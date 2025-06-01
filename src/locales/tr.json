@@ -1,0 +1,114 @@
+{
+    "nav": {
+        "home": "Ana Sayfa",
+        "projects": "Projeler"
+    },
+    "home": {
+        "greeting": "Merhaba, ben <strong>Melih Emre Güler</strong>.",
+        "tagline": "<strong>Temiz ve ölçeklenebilir backend sistemleri</strong> geliştiren tutkulu bir yazılım geliştiricisiyim.",
+        "about": {
+            "title": "Hakkımda",
+            "description": "Haziran 2025'te mezun olacak <strong>Bilgisayar Mühendisliği</strong> son sınıf öğrencisiyim. <strong>Golang</strong> ve <strong>Java</strong> ile <strong>backend geliştirme</strong> alanında uzmanlaşıyorum. <strong>Temiz kod</strong> yazmaya ve ölçeklenebilir sistemler kurmaya odaklanıyorum."
+        },
+        "education": {
+            "title": "Eğitim",
+            "items": [
+                {
+                    "degree": "<strong>Bilgisayar Mühendisliği Lisans</strong>",
+                    "school": "Düzce Üniversitesi",
+                    "year": "Beklenen Mezuniyet: Haziran 2025",
+                    "note": "Ortalama: 3.21 / 4.00"
+                },
+                {
+                    "degree": "<strong>İngilizce Hazırlık Okulu</strong>",
+                    "school": "Düzce Üniversitesi",
+                    "year": "2020 – 2021"
+                }
+            ]
+        },
+        "experience": {
+            "title": "Deneyim",
+            "items": [
+                {
+                    "position": "<strong>Backend Geliştirici (Yardımcı)</strong>",
+                    "company": "Prime Modality",
+                    "location": "Düzce Teknopark (Hibrit)",
+                    "period": "Eylül 2023 – Devam ediyor",
+                    "responsibilities": [
+                        "<strong>Golang</strong> ile <strong>10+ RESTful endpoint</strong> geliştirildi.",
+                        "<strong>PostgreSQL</strong> ile <strong>9 sütunlu</strong> filtreleme sistemi geliştirildi.",
+                        "<strong>Event-Driven Architecture</strong> ile <strong>WebSocket</strong> bağlantıları kuruldu.",
+                        "<strong>Golang</strong> ile <link1>CloudQuery</link1> için <link2>ArangoDB</link2> entegrasyonu geliştirildi (<strong>10K+ kayıt</strong>).",
+                        "<strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Skaffold</strong> ile <strong>6 servis</strong> ve <strong>2 veritabanı</strong> dağıtıldı.",
+                        "<strong>AWS</strong> (ECS, EKS, RDS, ECR) üzerinde bulut altyapısı optimize edildi."
+                    ]
+                }
+            ]
+        },
+        "skills": {
+            "title": "Yetenekler",
+            "items": [
+                "Golang, Java",
+                "PostgreSQL, MongoDB, Redis, ArangoDB",
+                "Spring Boot, Kafka, RabbitMQ, gRPC",
+                "Docker, Kubernetes, Skaffold",
+                "AWS (ECS, EKS, RDS, ECR)",
+                "Git, CI/CD, Swagger"
+            ]
+        },
+        "projects": {
+            "title": "Projeler",
+            "description": "Üzerinde çalıştığım bazı projeler aşağıda listelenmiştir.",
+            "items": [
+                {
+                    "name": "URL Kısaltıcı",
+                    "description": "<strong>Java Spring Boot</strong> ile <strong>MVC mimarisi</strong> ve <strong>Temiz Kod</strong> prensiplerine uygun olarak geliştirildi. <strong>4 endpoint</strong> destekli, özel domain tanımlı, <strong>MongoDB</strong> veri tabanlı ve <strong>JUnit</strong> testli."
+                },
+                {
+                    "name": "CAPTCHA Doğrulama Sistemi",
+                    "description": "<strong>Spring Framework</strong> ile geliştirilmiş, <strong>CAPTCHA üretimi ve doğrulaması</strong> yapan güvenli bir doğrulama sistemidir. <strong>Hibernate</strong>, <strong>PostgreSQL</strong>, <strong>Maven</strong> ve <strong>JUnit 5</strong> ile inşa edildi."
+                },
+                {
+                    "name": "Atık Yönetimi Backend",
+                    "description": "<strong>Golang (Fiber)</strong> ve <strong>PostgreSQL</strong> ile geliştirilmiş bir backend sistemidir. <strong>AWS EC2/RDS</strong> üzerinde çalışmakta ve <strong>Docker Compose</strong> ile dağıtılmıştır. CI/CD için <strong>GitHub Actions</strong> kullanılmıştır."
+                },
+                {
+                    "name": "Not Tutma Uygulaması",
+                    "description": "<strong>11 endpoint</strong> içeren, <strong>Golang + Fiber</strong> kullanılarak geliştirilmiş kullanıcı kimlik doğrulamalı bir not yönetim uygulamasıdır. Takım halinde geliştirilmiş ve <strong>Swagger</strong> ile belgelenmiştir."
+                },
+                {
+                    "name": "ToDo Uygulaması",
+                    "description": "<strong>Gin</strong> ve <strong>MongoDB</strong> kullanılarak geliştirilen, <strong>9 endpoint</strong> içeren görev yönetim sistemidir. Kimlik doğrulama desteklidir, tam containerize edilmiştir."
+                },
+                {
+                    "name": "Şehir Listesi ve Trafik Kodları",
+                    "description": "<strong>PostgreSQL</strong> ile geliştirilmiş, <strong>6 endpoint</strong> içeren bir <strong>REST API</strong>'dir. <strong>Redis cache</strong> ve <strong>RabbitMQ</strong> ile desteklenmiştir."
+                }
+            ]
+        },
+        "community": {
+            "title": "Topluluk Etkinlikleri",
+            "items": [
+                {
+                    "role": "GDSC Düzce Web Takım Lideri",
+                    "duration": "Eylül 2023 – Haziran 2024",
+                    "activities": [
+                        "<link1>GDSC Düzce Web Takımı</link1>'na liderlik etti, 10+ toplantı düzenlendi, 3 Golang projesi geliştirildi.",
+                        "30 katılımcı için Git atölyesi düzenlendi. <link2>(Detayları Gör)</link2>"
+                    ]
+                },
+                {
+                    "role": "GDG Düzce Üyesi",
+                    "duration": "Ağustos 2023 – Haziran 2024",
+                    "activities": [
+                        "100+ katılımcı ve 4 konuşmacı ile online yazılım konferansı düzenlendi. <link3>(İzle)</link3>",
+                        "50+ katılımcı ile geliştirici festivali organize edildi. <link4>(Etkinlik Fotoğrafları)</link4>"
+                    ]
+                }
+            ]
+        },
+        "footer": {
+            "rights": "Tüm hakları saklıdır."
+        }
+    }
+}

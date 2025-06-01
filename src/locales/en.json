@@ -1,0 +1,114 @@
+{
+    "nav": {
+        "home": "Home",
+        "projects": "Projects"
+    },
+    "home": {
+        "greeting": "Hello, I'm <strong>Melih Emre G\u00fcler</strong>.",
+        "tagline": "A passionate software developer building <strong>clean, scalable backend systems</strong>.",
+        "about": {
+            "title": "About Me",
+            "description": "I am a final-year <strong>Computer Engineering</strong> student, graduating in June 2025, specializing in <strong>backend development</strong> with Golang and Java. I focus on writing <strong>clean code</strong> and building scalable systems."
+        },
+        "education": {
+            "title": "Education",
+            "items": [
+                {
+                    "degree": "<strong>Bachelor of Computer Engineering</strong>",
+                    "school": "D\u00fczce University",
+                    "year": "Expected Jun 2025",
+                    "note": "GPA: 3.21 / 4.00"
+                },
+                {
+                    "degree": "<strong>Preparatory School of English</strong>",
+                    "school": "D\u00fczce University",
+                    "year": "2020 \u2013 2021"
+                }
+            ]
+        },
+        "experience": {
+            "title": "Experience",
+            "items": [
+                {
+                    "position": "<strong>Associate Back End Developer</strong>",
+                    "company": "Prime Modality",
+                    "location": "D\u00fczce Teknopark (Hybrid)",
+                    "period": "Sep 2023 \u2013 Present",
+                    "responsibilities": [
+                        "Engineered <strong>10+ RESTful</strong> endpoints using <strong>Golang</strong> to enhance API scalability.",
+                        "Built a filtering system with <strong>9 column-based options</strong> using <strong>PostgreSQL</strong>.",
+                        "Designed <strong>WebSocket</strong> connections using <strong>Event-Driven Architecture</strong> in Go.",
+                        "Developed an integration for <link1>CloudQuery</link1> using <strong>Golang</strong>, storing <strong>10K+ cloud environment data</strong> in <link2>ArangoDB</link2>.",
+                        "Used <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Skaffold</strong> to deploy <strong>6 services</strong> with <strong>2 databases</strong>.",
+                        "Optimized <strong>AWS</strong> ECS, EKS, RDS, and ECR for scalable infrastructure."
+                    ]
+                }
+            ]
+        },
+        "skills": {
+            "title": "Skills",
+            "items": [
+                "Golang, Java",
+                "PostgreSQL, MongoDB, Redis, ArangoDB",
+                "Spring Boot, Kafka, RabbitMQ, gRPC",
+                "Docker, Kubernetes, Skaffold",
+                "AWS (ECS, EKS, RDS, ECR)",
+                "Git, CI/CD, Swagger"
+            ]
+        },
+        "projects": {
+            "title": "Projects",
+            "description": "Here are some of the projects I've worked on.",
+            "items": [
+                {
+                    "name": "URL Shortener",
+                    "description": "A URL shortening service built with <strong>Java Spring Boot</strong>, following the <strong>MVC architecture</strong> and <strong>Clean Code</strong> principles. Supports <strong>4 endpoints</strong>, custom domains, <strong>MongoDB</strong> for storage, and <strong>JUnit</strong> testing."
+                },
+                {
+                    "name": "CAPTCHA Verification System",
+                    "description": "A secure user verification system using <strong>Spring Framework</strong>, supporting <strong>CAPTCHA generation and validation</strong> via RESTful APIs. Built with <strong>Hibernate</strong> and <strong>PostgreSQL</strong>, tested using <strong>Maven</strong> and <strong>JUnit 5</strong>."
+                },
+                {
+                    "name": "Waste Management Backend",
+                    "description": "A backend system built with <strong>Golang (Fiber)</strong> and <strong>PostgreSQL</strong>, deployed on <strong>AWS EC2/RDS</strong> using <strong>Docker Compose</strong> and CI/CD via <strong>GitHub Actions</strong>."
+                },
+                {
+                    "name": "Note Taking App",
+                    "description": "An authenticated note app with <strong>11 endpoints</strong> built using <strong>Golang + Fiber</strong>. Collaboratively developed and documented using <strong>Swagger</strong>."
+                },
+                {
+                    "name": "ToDo App",
+                    "description": "A <strong>9-endpoint</strong> task manager built with <strong>Gin</strong> and <strong>MongoDB</strong>, including authentication. Fully containerized and documented."
+                },
+                {
+                    "name": "City List and Traffic Codes",
+                    "description": "A <strong>6-endpoint REST API</strong> using <strong>PostgreSQL</strong> with <strong>Redis caching</strong> and <strong>RabbitMQ</strong> for message queuing."
+                }
+            ]
+        },
+        "community": {
+            "title": "Community Activities",
+            "items": [
+                {
+                    "role": "GDSC Düzce Web Team Lead",
+                    "duration": "Sep 2023 – Jun 2024",
+                    "activities": [
+                        "Led the <link1>GDSC Düzce Web Team</link1>, organized 10+ meetings, built 3 Golang projects.",
+                        "Conducted a Git workshop for 30 participants. <link2>(See Details)</link2>"
+                    ]
+                },
+                {
+                    "role": "GDG Düzce Member",
+                    "duration": "Aug 2023 – Jun 2024",
+                    "activities": [
+                        "Co-hosted an online conference with 4 speakers and 100+ attendees. <link3>(Watch Here)</link3>",
+                        "Organized a developer festival with 50+ participants. <link4>(Event Photos)</link4>"
+                    ]
+                }
+            ]
+        },
+        "footer": {
+            "rights": "All rights reserved."
+        }
+    }
+}
