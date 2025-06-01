@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ProfileHeader } from "./components/pages/home/ProfileHeader";
 import { AboutSection } from "./components/pages/home/AboutSection";

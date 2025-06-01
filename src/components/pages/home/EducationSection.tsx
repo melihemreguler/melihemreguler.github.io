@@ -2,7 +2,7 @@ import { useTranslation, Trans } from "react-i18next";
 
 export function EducationSection() {
     const { t } = useTranslation();
-    const educationItems = t("home.education.items", { returnObjects: true });
+    const educationItems = t("home.education.items", { returnObjects: true }) as any[];
 
     return (
         <section className="mb-8">

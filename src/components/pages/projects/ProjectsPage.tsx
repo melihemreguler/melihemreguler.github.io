@@ -2,7 +2,7 @@ import { useTranslation, Trans } from "react-i18next";
 
 export function ProjectsPage() {
     const { t } = useTranslation();
-    const projects = t("home.projects.items", { returnObjects: true });
+    const projects = t("home.projects.items", { returnObjects: true }) as any[];
 
     return (
         <main className="max-w-4xl mx-auto px-6 py-10">
