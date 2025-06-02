@@ -120,6 +120,22 @@
                 }
             ]
         },
+        "contact": {
+            "title": "Get In Touch",
+            "form": {
+                "name": "Full Name",
+                "namePlaceholder": "Enter your full name",
+                "email": "Email Address",
+                "emailPlaceholder": "Enter your email address",
+                "message": "Message",
+                "messagePlaceholder": "Write your message here...",
+                "send": "Send Message",
+                "sending": "Sending...",
+                "successMessage": "Thank you! Your message has been sent successfully. I'll get back to you soon.",
+                "errorMessage": "Sorry, there was an error sending your message. Please try again or contact me directly."
+            },
+            "alternativeText": "You can also reach me directly via email or social media platforms."
+        },
         "footer": {
             "rights": "All rights reserved."
         }

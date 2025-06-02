@@ -6,6 +6,7 @@ import { EducationSection } from "./components/pages/home/EducationSection";
 import { ExperienceSection } from "./components/pages/home/ExperienceSection";
 import { SkillsSection } from "./components/pages/home/SkillsSection";
 import { CommunitySection } from "./components/pages/home/CommunitySection";
+import { ContactSection } from "./components/pages/home/ContactSection";
 import { ProjectsPage } from "./components/pages/projects/ProjectsPage";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                             <ExperienceSection />
                             <SkillsSection />
                             <CommunitySection />
+                            <ContactSection />
                         </main>
                     } />
                     <Route path="/projects" element={<ProjectsPage />} />

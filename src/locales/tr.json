@@ -107,6 +107,22 @@
                 }
             ]
         },
+        "contact": {
+            "title": "Benimle İletişime Geçin",
+            "form": {
+                "name": "Ad Soyad",
+                "namePlaceholder": "Adınızı ve soyadınızı girin",
+                "email": "E-posta Adresi",
+                "emailPlaceholder": "E-posta adresinizi girin",
+                "message": "Mesaj",
+                "messagePlaceholder": "Mesajınızı buraya yazın...",
+                "send": "Mesaj Gönder",
+                "sending": "Gönderiliyor...",
+                "successMessage": "Teşekkürler! Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağım.",
+                "errorMessage": "Üzgünüm, mesajınız gönderilirken bir hata oluştu. Lütfen tekrar deneyin veya doğrudan benimle iletişime geçin."
+            },
+            "alternativeText": "Ayrıca doğrudan e-posta veya sosyal medya platformları üzerinden de bana ulaşabilirsiniz."
+        },
         "footer": {
             "rights": "Tüm hakları saklıdır."
         }
