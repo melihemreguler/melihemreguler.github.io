@@ -37,10 +37,10 @@
                     "responsibilities": [
                         "Engineered <strong>10+ RESTful</strong> endpoints using <strong>Golang</strong> to enhance API scalability.",
                         "Built a filtering system with <strong>9 column-based options</strong> using <strong>PostgreSQL</strong>.",
-                        "Designed <strong>WebSocket</strong> connections using <strong>Event-Driven Architecture</strong> in Go.",
-                        "Developed an integration for <link1>CloudQuery</link1> using <strong>Golang</strong>, storing <strong>10K+ cloud environment data</strong> in <link2>ArangoDB</link2>.",
-                        "Used <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Skaffold</strong> to deploy <strong>6 services</strong> with <strong>2 databases</strong>.",
-                        "Optimized <strong>AWS</strong> ECS, EKS, RDS, and ECR for scalable infrastructure."
+                        "Designed <strong>WebSocket</strong> connections using <em>Event-Driven Architecture</em> in Go.",
+                        "Developed an integration for <link1>CloudQuery</link1> using <strong>Golang</strong>, storing <mark>10K+ cloud environment data</mark> in <link2>ArangoDB</link2>.",
+                        "Used <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Skaffold</strong> to deploy <u>6 services</u> with <u>2 databases</u>.",
+                        "Optimized <strong>AWS</strong> ECS, EKS, RDS, and ECR for <em>scalable infrastructure</em>."
                     ]
                 }
             ]
@@ -62,27 +62,40 @@
             "items": [
                 {
                     "name": "URL Shortener",
-                    "description": "A URL shortening service built with <strong>Java Spring Boot</strong>, following the <strong>MVC architecture</strong> and <strong>Clean Code</strong> principles. Supports <strong>4 endpoints</strong>, custom domains, <strong>MongoDB</strong> for storage, and <strong>JUnit</strong> testing."
+                    "description": "A URL shortening service built with <strong>Java Spring Boot</strong>, following the <em>MVC architecture</em> and <strong>Clean Code</strong> principles. Supports <mark>4 endpoints</mark>, custom domains, <strong>MongoDB</strong> for storage, and <code>JUnit</code> testing.",
+                    "github": "https://github.com/melihemreguler/url-shortener",
+                    "technologies": ["Java", "Spring Boot", "MongoDB", "JUnit"]
                 },
                 {
-                    "name": "CAPTCHA Verification System",
-                    "description": "A secure user verification system using <strong>Spring Framework</strong>, supporting <strong>CAPTCHA generation and validation</strong> via RESTful APIs. Built with <strong>Hibernate</strong> and <strong>PostgreSQL</strong>, tested using <strong>Maven</strong> and <strong>JUnit 5</strong>."
+                    "name": "CAPTCHA Verification System", 
+                    "description": "A secure user verification system using <strong>Spring Framework</strong>, supporting <em>CAPTCHA generation and validation</em> via RESTful APIs. Built with <strong>Hibernate</strong> and <strong>PostgreSQL</strong>, tested using <code>Maven</code> and <code>JUnit 5</code>.",
+                    "github": "https://github.com/melihemreguler/captcha-verification",
+                    "technologies": ["Java", "Spring", "PostgreSQL", "Hibernate"]
                 },
                 {
                     "name": "Waste Management Backend",
-                    "description": "A backend system built with <strong>Golang (Fiber)</strong> and <strong>PostgreSQL</strong>, deployed on <strong>AWS EC2/RDS</strong> using <strong>Docker Compose</strong> and CI/CD via <strong>GitHub Actions</strong>."
+                    "description": "A backend system built with <strong>Golang (Fiber)</strong> and <strong>PostgreSQL</strong>, deployed on <mark>AWS EC2/RDS</mark> using <strong>Docker Compose</strong> and CI/CD via <u>GitHub Actions</u>.",
+                    "github": "https://github.com/melihemreguler/waste-management",
+                    "demo": "https://waste-api.example.com",
+                    "technologies": ["Golang", "Fiber", "PostgreSQL", "AWS"]
                 },
                 {
                     "name": "Note Taking App",
-                    "description": "An authenticated note app with <strong>11 endpoints</strong> built using <strong>Golang + Fiber</strong>. Collaboratively developed and documented using <strong>Swagger</strong>."
+                    "description": "An authenticated note app with <mark>11 endpoints</mark> built using <strong>Golang + Fiber</strong>. <em>Collaboratively developed</em> and documented using <code>Swagger</code>.",
+                    "github": "https://github.com/melihemreguler/note-app",
+                    "technologies": ["Golang", "Fiber", "Authentication"]
                 },
                 {
                     "name": "ToDo App",
-                    "description": "A <strong>9-endpoint</strong> task manager built with <strong>Gin</strong> and <strong>MongoDB</strong>, including authentication. Fully containerized and documented."
+                    "description": "A <mark>9-endpoint</mark> task manager built with <strong>Gin</strong> and <strong>MongoDB</strong>, including <em>authentication</em>. Fully <u>containerized</u> and documented.",
+                    "github": "https://github.com/melihemreguler/todo-app",
+                    "technologies": ["Golang", "Gin", "MongoDB"]
                 },
                 {
                     "name": "City List and Traffic Codes",
-                    "description": "A <strong>6-endpoint REST API</strong> using <strong>PostgreSQL</strong> with <strong>Redis caching</strong> and <strong>RabbitMQ</strong> for message queuing."
+                    "description": "A <mark>6-endpoint REST API</mark> using <strong>PostgreSQL</strong> with <strong>Redis caching</strong> and <strong>RabbitMQ</strong> for <em>message queuing</em>.",
+                    "github": "https://github.com/melihemreguler/city-traffic-api",
+                    "technologies": ["REST API", "PostgreSQL", "Redis", "RabbitMQ"]
                 }
             ]
         },
@@ -93,16 +106,16 @@
                     "role": "GDSC Düzce Web Team Lead",
                     "duration": "Sep 2023 – Jun 2024",
                     "activities": [
-                        "Led the <link1>GDSC Düzce Web Team</link1>, organized 10+ meetings, built 3 Golang projects.",
-                        "Conducted a Git workshop for 30 participants. <link2>(See Details)</link2>"
+                        "Led the <link1>GDSC Düzce Web Team</link1>, organized <mark>10+ meetings</mark>, built <strong>3 Golang projects</strong>.",
+                        "Conducted a <em>Git workshop</em> for <mark>30 participants</mark>. <link2>(See Details)</link2>"
                     ]
                 },
                 {
-                    "role": "GDG Düzce Member",
+                    "role": "GDG Düzce Member", 
                     "duration": "Aug 2023 – Jun 2024",
                     "activities": [
-                        "Co-hosted an online conference with 4 speakers and 100+ attendees. <link3>(Watch Here)</link3>",
-                        "Organized a developer festival with 50+ participants. <link4>(Event Photos)</link4>"
+                        "Co-hosted an <strong>online conference</strong> with <mark>4 speakers</mark> and <mark>100+ attendees</mark>. <link3>(Watch Here)</link3>",
+                        "Organized a <em>developer festival</em> with <mark>50+ participants</mark>. <link4>(Event Photos)</link4>"
                     ]
                 }
             ]

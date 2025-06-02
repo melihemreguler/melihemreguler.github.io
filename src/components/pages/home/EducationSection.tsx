@@ -1,4 +1,5 @@
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { RichText } from "../../common/RichText";
 
 export function EducationSection() {
     const { t } = useTranslation();
@@ -11,9 +12,8 @@ export function EducationSection() {
                 {educationItems.map((item: any, index: number) => (
                     <li key={index} className="text-gray-700">
                         <div className="font-semibold">
-                            <Trans 
+                            <RichText 
                                 i18nKey={`home.education.items.${index}.degree`}
-                                components={{ strong: <span className="font-bold text-gray-900" /> }}
                             />
                             {" – "}
                             {item.school}

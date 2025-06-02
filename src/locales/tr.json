@@ -36,11 +36,11 @@
                     "period": "Eylül 2023 – Devam ediyor",
                     "responsibilities": [
                         "<strong>Golang</strong> ile <strong>10+ RESTful endpoint</strong> geliştirildi.",
-                        "<strong>PostgreSQL</strong> ile <strong>9 sütunlu</strong> filtreleme sistemi geliştirildi.",
-                        "<strong>Event-Driven Architecture</strong> ile <strong>WebSocket</strong> bağlantıları kuruldu.",
-                        "<strong>Golang</strong> ile <link1>CloudQuery</link1> için <link2>ArangoDB</link2> entegrasyonu geliştirildi (<strong>10K+ kayıt</strong>).",
-                        "<strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Skaffold</strong> ile <strong>6 servis</strong> ve <strong>2 veritabanı</strong> dağıtıldı.",
-                        "<strong>AWS</strong> (ECS, EKS, RDS, ECR) üzerinde bulut altyapısı optimize edildi."
+                        "<strong>PostgreSQL</strong> ile <mark>9 sütunlu</mark> filtreleme sistemi geliştirildi.",
+                        "<em>Event-Driven Architecture</em> ile <strong>WebSocket</strong> bağlantıları kuruldu.",
+                        "<strong>Golang</strong> ile <link1>CloudQuery</link1> için <link2>ArangoDB</link2> entegrasyonu geliştirildi (<mark>10K+ kayıt</mark>).",
+                        "<strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Skaffold</strong> ile <u>6 servis</u> ve <u>2 veritabanı</u> dağıtıldı.",
+                        "<strong>AWS</strong> (ECS, EKS, RDS, ECR) üzerinde <em>bulut altyapısı</em> optimize edildi."
                     ]
                 }
             ]

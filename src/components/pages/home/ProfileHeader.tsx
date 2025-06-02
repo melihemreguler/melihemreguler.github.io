@@ -1,5 +1,5 @@
 // src/components/sections/ProfileHeader.tsx
-import { Trans } from "react-i18next";
+import { RichText } from "../../common/RichText";
 
 export function ProfileHeader() {
     return (
@@ -34,15 +34,15 @@ export function ProfileHeader() {
                 </div>
             </div>
             <div className="text-3xl font-bold mb-4">
-                <Trans 
+                <RichText 
                     i18nKey="home.greeting"
-                    components={{ strong: <span className="text-blue-600" /> }}
+                    strongClassName="text-blue-600 font-bold"
                 />
             </div>
             <div className="text-xl text-gray-600 max-w-2xl mx-auto">
-                <Trans 
+                <RichText 
                     i18nKey="home.tagline"
-                    components={{ strong: <span className="font-semibold text-gray-800" /> }}
+                    strongClassName="font-semibold text-gray-800"
                 />
             </div>
         </section>
