@@ -27,16 +27,16 @@ export function TabsSection() {
             labelKey: 'home.skills.title'
         },
         {
+            id: 'projects',
+            labelKey: 'home.projects.title'
+        },
+        {
             id: 'education',
             labelKey: 'home.education.title'
         },
         {
             id: 'community',
             labelKey: 'home.community.title'
-        },
-        {
-            id: 'projects',
-            labelKey: 'home.projects.title'
         }
     ];
 
