@@ -6,17 +6,18 @@ interface SkillsSectionProps {
 
 export function SkillsSection({ isEmbedded = false }: SkillsSectionProps) {
     const { t } = useTranslation();
-    const skills = t("home.skills.items", { returnObjects: true }) as string[];
+    const skillsData = t("home.skills.categories", { returnObjects: true }) as any[];
 
     return (
         <section className="mb-8">
             {!isEmbedded && (
                 <h2 className="text-xl font-semibold mb-4">{t("home.skills.title")}</h2>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {skills.map((skill: string, index: number) => (
-                    <div key={index} className="bg-gray-50 px-3 py-2 rounded-lg text-gray-700 text-sm">
-                        {skill}
+            <div className="space-y-4">
+                {skillsData.map((category: any, index: number) => (
+                    <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                        <h3 className="font-semibold text-gray-900 mb-2">{category.name}</h3>
+                        <p className="text-gray-700 text-sm">{category.items}</p>
                     </div>
                 ))}
             </div>

@@ -21,17 +21,23 @@ export function ExperienceSection({ isEmbedded = false }: ExperienceSectionProps
                             i18nKey={`home.experience.items.${index}.position`}
                         />
                         {" – "}
-                        {item.company}
+                        <RichText
+                            i18nKey={`home.experience.items.${index}.company`}
+                        />
                     </div>
-                    <p className="text-sm text-gray-600">{item.location} | {item.period}</p>
+                    <p className="text-sm text-gray-600">
+                        {item.location} | {item.period}
+                        {item.workType && ` | ${item.workType}`}
+                    </p>
                     <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
                         {item.responsibilities.map((_: any, i: number) => (
                             <li key={i}>
                                 <RichText
                                     i18nKey={`home.experience.items.${index}.responsibilities.${i}`}
                                     links={{
-                                        link1: { href: "https://github.com/cloudquery/cloudquery" },
-                                        link2: { href: "https://arangodb.com" }
+                                        cloudqueryLink: { href: "https://github.com/MelihEmreGuler/cloudquery/tree/arangodb/plugins/destination/arangodb/client" },
+                                        cloudqueryMainLink: { href: "https://github.com/cloudquery/cloudquery" },
+                                        arangodbLink: { href: "https://arangodb.com/" }
                                     }}
                                 />
                             </li>

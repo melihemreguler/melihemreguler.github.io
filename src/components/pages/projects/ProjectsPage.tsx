@@ -22,25 +22,21 @@ export function ProjectsPage({ isEmbedded = false }: ProjectsPageProps) {
                 {projects.map((project: any, index: number) => (
                     <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
                         <h3 className="text-xl font-semibold mb-3 text-gray-900">
-                            {project.name}
+                            <RichText 
+                                i18nKey={`home.projects.items.${index}.name`}
+                                links={{
+                                    urlShortenerLink: { href: "https://github.com/MelihEmreGuler/urlshortener" },
+                                    captchaSystemLink: { href: "https://github.com/ileri-java-proje/BM470" },
+                                    wasteManagementLink: { href: "https://github.com/donus-turkiye/backend" },
+                                    noteAppLink: { href: "https://github.com/MelihEmreGuler/go-user-notes-app" },
+                                    todoAppLink: { href: "https://github.com/gdscduzceuniversity/todo-app-1" },
+                                    cityTrafficLink: { href: "https://github.com/MelihEmreGuler/go-psql-redis-cities" }
+                                }}
+                            />
                         </h3>
                         <div className="text-gray-600 leading-relaxed mb-4">
                             <RichText 
                                 i18nKey={`home.projects.items.${index}.description`}
-                                links={{
-                                    ...(project.github && {
-                                        github: { 
-                                            href: project.github, 
-                                            className: "text-gray-800 font-semibold hover:text-blue-600 transition-colors" 
-                                        }
-                                    }),
-                                    ...(project.demo && {
-                                        demo: { 
-                                            href: project.demo, 
-                                            className: "text-green-600 font-semibold hover:text-green-800 transition-colors" 
-                                        }
-                                    })
-                                }}
                             />
                         </div>
                         

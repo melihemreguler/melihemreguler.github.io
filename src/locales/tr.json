@@ -8,7 +8,7 @@
         "tagline": "<strong>Temiz ve ölçeklenebilir backend sistemleri</strong> geliştiren tutkulu bir yazılım geliştiricisiyim.",
         "about": {
             "title": "Hakkımda",
-            "description": "Haziran 2025'te mezun olacak <strong>Bilgisayar Mühendisliği</strong> son sınıf öğrencisiyim. <strong>Golang</strong> ve <strong>Java</strong> ile <strong>backend geliştirme</strong> alanında uzmanlaşıyorum. <strong>Temiz kod</strong> yazmaya ve ölçeklenebilir sistemler kurmaya odaklanıyorum."
+            "description": "Haziran 2025'te mezun olacak Bilgisayar Mühendisliği son sınıf öğrencisiyim. <strong>Backend geliştirme</strong> (<strong>Golang</strong>, <strong>Java</strong>) alanında uzmanlaşıyorum. Mikroservisler, mesajlaşma sistemleri (<strong>Kafka</strong>, <strong>RabbitMQ</strong>), <strong>AWS</strong> servisleri ve konteynerleştirme (<strong>Docker</strong>, <strong>Kubernetes</strong>) konularında uygulamalı deneyimim bulunmaktadır. <strong>Temiz, sürdürülebilir kod</strong> yazmaya odaklanıp, veri odaklı görüşlerden yararlanarak ölçeklenebilir ve güvenilir çözümler geliştiriyorum. Aynı zamanda çapraz fonksiyonel takımlarda etkili bir şekilde işbirliği yapıyorum."
         },
         "education": {
             "title": "Eğitim",
@@ -16,13 +16,13 @@
                 {
                     "degree": "<strong>Bilgisayar Mühendisliği Lisans</strong>",
                     "school": "Düzce Üniversitesi",
-                    "year": "Beklenen Mezuniyet: Haziran 2025",
-                    "note": "Ortalama: 3.21 / 4.00"
+                    "year": "Beklenen Mezuniyet: Haz 2025",
+                    "note": "Dördüncü sınıf öğrencisi - Not Ortalaması: 3.21/4.00"
                 },
                 {
                     "degree": "<strong>İngilizce Hazırlık Okulu</strong>",
                     "school": "Düzce Üniversitesi",
-                    "year": "2020 – 2021"
+                    "year": "2020 - 2021"
                 }
             ]
         },
@@ -30,30 +30,53 @@
             "title": "Deneyim",
             "items": [
                 {
-                    "position": "<strong>Backend Geliştirici (Yardımcı)</strong>",
-                    "company": "Prime Modality",
-                    "location": "Düzce Teknopark (Hibrit)",
-                    "period": "Eylül 2023 – Devam ediyor",
+                    "position": "<strong>Yardımcı Backend Geliştirici</strong>",
+                    "company": "<strong>Prime Modality</strong> Bulut-Yerel Uygulama Koruma Platformu (CNAPP)",
+                    "location": "Düzce Teknopark, Türkiye",
+                    "period": "Eyl 2023 - Devam ediyor",
+                    "workType": "Hibrit",
                     "responsibilities": [
-                        "<strong>Golang</strong> ile <strong>10+ RESTful endpoint</strong> geliştirildi.",
-                        "<strong>PostgreSQL</strong> ile <mark>9 sütunlu</mark> filtreleme sistemi geliştirildi.",
-                        "<em>Event-Driven Architecture</em> ile <strong>WebSocket</strong> bağlantıları kuruldu.",
-                        "<strong>Golang</strong> ile <link1>CloudQuery</link1> için <link2>ArangoDB</link2> entegrasyonu geliştirildi (<mark>10K+ kayıt</mark>).",
-                        "<strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Skaffold</strong> ile <u>6 servis</u> ve <u>2 veritabanı</u> dağıtıldı.",
-                        "<strong>AWS</strong> (ECS, EKS, RDS, ECR) üzerinde <em>bulut altyapısı</em> optimize edildi."
+                        "API ölçeklenebilirliği ve sürdürülebilirliğini artırmak için <strong>Golang</strong> kullanarak <strong>10+ RESTful</strong> endpoint geliştirdim.",
+                        "İlişkisel veriler için <strong>PostgreSQL</strong> kullanarak veritabanı çözümleri tasarladım ve inşa ettim. Güvenlik Bulguları Panosu için <strong>9 sütun tabanlı filtreleme seçeneği</strong> içeren bir filtreleme sistemi geliştirdim.",
+                        "Platformda gerçek zamanlı veri akışını sağlamak için <strong>Event-Driven Architecture</strong> ve <strong>Observer Design Pattern</strong> prensiplerini takip ederek <strong>Golang</strong>'da <strong>WebSocket</strong> bağlantıları tasarladım ve entegre ettim.",
+                        "Açık kaynak veri entegrasyon platformu <cloudqueryMainLink>CloudQuery</cloudqueryMainLink> için <strong>Golang</strong> ile bir <cloudqueryLink>API</cloudqueryLink> geliştirdim. Bu API, grafik tabanlı veritabanı <arangodbLink>ArangoDB</arangodbLink>'de <strong>10K+ bulut ortamı verisi</strong> kaydının depolanmasını sağladı.",
+                        "<strong>2 farklı veritabanı</strong> dahil olmak üzere <strong>6 servisli</strong> bir ortamı dağıtmak ve yönetmek için <strong>Docker</strong>, <strong>Kubernetes</strong>, <strong>Minikube</strong> ve <strong>Skaffold</strong> gibi konteynerleştirme ve orkestrasyon araçlarını aktif olarak kullandım.",
+                        "Yüksek ölçeklenebilir <strong>Bulut-Yerel</strong> altyapı sağlamak için Elastic Container Service (ECS), Elastic Kubernetes Service (EKS), Elastic Container Registry (ECR) ve Relational Database Service (RDS) dahil olmak üzere <strong>AWS</strong> bulut servislerini optimize etmek için takımlarla işbirliği yaptım."
                     ]
                 }
             ]
         },
         "skills": {
             "title": "Yetenekler",
-            "items": [
-                "Golang, Java",
-                "PostgreSQL, MongoDB, Redis, ArangoDB",
-                "Spring Boot, Kafka, RabbitMQ, gRPC",
-                "Docker, Kubernetes, Skaffold",
-                "AWS (ECS, EKS, RDS, ECR)",
-                "Git, CI/CD, Swagger"
+            "categories": [
+                {
+                    "name": "Programlama Dilleri",
+                    "items": "Golang, Java."
+                },
+                {
+                    "name": "Veritabanları",
+                    "items": "PostgreSQL, MongoDB, Redis, ArangoDB."
+                },
+                {
+                    "name": "Backend Teknolojileri",
+                    "items": "Spring Boot, Maven, Kafka, RabbitMQ, gRPC, JUnit."
+                },
+                {
+                    "name": "Konteynerleştirme",
+                    "items": "Docker, Docker Compose, Kubernetes, Minikube, Skaffold."
+                },
+                {
+                    "name": "Bulut Servisleri",
+                    "items": "AWS (ECS, EKS, RDS, ECR)."
+                },
+                {
+                    "name": "Yazılım Prensipleri",
+                    "items": "Temiz Kod."
+                },
+                {
+                    "name": "Geliştirme Araçları",
+                    "items": "Git, GitHub Actions, CI/CD, Swagger."
+                }
             ]
         },
         "projects": {
@@ -61,28 +84,40 @@
             "description": "Üzerinde çalıştığım bazı projeler aşağıda listelenmiştir.",
             "items": [
                 {
-                    "name": "URL Kısaltıcı",
-                    "description": "<strong>Java Spring Boot</strong> ile <strong>MVC mimarisi</strong> ve <strong>Temiz Kod</strong> prensiplerine uygun olarak geliştirildi. <strong>4 endpoint</strong> destekli, özel domain tanımlı, <strong>MongoDB</strong> veri tabanlı ve <strong>JUnit</strong> testli."
+                    "name": "<urlShortenerLink>URL Kısaltıcı</urlShortenerLink>",
+                    "description": "<strong>Java Spring Boot</strong> kullanılarak <strong>MVC</strong> mimarisi ile <strong>Temiz Kod</strong> prensiplerini takip ederek inşa edilmiş bir URL kısaltma servisidir. <strong>4 endpoint</strong>, yapılandırılabilir kısa URL domain desteği ve <strong>Swagger</strong> ile API dokümantasyonu içermektedir. Depolama için <strong>MongoDB</strong> entegre edilmiş ve güvenilirliği sağlamak için <strong>JUnit</strong> birim testleri eklenmiştir.",
+                    "github": "https://github.com/MelihEmreGuler/urlshortener",
+                    "technologies": ["Java", "Spring Boot", "MongoDB", "JUnit", "Swagger", "MVC"]
                 },
                 {
-                    "name": "CAPTCHA Doğrulama Sistemi",
-                    "description": "<strong>Spring Framework</strong> ile geliştirilmiş, <strong>CAPTCHA üretimi ve doğrulaması</strong> yapan güvenli bir doğrulama sistemidir. <strong>Hibernate</strong>, <strong>PostgreSQL</strong>, <strong>Maven</strong> ve <strong>JUnit 5</strong> ile inşa edildi."
+                    "name": "<captchaSystemLink>CAPTCHA Doğrulama Sistemi</captchaSystemLink>",
+                    "description": "<strong>Spring Framework 6.2.3</strong> kullanılarak geliştirilen, <strong>RESTful API'ler</strong> ile CAPTCHA üretimi ve doğrulaması yapan güvenli bir kullanıcı doğrulama platformudur. <strong>Hibernate</strong> ve <strong>PostgreSQL</strong> kullanılmıştır. <strong>Maven</strong> ve <strong>JUnit 5</strong> ile inşa edilip test edilmiş, Jakarta EE uyumlu stack üzerinde çalışmaktadır. <strong>Türkçe ve İngilizce</strong> dil seçenekleri ile <strong>yerelleştirme</strong> desteği sağlar. Gerçek dünya uygulaması ile Java <strong>Spring Web MVC</strong> yetkinliği güçlendirilmiştir.",
+                    "github": "https://github.com/ileri-java-proje/BM470",
+                    "technologies": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit 5"]
                 },
                 {
-                    "name": "Atık Yönetimi Backend",
-                    "description": "<strong>Golang (Fiber)</strong> ve <strong>PostgreSQL</strong> ile geliştirilmiş bir backend sistemidir. <strong>AWS EC2/RDS</strong> üzerinde çalışmakta ve <strong>Docker Compose</strong> ile dağıtılmıştır. CI/CD için <strong>GitHub Actions</strong> kullanılmıştır."
+                    "name": "<wasteManagementLink>Atık Yönetimi Backend</wasteManagementLink>",
+                    "description": "<strong>Go (Fiber)</strong> ve <strong>PostgreSQL</strong> ile inşa edilmiş ölçeklenebilir bir backend sistemidir. <strong>Docker Compose</strong> orkestrasyonu ve <strong>AWS EC2/RDS</strong>'ye dağıtım özelliklerine sahiptir. <code>prod</code> branch'ini hedef alan <strong>GitHub Actions</strong> aracılığıyla <strong>CI/CD</strong> otomasyonu uygulanmıştır. <strong>Swagger</strong> ile belgelenmiş ve <strong>golang-migrate</strong> ile veritabanı versiyonlaması içermektedir. Gelecekteki <strong>mikroservis entegrasyonu</strong> göz önünde bulundurularak tasarlanmıştır.",
+                    "github": "https://github.com/donus-turkiye/backend",
+                    "technologies": ["Golang", "Fiber", "PostgreSQL", "AWS", "Docker", "CI/CD"]
                 },
                 {
-                    "name": "Not Tutma Uygulaması",
-                    "description": "<strong>11 endpoint</strong> içeren, <strong>Golang + Fiber</strong> kullanılarak geliştirilmiş kullanıcı kimlik doğrulamalı bir not yönetim uygulamasıdır. Takım halinde geliştirilmiş ve <strong>Swagger</strong> ile belgelenmiştir."
+                    "name": "<noteAppLink>Not Alma Uygulaması</noteAppLink>",
+                    "description": "<strong>Golang</strong> ve <strong>Fiber</strong> ile oluşturulmuş, <strong>11 RESTful endpoint</strong> sunan kullanıcı kimlik doğrulamalı not yönetim uygulamasıdır. <strong>2 kişilik takım</strong> tarafından işbirliği içinde geliştirilmiş ve kimlik doğrulama mekanizmaları ile güvenlik altına alınmıştır. <strong>Swagger</strong> aracılığıyla API dokümantasyonu sağlanmıştır.",
+                    "github": "https://github.com/MelihEmreGuler/go-user-notes-app",
+                    "technologies": ["Golang", "Fiber", "Authentication", "Swagger"]
                 },
                 {
-                    "name": "ToDo Uygulaması",
-                    "description": "<strong>Gin</strong> ve <strong>MongoDB</strong> kullanılarak geliştirilen, <strong>9 endpoint</strong> içeren görev yönetim sistemidir. Kimlik doğrulama desteklidir, tam containerize edilmiştir."
+                    "name": "<todoAppLink>ToDo Uygulaması</todoAppLink>",
+                    "description": "<strong>Gin</strong> ile formüle edilmiş ve <strong>MongoDB</strong> ile desteklenen <strong>9 endpoint</strong> içeren görev yönetimi API'sidir. Kullanıcı kimlik doğrulamasını destekler ve <strong>2 kişilik takım</strong> ile işbirliği içinde üretilmiştir. Sorunsuz dağıtım için tamamen konteynerleştirilmiş ve <strong>Swagger</strong> kullanılarak belgelenmiştir.",
+                    "github": "https://github.com/gdscduzceuniversity/todo-app-1",
+                    "technologies": ["Golang", "Gin", "MongoDB", "Docker", "Swagger"]
                 },
                 {
-                    "name": "Şehir Listesi ve Trafik Kodları",
-                    "description": "<strong>PostgreSQL</strong> ile geliştirilmiş, <strong>6 endpoint</strong> içeren bir <strong>REST API</strong>'dir. <strong>Redis cache</strong> ve <strong>RabbitMQ</strong> ile desteklenmiştir."
+                    "name": "<cityTrafficLink>Şehir Listesi ve Trafik Kodları</cityTrafficLink>",
+                    "description": "Yapılandırılmış veri depolama için <strong>PostgreSQL</strong> kullanan, <strong>Redis</strong> ile önbellekleme ve <strong>RabbitMQ</strong> ile mesaj kuyruğu işleme ile geliştirilmiş <strong>6 endpoint</strong> içeren bir <strong>REST API</strong>'dir.",
+                    "github": "https://github.com/MelihEmreGuler/go-psql-redis-cities",
+                    "technologies": ["REST API", "PostgreSQL", "Redis", "RabbitMQ"]
                 }
             ]
         },
@@ -90,19 +125,19 @@
             "title": "Topluluk Etkinlikleri",
             "items": [
                 {
-                    "role": "GDSC Düzce Web Takım Lideri",
-                    "duration": "Eylül 2023 – Haziran 2024",
+                    "role": "<gdscDuzceLink><strong>GDSC Düzce Swat Web Geliştirme Takım Lideri</strong></gdscDuzceLink>",
+                    "duration": "Eyl 2023 - Haz 2024 (10 ay)",
                     "activities": [
-                        "<link1>GDSC Düzce Web Takımı</link1>'na liderlik etti, 10+ toplantı düzenlendi, 3 Golang projesi geliştirildi.",
-                        "30 katılımcı için Git atölyesi düzenlendi. <link2>(Detayları Gör)</link2>"
+                        "Swat Web Geliştirme <gdscGithubLink>Takımı</gdscGithubLink>'na liderlik ettim, işbirliğini artırmak ve sürekli öğrenme ve yenilik kültürünü teşvik etmek için <strong>10+ takım toplantısı</strong> düzenledim. <strong>3 Golang tabanlı mini uygulama</strong> oluşturarak web geliştirme becerilerine katkıda bulundum.",
+                        "<strong>30 katılımcı</strong> için uygulamalı Git atölyesi düzenledim, versiyon kontrolü konusunda pratik görüşler sağladım <gitWorkshopLink>(Etkinlik Detayları)</gitWorkshopLink>."
                     ]
                 },
                 {
-                    "role": "GDG Düzce Üyesi",
-                    "duration": "Ağustos 2023 – Haziran 2024",
+                    "role": "<gdgDuzceLink><strong>Google Developers Groups Düzce Üyesi</strong></gdgDuzceLink>",
+                    "duration": "Ağu 2023 - Haz 2024 (10 ay)",
                     "activities": [
-                        "100+ katılımcı ve 4 konuşmacı ile online yazılım konferansı düzenlendi. <link3>(İzle)</link3>",
-                        "50+ katılımcı ile geliştirici festivali organize edildi. <link4>(Etkinlik Fotoğrafları)</link4>"
+                        "Farklı sektörlerden gelişmekte olan trendler hakkında görüşlerini paylaşan <strong>4 sektör konuşmacısı</strong> ile <strong>100+ izleyicili</strong> online yazılım konferansını birlikte organize ettim. Bu deneyim, çeşitli kitlelerle etkileşim kurma yeteneğimi geliştirdi. <conferenceLink>(Buradan İzleyin)</conferenceLink>.",
+                        "Yerel teknoloji topluluğunu ağ kurma ve öğrenme oturumlarında bir araya getiren <strong>50+ katılımcılı</strong> bir <strong>Geliştirici Festivali</strong> düzenledim <festivalLink>(Etkinlik Fotoğrafları)</festivalLink>."
                     ]
                 }
             ]

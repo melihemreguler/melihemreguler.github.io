@@ -22,7 +22,13 @@ export function CommunitySection({ isEmbedded = false }: CommunitySectionProps) 
                 {communityItems.map((item: any, index: number) => (
                     <div key={index} className="bg-gray-50 rounded-lg p-4">
                         <div className="font-semibold text-gray-900 mb-1">
-                            {item.role}
+                            <RichText
+                                i18nKey={`home.community.items.${index}.role`}
+                                links={{
+                                    gdscDuzceLink: { href: "https://www.linkedin.com/company/google-developer-student-clubs-duzce-university/" },
+                                    gdgDuzceLink: { href: "https://www.linkedin.com/in/gdgduzce/" }
+                                }}
+                            />
                         </div>
                         <p className="text-sm text-gray-600 mb-3">{item.duration}</p>
                         <ul className="list-disc list-inside space-y-2 text-gray-700">
@@ -31,10 +37,10 @@ export function CommunitySection({ isEmbedded = false }: CommunitySectionProps) 
                                     <RichText
                                         i18nKey={`home.community.items.${index}.activities.${activityIndex}`}
                                         links={{
-                                            link1: { href: "https://gdsc.community.dev/duzce-university/" },
-                                            link2: { href: "#workshop-details" },
-                                            link3: { href: "https://youtube.com/watch?v=example" },
-                                            link4: { href: "#event-photos" }
+                                            gdscGithubLink: { href: "https://github.com/gdscduzceuniversity" },
+                                            gitWorkshopLink: { href: "https://www.linkedin.com/posts/google-developer-student-clubs-duzce-university_git-github-gdsc-activity-7162423821407399936-1Vba?utm_source=share&utm_medium=member_desktop&rcm=ACoAACy-TDIBCtGt5J1Napgn6CxxIo8_3gDaJgo" },
+                                            conferenceLink: { href: "https://www.youtube.com/live/IskqzVywXxs?si=dwkxozOmoC7oABAf" },
+                                            festivalLink: { href: "https://www.instagram.com/p/CzlyjcAt6R6/?img_index=1&igsh=aGJheDRnZ2hoYjR5" }
                                         }}
                                     />
                                 </li>
