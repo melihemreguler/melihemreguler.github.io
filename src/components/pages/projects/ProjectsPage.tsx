@@ -40,19 +40,112 @@ export function ProjectsPage({ isEmbedded = false }: ProjectsPageProps) {
                             />
                         </div>
                         
-                        {/* Technology tags */}
-                        {project.technologies && (
-                            <div className="flex flex-wrap gap-2 mb-4">
-                                {project.technologies.map((tech: string, techIndex: number) => (
-                                    <span 
-                                        key={techIndex}
-                                        className="bg-blue-50 text-blue-700 px-2 py-1 rounded-md text-xs font-medium"
-                                    >
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
+                        {/* Technology tags - Clickable Version */}
+                        <div className="mb-4">
+                            {project.technologies && (
+                                <div>
+                                    <div className="text-sm font-medium text-gray-700 mb-2">Technologies:</div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.technologies.map((tech: string, index: number) => {
+                                            const getTechUrl = (techName: string) => {
+                                                const techUrls: { [key: string]: string } = {
+                                                    'Java': 'https://www.oracle.com/java/',
+                                                    'Spring Boot': 'https://spring.io/projects/spring-boot',
+                                                    'Spring Framework': 'https://spring.io/projects/spring-framework',
+                                                    'MongoDB': 'https://www.mongodb.com/',
+                                                    'PostgreSQL': 'https://www.postgresql.org/',
+                                                    'JUnit': 'https://junit.org/',
+                                                    'JUnit 5': 'https://junit.org/junit5/',
+                                                    'Swagger': 'https://swagger.io/',
+                                                    'MVC': 'https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller',
+                                                    'Hibernate': 'https://hibernate.org/',
+                                                    'Maven': 'https://maven.apache.org/',
+                                                    'Golang': 'https://golang.org/',
+                                                    'Go': 'https://golang.org/',
+                                                    'Fiber': 'https://gofiber.io/',
+                                                    'Gin': 'https://gin-gonic.com/',
+                                                    'AWS': 'https://aws.amazon.com/',
+                                                    'Docker': 'https://www.docker.com/',
+                                                    'CI/CD': 'https://en.wikipedia.org/wiki/CI/CD',
+                                                    'Authentication': 'https://en.wikipedia.org/wiki/Authentication',
+                                                    'REST API': 'https://en.wikipedia.org/wiki/Representational_state_transfer',
+                                                    'Redis': 'https://redis.io/',
+                                                    'RabbitMQ': 'https://www.rabbitmq.com/',
+                                                    'React': 'https://reactjs.org/',
+                                                    'TypeScript': 'https://www.typescriptlang.org/',
+                                                    'JavaScript': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+                                                    'Tailwind CSS': 'https://tailwindcss.com/',
+                                                    'Node.js': 'https://nodejs.org/',
+                                                    'Express': 'https://expressjs.com/',
+                                                    'Vue.js': 'https://vuejs.org/',
+                                                    'Angular': 'https://angular.io/',
+                                                    'Python': 'https://www.python.org/',
+                                                    'Django': 'https://www.djangoproject.com/',
+                                                    'Flask': 'https://flask.palletsprojects.com/',
+                                                    'MySQL': 'https://www.mysql.com/',
+                                                    'SQLite': 'https://www.sqlite.org/',
+                                                    'GraphQL': 'https://graphql.org/',
+                                                    'Kubernetes': 'https://kubernetes.io/',
+                                                    'Git': 'https://git-scm.com/',
+                                                    'GitHub': 'https://github.com/',
+                                                    'Vite': 'https://vitejs.dev/',
+                                                    'Webpack': 'https://webpack.js.org/',
+                                                    'Babel': 'https://babeljs.io/',
+                                                    'ESLint': 'https://eslint.org/',
+                                                    'Prettier': 'https://prettier.io/',
+                                                    'Jest': 'https://jestjs.io/',
+                                                    'Cypress': 'https://www.cypress.io/',
+                                                    'Selenium': 'https://selenium.dev/',
+                                                    'NGINX': 'https://nginx.org/',
+                                                    'Apache': 'https://httpd.apache.org/',
+                                                    'Linux': 'https://www.linux.org/',
+                                                    'Ubuntu': 'https://ubuntu.com/',
+                                                    'CentOS': 'https://www.centos.org/',
+                                                    'Debian': 'https://www.debian.org/'
+                                                };
+                                                return techUrls[techName] || `https://www.google.com/search?q=${encodeURIComponent(techName + ' programming technology')}`;
+                                            };
+
+                                            return (
+                                                <a
+                                                    key={index}
+                                                    href={getTechUrl(tech)}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    style={{
+                                                        display: 'inline-block',
+                                                        backgroundColor: '#e0e7ff',
+                                                        color: '#3730a3',
+                                                        padding: '4px 8px',
+                                                        borderRadius: '12px',
+                                                        fontSize: '12px',
+                                                        fontWeight: '500',
+                                                        border: '1px solid #c7d2fe',
+                                                        marginRight: '4px',
+                                                        marginBottom: '4px',
+                                                        textDecoration: 'none',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.2s ease'
+                                                    }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.backgroundColor = '#c7d2fe';
+                                                        e.currentTarget.style.transform = 'translateY(-1px)';
+                                                        e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.backgroundColor = '#e0e7ff';
+                                                        e.currentTarget.style.transform = 'translateY(0)';
+                                                        e.currentTarget.style.boxShadow = 'none';
+                                                    }}
+                                                >
+                                                    {tech}
+                                                </a>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
 
                         {/* Demo button only if demo exists */}
                         {project.demo && (
