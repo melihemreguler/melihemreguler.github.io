@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ExperienceSection } from './ExperienceSection';
 import { SkillsSection } from './SkillsSection';
 import { CommunitySection } from './CommunitySection';
@@ -15,7 +15,35 @@ interface TabItem {
 
 export function TabsSection() {
     const { t } = useTranslation();
-    const [activeTab, setActiveTab] = useState<TabType>('experience');
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    // Get current tab from URL path
+    const getCurrentTab = (): TabType => {
+        const path = location.pathname;
+        switch (path) {
+            case '/':
+                return 'experience'; // Default tab for home page
+            case '/experience':
+                return 'experience';
+            case '/skills':
+                return 'skills';
+            case '/projects':
+                return 'projects';
+            case '/education':
+                return 'education';
+            case '/community':
+                return 'community';
+            default:
+                return 'experience';
+        }
+    };
+
+    const activeTab = getCurrentTab();
+
+    const handleTabChange = (tabId: TabType) => {
+        navigate(`/${tabId}`);
+    };
 
     const tabs: TabItem[] = [
         {
@@ -65,7 +93,7 @@ export function TabsSection() {
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
-                            onClick={() => setActiveTab(tab.id)}
+                            onClick={() => handleTabChange(tab.id)}
                             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
                                 activeTab === tab.id
                                     ? 'border-blue-500 text-blue-600'
