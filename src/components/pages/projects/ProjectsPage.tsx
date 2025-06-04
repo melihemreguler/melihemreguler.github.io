@@ -101,7 +101,12 @@ export function ProjectsPage({ isEmbedded = false }: ProjectsPageProps) {
                                                     'Linux': 'https://www.linux.org/',
                                                     'Ubuntu': 'https://ubuntu.com/',
                                                     'CentOS': 'https://www.centos.org/',
-                                                    'Debian': 'https://www.debian.org/'
+                                                    'Debian': 'https://www.debian.org/',
+                                                    'Clean Code': 'https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
+                                                    'ECS': 'https://aws.amazon.com/ecs/',
+                                                    'EKS': 'https://aws.amazon.com/eks/',
+                                                    'RDS': 'https://aws.amazon.com/rds/',
+                                                    'ECR': 'https://aws.amazon.com/ecr/'
                                                 };
                                                 return techUrls[techName] || `https://www.google.com/search?q=${encodeURIComponent(techName + ' programming technology')}`;
                                             };

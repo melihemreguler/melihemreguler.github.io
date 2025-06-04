@@ -67,7 +67,7 @@
                 },
                 {
                     "name": "Cloud Services",
-                    "items": "AWS (ECS, EKS, RDS, ECR)."
+                    "items": "AWS, ECS, EKS, RDS, ECR."
                 },
                 {
                     "name": "Software Principles",
