@@ -32,16 +32,21 @@ export function ContactSection() {
         setSubmitStatus(null);
 
         try {
-            // EmailJS konfigürasyonu - gerçek değerlerle değiştirilecek
-            const serviceId = 'YOUR_SERVICE_ID';
-            const templateId = 'YOUR_TEMPLATE_ID';
-            const publicKey = 'YOUR_PUBLIC_KEY';
+            // EmailJS configuration from environment variables
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+            // Check if environment variables are configured
+            if (!serviceId || !templateId || !publicKey) {
+                throw new Error('EmailJS configuration is missing. Please check your environment variables.');
+            }
 
             const templateParams = {
                 from_name: formData.name,
                 from_email: formData.email,
                 message: formData.message,
-                to_name: 'Melih Emre Güler', // Alıcı ismi
+                to_name: 'Melih Emre Güler', // receiver's name
             };
 
             await emailjs.send(serviceId, templateId, templateParams, publicKey);
@@ -49,7 +54,7 @@ export function ContactSection() {
             setSubmitStatus('success');
             setFormData({ name: '', email: '', message: '' });
         } catch (error) {
-            console.error('Email gönderme hatası:', error);
+            console.error('Email sending error:', error);
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
@@ -62,7 +67,7 @@ export function ContactSection() {
             
             <div className="bg-gray-50 rounded-lg p-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* İsim */}
+                    {/* Name */}
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                             {t("home.contact.form.name")} <span className="text-red-500">*</span>
@@ -96,7 +101,7 @@ export function ContactSection() {
                         />
                     </div>
 
-                    {/* Mesaj */}
+                    {/* Message */}
                     <div>
                         <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                             {t("home.contact.form.message")} <span className="text-red-500">*</span>
@@ -113,7 +118,7 @@ export function ContactSection() {
                         />
                     </div>
 
-                    {/* Gönder Butonu */}
+                    {/* Submit Button */}
                     <div>
                         <button
                             type="submit"
@@ -128,7 +133,7 @@ export function ContactSection() {
                         </button>
                     </div>
 
-                    {/* Durum Mesajları */}
+                    {/* Status Messages */}
                     {submitStatus === 'success' && (
                         <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
                             {t("home.contact.form.successMessage")}
@@ -143,7 +148,7 @@ export function ContactSection() {
                 </form>
             </div>
 
-            {/* İletişim Bilgileri */}
+            {/* Contact Information */}
             <div className="mt-6 text-sm text-gray-600">
                 <p>{t("home.contact.alternativeText")}</p>
             </div>
