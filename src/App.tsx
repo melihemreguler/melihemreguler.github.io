@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ProfileHeader } from "./components/pages/home/ProfileHeader";
 import { AboutSection } from "./components/pages/home/AboutSection";
@@ -7,7 +7,7 @@ import { ContactSection } from "./components/pages/home/ContactSection";
 import { ProjectsPage } from "./components/pages/projects/ProjectsPage";
 
 function App() {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
 
     const toggleLanguage = () => {
         i18n.changeLanguage(i18n.language === "en" ? "tr" : "en");
@@ -16,35 +16,23 @@ function App() {
     return (
         <Router>
             <div className="min-h-screen bg-white text-gray-900 font-sans">
-                <nav className="flex justify-between items-center p-4 shadow-sm border-b border-gray-100">
-                    <h1 className="text-xl font-bold text-gray-900">Melih Emre Güler</h1>
-                    <ul className="flex gap-6 text-sm items-center">
-                        <li>
-                            <Link 
-                                to="/" 
-                                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
-                            >
-                                {t("nav.home")}
-                            </Link>
-                        </li>
-                        <li>
-                            <Link 
-                                to="/projects" 
-                                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium"
-                            >
-                                {t("nav.projects")}
-                            </Link>
-                        </li>
-                        <li>
-                            <button
-                                onClick={toggleLanguage}
-                                className="text-blue-600 hover:text-blue-800 transition-colors duration-200 text-xs font-medium px-3 py-1 border border-blue-200 rounded-full hover:bg-blue-50"
-                            >
-                                {i18n.language === "en" ? "🇹🇷 Türkçe" : "🇺🇸 English"}
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
+                {/* Language Toggle Button - Fixed to top right */}
+                <div 
+                    className="fixed top-4 right-4 z-50" 
+                    style={{ 
+                        position: 'fixed', 
+                        top: '1rem', 
+                        right: '1rem', 
+                        zIndex: 50 
+                    }}
+                >
+                    <button
+                        onClick={toggleLanguage}
+                        className="text-blue-600 hover:text-blue-800 transition-colors duration-200 text-xs font-medium px-3 py-1 border border-blue-200 rounded-full hover:bg-blue-50 bg-white shadow-sm"
+                    >
+                        {i18n.language === "en" ? "🇹🇷 Türkçe" : "🇺🇸 English"}
+                    </button>
+                </div>
 
                 <Routes>
                     <Route path="/" element={
