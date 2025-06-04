@@ -84,37 +84,37 @@
             "description": "Üzerinde çalıştığım bazı projeler aşağıda listelenmiştir.",
             "items": [
                 {
-                    "name": "<urlShortenerLink>URL Kısaltıcı</urlShortenerLink>",
+                    "name": "<urlShortenerLink><strong>URL Kısaltıcı</strong></urlShortenerLink>",
                     "description": "<strong>Java Spring Boot</strong> kullanılarak <strong>MVC</strong> mimarisi ile <strong>Temiz Kod</strong> prensiplerini takip ederek inşa edilmiş bir URL kısaltma servisidir. <strong>4 endpoint</strong>, yapılandırılabilir kısa URL domain desteği ve <strong>Swagger</strong> ile API dokümantasyonu içermektedir. Depolama için <strong>MongoDB</strong> entegre edilmiş ve güvenilirliği sağlamak için <strong>JUnit</strong> birim testleri eklenmiştir.",
                     "github": "https://github.com/MelihEmreGuler/urlshortener",
                     "technologies": ["Java", "Spring Boot", "MongoDB", "JUnit", "Swagger", "MVC"]
                 },
                 {
-                    "name": "<captchaSystemLink>CAPTCHA Doğrulama Sistemi</captchaSystemLink>",
+                    "name": "<captchaSystemLink><strong>CAPTCHA Doğrulama Sistemi</strong></captchaSystemLink>",
                     "description": "<strong>Spring Framework 6.2.3</strong> kullanılarak geliştirilen, <strong>RESTful API'ler</strong> ile CAPTCHA üretimi ve doğrulaması yapan güvenli bir kullanıcı doğrulama platformudur. <strong>Hibernate</strong> ve <strong>PostgreSQL</strong> kullanılmıştır. <strong>Maven</strong> ve <strong>JUnit 5</strong> ile inşa edilip test edilmiş, Jakarta EE uyumlu stack üzerinde çalışmaktadır. <strong>Türkçe ve İngilizce</strong> dil seçenekleri ile <strong>yerelleştirme</strong> desteği sağlar. Gerçek dünya uygulaması ile Java <strong>Spring Web MVC</strong> yetkinliği güçlendirilmiştir.",
                     "github": "https://github.com/ileri-java-proje/BM470",
                     "technologies": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit 5"]
                 },
                 {
-                    "name": "<wasteManagementLink>Atık Yönetimi Backend</wasteManagementLink>",
+                    "name": "<wasteManagementLink><strong>Atık Yönetimi Backend</strong></wasteManagementLink>",
                     "description": "<strong>Go (Fiber)</strong> ve <strong>PostgreSQL</strong> ile inşa edilmiş ölçeklenebilir bir backend sistemidir. <strong>Docker Compose</strong> orkestrasyonu ve <strong>AWS EC2/RDS</strong>'ye dağıtım özelliklerine sahiptir. <code>prod</code> branch'ini hedef alan <strong>GitHub Actions</strong> aracılığıyla <strong>CI/CD</strong> otomasyonu uygulanmıştır. <strong>Swagger</strong> ile belgelenmiş ve <strong>golang-migrate</strong> ile veritabanı versiyonlaması içermektedir. Gelecekteki <strong>mikroservis entegrasyonu</strong> göz önünde bulundurularak tasarlanmıştır.",
                     "github": "https://github.com/donus-turkiye/backend",
                     "technologies": ["Golang", "Fiber", "PostgreSQL", "AWS", "Docker", "CI/CD"]
                 },
                 {
-                    "name": "<noteAppLink>Not Alma Uygulaması</noteAppLink>",
+                    "name": "<noteAppLink><strong>Not Alma Uygulaması</strong></noteAppLink>",
                     "description": "<strong>Golang</strong> ve <strong>Fiber</strong> ile oluşturulmuş, <strong>11 RESTful endpoint</strong> sunan kullanıcı kimlik doğrulamalı not yönetim uygulamasıdır. <strong>2 kişilik takım</strong> tarafından işbirliği içinde geliştirilmiş ve kimlik doğrulama mekanizmaları ile güvenlik altına alınmıştır. <strong>Swagger</strong> aracılığıyla API dokümantasyonu sağlanmıştır.",
                     "github": "https://github.com/MelihEmreGuler/go-user-notes-app",
                     "technologies": ["Golang", "Fiber", "Authentication", "Swagger"]
                 },
                 {
-                    "name": "<todoAppLink>ToDo Uygulaması</todoAppLink>",
+                    "name": "<todoAppLink><strong>ToDo Uygulaması</strong></todoAppLink>",
                     "description": "<strong>Gin</strong> ile formüle edilmiş ve <strong>MongoDB</strong> ile desteklenen <strong>9 endpoint</strong> içeren görev yönetimi API'sidir. Kullanıcı kimlik doğrulamasını destekler ve <strong>2 kişilik takım</strong> ile işbirliği içinde üretilmiştir. Sorunsuz dağıtım için tamamen konteynerleştirilmiş ve <strong>Swagger</strong> kullanılarak belgelenmiştir.",
                     "github": "https://github.com/gdscduzceuniversity/todo-app-1",
                     "technologies": ["Golang", "Gin", "MongoDB", "Docker", "Swagger"]
                 },
                 {
-                    "name": "<cityTrafficLink>Şehir Listesi ve Trafik Kodları</cityTrafficLink>",
+                    "name": "<cityTrafficLink><strong>Şehir Listesi ve Trafik Kodları</strong></cityTrafficLink>",
                     "description": "Yapılandırılmış veri depolama için <strong>PostgreSQL</strong> kullanan, <strong>Redis</strong> ile önbellekleme ve <strong>RabbitMQ</strong> ile mesaj kuyruğu işleme ile geliştirilmiş <strong>6 endpoint</strong> içeren bir <strong>REST API</strong>'dir.",
                     "github": "https://github.com/MelihEmreGuler/go-psql-redis-cities",
                     "technologies": ["REST API", "PostgreSQL", "Redis", "RabbitMQ"]
