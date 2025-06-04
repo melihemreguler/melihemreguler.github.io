@@ -1,13 +1,19 @@
 import { useTranslation } from "react-i18next";
 import { RichText } from "../../common/RichText";
 
-export function ExperienceSection() {
+interface ExperienceSectionProps {
+    isEmbedded?: boolean;
+}
+
+export function ExperienceSection({ isEmbedded = false }: ExperienceSectionProps) {
     const { t } = useTranslation();
     const experience = t("home.experience.items", { returnObjects: true }) as any[];
 
     return (
         <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">{t("home.experience.title")}</h2>
+            {!isEmbedded && (
+                <h2 className="text-xl font-semibold mb-4">{t("home.experience.title")}</h2>
+            )}
             {experience.map((item: any, index: number) => (
                 <div key={index} className="mb-6">
                     <div className="font-bold text-gray-900">

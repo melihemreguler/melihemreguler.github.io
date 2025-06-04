@@ -2,10 +2,7 @@ import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ProfileHeader } from "./components/pages/home/ProfileHeader";
 import { AboutSection } from "./components/pages/home/AboutSection";
-import { EducationSection } from "./components/pages/home/EducationSection";
-import { ExperienceSection } from "./components/pages/home/ExperienceSection";
-import { SkillsSection } from "./components/pages/home/SkillsSection";
-import { CommunitySection } from "./components/pages/home/CommunitySection";
+import { TabsSection } from "./components/pages/home/TabsSection";
 import { ContactSection } from "./components/pages/home/ContactSection";
 import { ProjectsPage } from "./components/pages/projects/ProjectsPage";
 
@@ -54,10 +51,7 @@ function App() {
                         <main className="max-w-3xl mx-auto px-6 py-10">
                             <ProfileHeader />
                             <AboutSection />
-                            <EducationSection />
-                            <ExperienceSection />
-                            <SkillsSection />
-                            <CommunitySection />
+                            <TabsSection />
                             <ContactSection />
                         </main>
                     } />

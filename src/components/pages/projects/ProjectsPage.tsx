@@ -1,16 +1,22 @@
 import { useTranslation } from "react-i18next";
 import { RichText } from "../../common/RichText";
 
-export function ProjectsPage() {
+interface ProjectsPageProps {
+    isEmbedded?: boolean;
+}
+
+export function ProjectsPage({ isEmbedded = false }: ProjectsPageProps) {
     const { t } = useTranslation();
     const projects = t("home.projects.items", { returnObjects: true }) as any[];
 
-    return (
-        <main className="max-w-4xl mx-auto px-6 py-10">
-            <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold mb-4">{t("home.projects.title")}</h1>
-                <p className="text-gray-600 text-lg">{t("home.projects.description")}</p>
-            </div>
+    const content = (
+        <>
+            {!isEmbedded && (
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-bold mb-4">{t("home.projects.title")}</h1>
+                    <p className="text-gray-600 text-lg">{t("home.projects.description")}</p>
+                </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {projects.map((project: any, index: number) => (
@@ -84,6 +90,16 @@ export function ProjectsPage() {
                     </div>
                 ))}
             </div>
+        </>
+    );
+
+    return isEmbedded ? (
+        <div className="space-y-6">
+            {content}
+        </div>
+    ) : (
+        <main className="max-w-4xl mx-auto px-6 py-10">
+            {content}
         </main>
     );
 }

@@ -1,7 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { RichText } from "../../common/RichText";
 
-export function CommunitySection() {
+interface CommunitySectionProps {
+    isEmbedded?: boolean;
+}
+
+export function CommunitySection({ isEmbedded = false }: CommunitySectionProps) {
     const { t } = useTranslation();
     const communityItems = t("home.community.items", { returnObjects: true }) as any[];
 
@@ -11,7 +15,9 @@ export function CommunitySection() {
 
     return (
         <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">{t("home.community.title")}</h2>
+            {!isEmbedded && (
+                <h2 className="text-xl font-semibold mb-4">{t("home.community.title")}</h2>
+            )}
             <div className="space-y-6">
                 {communityItems.map((item: any, index: number) => (
                     <div key={index} className="bg-gray-50 rounded-lg p-4">
