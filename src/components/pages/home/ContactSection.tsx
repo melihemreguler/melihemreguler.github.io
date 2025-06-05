@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 
@@ -8,6 +8,15 @@ interface ContactFormData {
     message: string;
 }
 
+interface UserMetadata {
+    ip: string;
+    userAgent: string;
+    timeZone: string;
+    screenResolution: string;
+    language: string;
+    platform: string;
+}
+
 export function ContactSection() {
     const { t } = useTranslation();
     const [formData, setFormData] = useState<ContactFormData>({
@@ -15,8 +24,35 @@ export function ContactSection() {
         email: '',
         message: ''
     });
+    const [userMetadata, setUserMetadata] = useState<UserMetadata | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+
+    useEffect(() => {
+        // Get user metadata when component mounts
+        getUserMetadata();
+    }, []);
+
+    const getUserMetadata = async () => {
+        try {
+            // Get IP address from ipify API
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+
+            const metadata: UserMetadata = {
+                ip: ipData.ip,
+                userAgent: navigator.userAgent,
+                timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                language: navigator.language,
+                platform: navigator.platform
+            };
+
+            setUserMetadata(metadata);
+        } catch (error) {
+            console.error('Error fetching user metadata:', error);
+        }
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -46,7 +82,13 @@ export function ContactSection() {
                 from_name: formData.name,
                 from_email: formData.email,
                 message: formData.message,
-                to_name: 'Melih Emre Güler', // receiver's name
+                to_name: 'Melih Emre Güler',
+                user_ip: userMetadata?.ip || 'Not available',
+                user_agent: userMetadata?.userAgent || 'Not available',
+                user_timezone: userMetadata?.timeZone || 'Not available',
+                user_language: userMetadata?.language || 'Not available',
+                user_platform: userMetadata?.platform || 'Not available',
+                contact_time: new Date().toISOString()
             };
 
             await emailjs.send(serviceId, templateId, templateParams, publicKey);
