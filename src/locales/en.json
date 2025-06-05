@@ -39,6 +39,7 @@
                     "location": "Düzce Teknopark, Turkey",
                     "period": "Sep 2023 - Present",
                     "workType": "Hybrid",
+                    "companyDescription": "<primodLink>Prime Modality</primodLink> is a <strong>cybersecurity company</strong> developing a comprehensive <strong>CNAPP</strong> solution that combines <strong>Cloud Security Posture Management (CSPM)</strong> and <strong>runtime threat detection</strong> using <strong>eBPF</strong> technology. The platform is designed to be both <strong>cloud-native</strong> and <strong>kubernetes-native</strong>, identifying <strong>misconfigurations</strong>, <strong>vulnerabilities</strong>, and <strong>real-time threats</strong> across modern cloud infrastructures and delivering actionable insights to customers.",
                     "responsibilities": [
                         "Engineered <strong>10+ RESTful</strong> endpoints using <strong>Golang</strong> to enhance API scalability and maintainability.",
                         "Architected and constructed database solutions using <strong>PostgreSQL</strong> for relational data, including a filtering system for a Security Findings Dashboard with <strong>9 column-based filter options</strong>.",

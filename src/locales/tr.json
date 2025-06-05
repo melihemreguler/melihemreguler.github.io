@@ -39,6 +39,7 @@
                     "location": "Düzce Teknopark, Türkiye",
                     "period": "Eyl 2023 - Devam ediyor",
                     "workType": "Hibrit",
+                    "companyDescription": "<primodLink>Prime Modality</primodLink>, <strong>eBPF</strong> teknolojisini kullanarak <strong>Bulut Güvenlik Duruş Yönetimi (CSPM)</strong> ve <strong>çalışma zamanı tehdit tespitini</strong> birleştiren kapsamlı bir <strong>CNAPP</strong> çözümü geliştiren bir <strong>siber güvenlik şirketidir</strong>. Platform, modern bulut altyapıları genelinde <strong>yanlış yapılandırmaları</strong>, <strong>güvenlik açıklarını</strong> ve <strong>gerçek zamanlı tehditleri</strong> tespit edip müşterilere uygulanabilir öngörüler sunarak hem <strong>bulut-yerel</strong> hem de <strong>kubernetes-yerel</strong> olacak şekilde tasarlanmıştır.",
                     "responsibilities": [
                         "API ölçeklenebilirliği ve sürdürülebilirliğini artırmak için <strong>Golang</strong> kullanarak <strong>10+ RESTful</strong> endpoint geliştirdim.",
                         "İlişkisel veriler için <strong>PostgreSQL</strong> kullanarak veritabanı çözümleri tasarladım ve inşa ettim. Güvenlik Bulguları Panosu için <strong>9 sütun tabanlı filtreleme seçeneği</strong> içeren bir filtreleme sistemi geliştirdim.",

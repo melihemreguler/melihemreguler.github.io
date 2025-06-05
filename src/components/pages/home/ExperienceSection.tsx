@@ -29,6 +29,17 @@ export function ExperienceSection({ isEmbedded = false }: ExperienceSectionProps
                         {item.location} | {item.period}
                         {item.workType && ` | ${item.workType}`}
                     </p>
+                    
+                    {/* Company Description */}
+                    <div className="mt-3 mb-4 text-gray-700">
+                        <RichText
+                            i18nKey={`home.experience.items.${index}.companyDescription`}
+                            links={{
+                                primodLink: { href: "https://app.primod.io/" }
+                            }}
+                        />
+                    </div>
+
                     <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
                         {item.responsibilities.map((_: any, i: number) => (
                             <li key={i}>
