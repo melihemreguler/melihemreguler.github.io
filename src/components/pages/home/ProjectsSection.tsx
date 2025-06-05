@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { RichText } from "../../common/RichText";
 
-interface ProjectsPageProps {
+interface ProjectsSectionProps {
     isEmbedded?: boolean;
 }
 
-export function ProjectsPage({ isEmbedded = false }: ProjectsPageProps) {
+export function ProjectsSection({ isEmbedded = false }: ProjectsSectionProps) {
     const { t } = useTranslation();
     const projects = t("home.projects.items", { returnObjects: true }) as any[];
 

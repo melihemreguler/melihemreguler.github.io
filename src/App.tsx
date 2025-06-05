@@ -1,10 +1,9 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ProfileHeader } from "./components/pages/home/ProfileHeader";
 import { AboutSection } from "./components/pages/home/AboutSection";
 import { TabsSection } from "./components/pages/home/TabsSection";
 import { ContactSection } from "./components/pages/home/ContactSection";
-import { ProjectsPage } from "./components/pages/projects/ProjectsPage";
 
 function App() {
     const { i18n } = useTranslation();
@@ -43,7 +42,46 @@ function App() {
                             <ContactSection />
                         </main>
                     } />
-                    <Route path="/projects" element={<ProjectsPage />} />
+                    <Route path="/experience" element={
+                        <main className="max-w-3xl mx-auto px-6 py-10">
+                            <ProfileHeader />
+                            <AboutSection />
+                            <TabsSection />
+                            <ContactSection />
+                        </main>
+                    } />
+                    <Route path="/skills" element={
+                        <main className="max-w-3xl mx-auto px-6 py-10">
+                            <ProfileHeader />
+                            <AboutSection />
+                            <TabsSection />
+                            <ContactSection />
+                        </main>
+                    } />
+                    <Route path="/education" element={
+                        <main className="max-w-3xl mx-auto px-6 py-10">
+                            <ProfileHeader />
+                            <AboutSection />
+                            <TabsSection />
+                            <ContactSection />
+                        </main>
+                    } />
+                    <Route path="/community" element={
+                        <main className="max-w-3xl mx-auto px-6 py-10">
+                            <ProfileHeader />
+                            <AboutSection />
+                            <TabsSection />
+                            <ContactSection />
+                        </main>
+                    } />
+                    <Route path="/projects" element={
+                        <main className="max-w-3xl mx-auto px-6 py-10">
+                            <ProfileHeader />
+                            <AboutSection />
+                            <TabsSection />
+                            <ContactSection />
+                        </main>
+                    } />
                 </Routes>
 
                 <footer className="p-6 text-center text-sm text-gray-500 border-t border-gray-100 mt-16 bg-gray-50">

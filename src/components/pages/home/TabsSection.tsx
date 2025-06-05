@@ -4,7 +4,7 @@ import { ExperienceSection } from './ExperienceSection';
 import { SkillsSection } from './SkillsSection';
 import { CommunitySection } from './CommunitySection';
 import { EducationSection } from './EducationSection';
-import { ProjectsPage } from '../projects/ProjectsPage';
+import { ProjectsSection } from './ProjectsSection';
 
 type TabType = 'experience' | 'skills' | 'education' | 'community' | 'projects';
 
@@ -79,7 +79,7 @@ export function TabsSection() {
             case 'community':
                 return <CommunitySection isEmbedded={true} />;
             case 'projects':
-                return <ProjectsPage isEmbedded={true} />;
+                return <ProjectsSection isEmbedded={true} />;
             default:
                 return <ExperienceSection isEmbedded={true} />;
         }
