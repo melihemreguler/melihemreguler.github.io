@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Creator</title>
+</head>
+<body>
+    <canvas id="canvas" width="32" height="32" style="border: 1px solid #ccc;"></canvas>
+    <br><br>
+    <button onclick="downloadFavicon()">Download Favicon</button>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Load the profile image
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function() {
+            // Clear canvas
+            ctx.clearRect(0, 0, 32, 32);
+            
+            // Create circular clipping path
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(16, 16, 15, 0, 2 * Math.PI);
+            ctx.clip();
+            
+            // Draw the image (cropped to circle)
+            ctx.drawImage(img, 0, 0, 32, 32);
+            ctx.restore();
+            
+            // Add a subtle border
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(16, 16, 15.5, 0, 2 * Math.PI);
+            ctx.stroke();
+        };
+        
+        img.src = './profile-photo.jpg';
+        
+        function downloadFavicon() {
+            // Convert to ICO format would be ideal, but let's use PNG
+            const link = document.createElement('a');
+            link.download = 'favicon.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    </script>
+</body>
+</html>
