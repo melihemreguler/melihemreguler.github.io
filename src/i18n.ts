@@ -14,6 +14,13 @@ i18n
         lng: "en",
         fallbackLng: "en",
         interpolation: { escapeValue: false },
+        // Make sure i18n is initialized synchronously
+        initImmediate: false,
+        // Ensure resources are loaded
+        load: 'all',
+        preload: ['en', 'tr'],
+        // Disable async loading since we're importing resources directly
+        partialBundledLanguages: true,
     });
 
 export default i18n;

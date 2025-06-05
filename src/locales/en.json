@@ -1,7 +1,11 @@
 {
     "nav": {
         "home": "Home",
-        "projects": "Projects"
+        "projects": "Projects",
+        "experience": "Experience",
+        "skills": "Skills",
+        "education": "Education",
+        "community": "Community"
     },
     "home": {
         "greeting": "Hello, I'm <strong>Melih Emre Güler</strong>.",
@@ -160,6 +164,12 @@
         },
         "footer": {
             "rights": "All rights reserved."
+        },
+        "notFound": {
+            "title": "Page Not Found",
+            "description": "The page you're looking for doesn't exist or may have been moved.",
+            "homeButton": "Go to Homepage",
+            "suggestion": "Please check the URL or continue from the homepage."
         }
     }
 }

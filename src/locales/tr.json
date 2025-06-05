@@ -1,7 +1,11 @@
 {
     "nav": {
         "home": "Ana Sayfa",
-        "projects": "Projeler"
+        "projects": "Projeler",
+        "experience": "Deneyim",
+        "skills": "Yetenekler",
+        "education": "Eğitim",
+        "community": "Topluluk"
     },
     "home": {
         "greeting": "Merhaba, ben <strong>Melih Emre Güler</strong>.",
@@ -160,6 +164,12 @@
         },
         "footer": {
             "rights": "Tüm hakları saklıdır."
+        },
+        "notFound": {
+            "title": "Sayfa Bulunamadı",
+            "description": "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
+            "homeButton": "Ana Sayfaya Dön",
+            "suggestion": "URL'yi kontrol edin veya ana sayfadan devam edin."
         }
     }
 }
