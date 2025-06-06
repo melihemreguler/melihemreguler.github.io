@@ -87,42 +87,53 @@
         "projects": {
             "title": "Projects",
             "description": "Here are some of the projects I've worked on.",
+            "showAll": "Show All",
+            "noProjects": "No projects found for selected technologies.",
+            "filterCategories": {
+                "Programming Languages": "Programming Languages",
+                "Databases": "Databases",
+                "Backend Technologies": "Backend Technologies",
+                "Containerization": "Containerization",
+                "Cloud Services": "Cloud Services",
+                "Software Principles": "Software Principles",
+                "Development Tools": "Development Tools"
+            },
             "items": [
                 {
                     "name": "<urlShortenerLink><strong>URL Shortener</strong></urlShortenerLink>",
                     "description": "A URL shortening service constructed with <strong>Java Spring Boot</strong> using the <strong>MVC</strong> architecture while adhering to <strong>Clean Code</strong> principles, featuring <strong>4 endpoints</strong>, configurable short URL domain support and API documentation via <strong>Swagger</strong>. Integrated <strong>MongoDB</strong> for storage and incorporated <strong>JUnit</strong> unit tests to ensure reliability.",
                     "github": "https://github.com/MelihEmreGuler/urlshortener",
-                    "technologies": ["Java", "Spring Boot", "MongoDB", "JUnit", "Swagger", "MVC"]
+                    "technologies": ["Java", "Spring Boot", "Spring Framework", "MongoDB", "JUnit", "Swagger", "Maven", "MVC", "Docker", "Docker Compose"]
                 },
                 {
                     "name": "<captchaSystemLink><strong>CAPTCHA Verification System</strong></captchaSystemLink>",
-                    "description": "A secure user verification platform developed using <strong>Spring Framework 6.2.3</strong>, implementing CAPTCHA generation and validation with <strong>RESTful APIs</strong>. Utilized <strong>Hibernate</strong> and <strong>PostgreSQL</strong>. Built and tested with <strong>Maven</strong> and <strong>JUnit 5</strong>, running on a Jakarta EE-compatible stack. Supports <strong>localization</strong> with both <strong>Turkish and English</strong> language options. Strengthened Java <strong>Spring Web MVC</strong> proficiency through real-world implementation.",
+                    "description": "A secure user verification platform developed using <strong>Spring Framework 6.2.3</strong>, implementing CAPTCHA generation and validation with <strong>RESTful APIs</strong>. Utilized <strong>Hibernate</strong> and <strong>PostgreSQL</strong>. Built and tested with <strong>Maven</strong> and <strong>JUnit</strong>, running on a Jakarta EE-compatible stack. Supports <strong>localization</strong> with both <strong>Turkish and English</strong> language options. Strengthened Java <strong>Spring Web MVC</strong> proficiency through real-world implementation.",
                     "github": "https://github.com/ileri-java-proje/BM470",
-                    "technologies": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit 5"]
+                    "technologies": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit", "Docker"]
                 },
                 {
                     "name": "<wasteManagementLink><strong>Waste Management Backend</strong></wasteManagementLink>",
                     "description": "A scalable backend system built with <strong>Go (Fiber)</strong> and <strong>PostgreSQL</strong>, featuring <strong>Docker Compose</strong> orchestration and deployment to <strong>AWS EC2/RDS</strong>. Applied <strong>CI/CD</strong> automation via <strong>GitHub Actions</strong> targeting the <code>prod</code> branch. Documented using <strong>Swagger</strong> and includes database versioning via <strong>golang-migrate</strong>. Designed with future <strong>microservices integration</strong> in mind.",
                     "github": "https://github.com/donus-turkiye/backend",
-                    "technologies": ["Golang", "Fiber", "PostgreSQL", "AWS", "Docker", "CI/CD"]
+                    "technologies": ["Golang", "Fiber", "PostgreSQL", "AWS", "Docker", "CI/CD", "Authentication", "Swagger", "Docker", "Docker Compose"]
                 },
                 {
                     "name": "<noteAppLink><strong>Note Taking App</strong></noteAppLink>",
                     "description": "A user-authenticated note management application crafted with <strong>Golang</strong> and <strong>Fiber</strong>, exposing <strong>11 RESTful endpoints</strong>. Created collaboratively by a <strong>2-person team</strong> and secured with authentication mechanisms. API documentation provided via <strong>Swagger</strong>.",
                     "github": "https://github.com/MelihEmreGuler/go-user-notes-app",
-                    "technologies": ["Golang", "Fiber", "Authentication", "Swagger"]
+                    "technologies": ["Golang", "Fiber", "Authentication", "Swagger", "Docker"]
                 },
                 {
                     "name": "<todoAppLink><strong>ToDo App</strong></todoAppLink>",
                     "description": "A <strong>9-endpoint</strong> task management API formulated with <strong>Gin</strong> and backed by <strong>MongoDB</strong>. Supports user authentication and was collaboratively produced with <strong>2-person team</strong>. Fully containerized for seamless deployment and documented using <strong>Swagger</strong>.",
                     "github": "https://github.com/gdscduzceuniversity/todo-app-1",
-                    "technologies": ["Golang", "Gin", "MongoDB", "Docker", "Swagger"]
+                    "technologies": ["Golang", "Gin", "MongoDB", "Swagger","Docker", "Authentication"]
                 },
                 {
                     "name": "<cityTrafficLink><strong>City List and Traffic Codes</strong></cityTrafficLink>",
                     "description": "A <strong>6-endpoint</strong> <strong>REST API</strong> leveraging <strong>PostgreSQL</strong> for structured data storage, enhanced with caching via <strong>Redis</strong> and message queue processing through <strong>RabbitMQ</strong>.",
                     "github": "https://github.com/MelihEmreGuler/go-psql-redis-cities",
-                    "technologies": ["REST API", "PostgreSQL", "Redis", "RabbitMQ"]
+                    "technologies": ["REST API", "PostgreSQL", "Redis", "RabbitMQ", "Docker"]
                 }
             ]
         },

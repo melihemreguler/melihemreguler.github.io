@@ -1,6 +1,7 @@
+import { useState, useMemo } from 'react';
 import { useTranslation } from "react-i18next";
 import { RichText } from "../../common/RichText";
-import { Card, CardContent, Typography, Stack, Chip, Button as MuiButton } from '@mui/material';
+import { Card, CardContent, Typography, Stack, Chip, Button as MuiButton, Box } from '@mui/material';
 
 interface ProjectsSectionProps {
     isEmbedded?: boolean;
@@ -10,6 +11,72 @@ export function ProjectsSection({ isEmbedded = false }: ProjectsSectionProps) {
     const { t } = useTranslation();
     const projects = t("home.projects.items", { returnObjects: true }) as any[];
 
+    // Extract unique technology list
+    const allTechnologies = useMemo(() => {
+        const techSet = new Set<string>();
+        projects.forEach((project) => {
+            (project.technologies || []).forEach((tech: string) => techSet.add(tech));
+        });
+        return Array.from(techSet).sort();
+    }, [projects]);
+
+    // Filter state: all technologies selected on initial load
+    const [selectedTechs, setSelectedTechs] = useState<string[]>(allTechnologies);
+
+    // Filtered projects
+    const filteredProjects = useMemo(() => {
+        if (selectedTechs.length === 0) return [];
+        return projects.filter((project) =>
+            (project.technologies || []).some((tech: string) => selectedTechs.includes(tech))
+        );
+    }, [projects, selectedTechs]);
+
+    // Chip click handler
+    const handleTechToggle = (tech: string) => {
+        if (selectedTechs.includes(tech)) {
+            // At least one must remain selected
+            if (selectedTechs.length === 1) return;
+            setSelectedTechs(selectedTechs.filter((t) => t !== tech));
+        } else {
+            setSelectedTechs([...selectedTechs, tech]);
+        }
+    };
+
+    // Select all
+    const handleSelectAll = () => setSelectedTechs(allTechnologies);
+
+    // Categorize technologies (compatible with SkillsSection)
+    const techCategories: Record<string, string[]> = {
+        'Programming Languages': [
+            'Golang', 'Java'
+        ],
+        'Databases': [
+            'PostgreSQL', 'MongoDB', 'Redis', 'ArangoDB', 'MySQL', 'SQLite'
+        ],
+        'Backend Technologies': [
+            'Spring Boot', 'Spring Framework', 'Maven', 'Kafka', 'RabbitMQ', 'gRPC', 'JUnit', 'Hibernate', 'Fiber', 'Gin', 'Node.js', 'Express', 'Python', 'Django', 'Flask', 'Vue.js', 'Angular', 'React', 'TypeScript', 'JavaScript', 'REST API', 'GraphQL', 'MVC', 'Authentication'
+        ],
+        'Containerization': [
+            'Docker', 'Docker Compose', 'Kubernetes', 'Minikube', 'Skaffold'
+        ],
+        'Cloud Services': [
+            'AWS', 'ECS', 'EKS', 'RDS', 'ECR'
+        ],
+        'Software Principles': [
+            'Clean Code', 'Temiz Kod'
+        ],
+        'Development Tools': [
+            'Git', 'GitHub', 'GitHub Actions', 'CI/CD', 'Swagger', 'Prettier', 'ESLint', 'Jest', 'Cypress', 'Selenium', 'Vite', 'Webpack', 'Babel', 'NGINX', 'Apache', 'Linux', 'Ubuntu', 'CentOS', 'Debian'
+        ]
+    };
+
+    // Filter technologies from categories that appear in projects
+    const categorizedTechs = Object.entries(techCategories).map(([cat, techs]) => ({
+        category: cat,
+        localizedCategory: t(`home.projects.filterCategories.${cat}`) as string,
+        techs: techs.filter((t) => allTechnologies.includes(t))
+    })).filter(cat => cat.techs.length > 0);
+
     const content = (
         <>
             {!isEmbedded && (
@@ -18,10 +85,45 @@ export function ProjectsSection({ isEmbedded = false }: ProjectsSectionProps) {
                     <p className="text-gray-600 text-lg">{t("home.projects.description")}</p>
                 </div>
             )}
+            {/* Teknoloji filtresi */}
+            <Box mb={3} display="flex" flexDirection="column" alignItems="center">
+                <Stack spacing={2} width="100%" maxWidth={700}>
+                    {categorizedTechs.map(({ category, localizedCategory, techs }) => (
+                        <Box key={category}>
+                            <Typography variant="subtitle2" color="text.secondary" mb={0.5} fontWeight={700} sx={{ pl: 0.5 }}>
+                                {localizedCategory}
+                            </Typography>
+                            <Stack direction="row" spacing={1} flexWrap="wrap" justifyContent="flex-start" mb={1} sx={{ gap: 1 }}>
+                                {techs.map((tech) => (
+                                    <Chip
+                                        key={tech}
+                                        label={tech}
+                                        clickable
+                                        color={selectedTechs.includes(tech) ? 'primary' : 'default'}
+                                        variant={selectedTechs.includes(tech) ? 'filled' : 'outlined'}
+                                        onClick={() => handleTechToggle(tech)}
+                                        sx={{ fontWeight: 500, fontSize: 13, mb: 1.5 }}
+                                    />
+                                ))}
+                            </Stack>
+                        </Box>
+                    ))}
+                </Stack>
+                {selectedTechs.length < allTechnologies.length && (
+                    <MuiButton size="small" onClick={handleSelectAll} sx={{ mt: 1 }}>
+                        {t('home.projects.showAll')}
+                    </MuiButton>
+                )}
+            </Box>
             <Stack spacing={3}>
-                {projects.map((project: any, index: number) => (
-                    <ProjectCard key={index} project={project} index={index} />
+                {filteredProjects.map((project: any, index: number) => (
+                    <ProjectCard key={project.github || index} project={project} index={projects.indexOf(project)} />
                 ))}
+                {filteredProjects.length === 0 && (
+                    <Typography variant="body1" color="text.secondary" align="center" sx={{ mt: 4 }}>
+                        {t('home.projects.noProjects')}
+                    </Typography>
+                )}
             </Stack>
         </>
     );
@@ -46,7 +148,6 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
             'MongoDB': 'https://www.mongodb.com/',
             'PostgreSQL': 'https://www.postgresql.org/',
             'JUnit': 'https://junit.org/',
-            'JUnit 5': 'https://junit.org/junit5/',
             'Swagger': 'https://swagger.io/',
             'MVC': 'https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller',
             'Hibernate': 'https://hibernate.org/',
@@ -57,6 +158,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
             'Gin': 'https://gin-gonic.com/',
             'AWS': 'https://aws.amazon.com/',
             'Docker': 'https://www.docker.com/',
+            'Docker Compose': 'https://docs.docker.com/compose/',
             'CI/CD': 'https://en.wikipedia.org/wiki/CI/CD',
             'Authentication': 'https://en.wikipedia.org/wiki/Authentication',
             'REST API': 'https://en.wikipedia.org/wiki/Representational_state_transfer',
@@ -124,7 +226,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                     <Stack direction="row" spacing={1} flexWrap="wrap" mb={2}>
                         {project.technologies.map((tech: string, i: number) => (
                             <Chip
-                                key={i}
+                                key={tech + '-' + i}
                                 label={tech}
                                 component="a"
                                 href={getTechUrl(tech)}
