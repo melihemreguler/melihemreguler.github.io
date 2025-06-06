@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Card, CardContent, Typography, Stack, Chip } from '@mui/material';
 
 interface SkillsSectionProps {
     isEmbedded?: boolean;
@@ -54,50 +55,42 @@ export function SkillsSection({ isEmbedded = false }: SkillsSectionProps) {
             {!isEmbedded && (
                 <h2 className="text-xl font-semibold mb-4">{t("home.skills.title")}</h2>
             )}
-            <div className="space-y-4">
+            <Stack spacing={3}>
                 {skillsData.map((category: any, index: number) => (
-                    <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                        <h3 className="font-semibold text-gray-900 mb-3">{category.name}</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {parseSkills(category.items).map((skill: string, skillIndex: number) => (
-                                <a
-                                    key={skillIndex}
-                                    href={getTechUrl(skill)}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{
-                                        display: 'inline-block',
-                                        backgroundColor: '#f0f9ff',
-                                        color: '#0c4a6e',
-                                        padding: '4px 10px',
-                                        borderRadius: '14px',
-                                        fontSize: '13px',
-                                        fontWeight: '500',
-                                        border: '1px solid #bae6fd',
-                                        marginRight: '4px',
-                                        marginBottom: '4px',
-                                        textDecoration: 'none',
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s ease'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.backgroundColor = '#bae6fd';
-                                        e.currentTarget.style.transform = 'translateY(-1px)';
-                                        e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.backgroundColor = '#f0f9ff';
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = 'none';
-                                    }}
-                                >
-                                    {skill}
-                                </a>
-                            ))}
-                        </div>
-                    </div>
+                    <Card key={index} elevation={3} sx={{ borderRadius: 4 }}>
+                        <CardContent>
+                            <Typography variant="h6" fontWeight={700} color="primary.main" mb={2}>
+                                {category.name}
+                            </Typography>
+                            <Stack direction="row" spacing={1} flexWrap="wrap">
+                                {parseSkills(category.items).map((skill: string, skillIndex: number) => (
+                                    <Chip
+                                        key={skillIndex}
+                                        label={skill}
+                                        component="a"
+                                        href={getTechUrl(skill)}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        clickable
+                                        sx={{
+                                            mb: 1,
+                                            bgcolor: (theme) => theme.palette.mode === 'dark' ? 'primary.dark' : '#e0e7ff',
+                                            color: (theme) => theme.palette.mode === 'dark' ? theme.palette.primary.contrastText : '#0c4a6e',
+                                            border: (theme) => theme.palette.mode === 'dark' ? '1px solid #374151' : '1px solid #bae6fd',
+                                            fontWeight: 500,
+                                            fontSize: 13,
+                                            '&:hover': {
+                                                bgcolor: (theme) => theme.palette.mode === 'dark' ? 'primary.main' : '#bae6fd',
+                                                color: (theme) => theme.palette.mode === 'dark' ? theme.palette.primary.contrastText : theme.palette.primary.main,
+                                            },
+                                        }}
+                                    />
+                                ))}
+                            </Stack>
+                        </CardContent>
+                    </Card>
                 ))}
-            </div>
+            </Stack>
         </section>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
+import { Card, CardContent, Typography, Stack, TextField, Button, Alert } from '@mui/material';
 
 interface ContactFormData {
     name: string;
@@ -104,96 +105,65 @@ export function ContactSection() {
     };
 
     return (
-        <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-6">{t("home.contact.title")}</h2>
-            
-            <div className="bg-gray-50 rounded-lg p-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Name */}
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                            {t("home.contact.form.name")} <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            id="name"
+        <Card elevation={3} sx={{ mb: 4, bgcolor: 'background.paper', borderRadius: 4, boxShadow: 3 }}>
+            <CardContent>
+                <Typography variant="h5" fontWeight={700} color="primary.main" mb={2}>
+                    {t("home.contact.title")}
+                </Typography>
+                <form onSubmit={handleSubmit}>
+                    <Stack spacing={2}>
+                        <TextField
+                            label={t("home.contact.form.name")}
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
                             required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder={t("home.contact.form.namePlaceholder")}
+                            fullWidth
+                            variant="outlined"
                         />
-                    </div>
-
-                    {/* Email */}
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                            {t("home.contact.form.email")} <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
+                        <TextField
+                            label={t("home.contact.form.email")}
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder={t("home.contact.form.emailPlaceholder")}
+                            fullWidth
+                            variant="outlined"
+                            type="email"
                         />
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                            {t("home.contact.form.message")} <span className="text-red-500">*</span>
-                        </label>
-                        <textarea
-                            id="message"
+                        <TextField
+                            label={t("home.contact.form.message")}
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
                             required
-                            rows={5}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
-                            placeholder={t("home.contact.form.messagePlaceholder")}
+                            fullWidth
+                            variant="outlined"
+                            multiline
+                            minRows={5}
                         />
-                    </div>
-
-                    {/* Submit Button */}
-                    <div>
-                        <button
+                        <Button
                             type="submit"
+                            variant="contained"
+                            color="primary"
                             disabled={isSubmitting}
-                            className={`w-full py-3 px-4 rounded-md font-medium transition-colors ${
-                                isSubmitting
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
-                            } text-white`}
+                            fullWidth
+                            size="large"
                         >
                             {isSubmitting ? t("home.contact.form.sending") : t("home.contact.form.send")}
-                        </button>
-                    </div>
-
-                    {/* Status Messages */}
-                    {submitStatus === 'success' && (
-                        <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded-md">
-                            {t("home.contact.form.successMessage")}
-                        </div>
-                    )}
-
-                    {submitStatus === 'error' && (
-                        <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-                            {t("home.contact.form.errorMessage")}
-                        </div>
-                    )}
+                        </Button>
+                        {submitStatus === 'success' && (
+                            <Alert severity="success">{t("home.contact.form.successMessage")}</Alert>
+                        )}
+                        {submitStatus === 'error' && (
+                            <Alert severity="error">{t("home.contact.form.errorMessage")}</Alert>
+                        )}
+                    </Stack>
                 </form>
-            </div>
-
-            {/* Contact Information */}
-            <div className="mt-6 text-sm text-gray-600">
-                <p>{t("home.contact.alternativeText")}</p>
-            </div>
-        </section>
+                <Typography variant="body2" color="text.secondary" mt={3}>
+                    {t("home.contact.alternativeText")}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 }

@@ -5,6 +5,7 @@ import { SkillsSection } from './SkillsSection';
 import { CommunitySection } from './CommunitySection';
 import { EducationSection } from './EducationSection';
 import { ProjectsSection } from './ProjectsSection';
+import { Tabs, Tab, Box, Paper, Card } from '@mui/material';
 
 type TabType = 'experience' | 'skills' | 'education' | 'community' | 'projects';
 
@@ -41,7 +42,7 @@ export function TabsSection() {
 
     const activeTab = getCurrentTab();
 
-    const handleTabChange = (tabId: TabType) => {
+    const handleTabChange = (_: any, tabId: TabType) => {
         navigate(`/${tabId}`);
     };
 
@@ -86,30 +87,71 @@ export function TabsSection() {
     };
 
     return (
-        <section className="mb-8">
-            {/* Tab Navigation */}
-            <div className="border-b border-gray-200 mb-6">
-                <nav className="-mb-px flex space-x-8 overflow-x-auto">
-                    {tabs.map((tab) => (
-                        <button
-                            key={tab.id}
-                            onClick={() => handleTabChange(tab.id)}
-                            className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200 ${
-                                activeTab === tab.id
-                                    ? 'border-blue-500 text-blue-600'
-                                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                            }`}
-                        >
-                            {t(tab.labelKey)}
-                        </button>
-                    ))}
-                </nav>
-            </div>
-
-            {/* Tab Content */}
-            <div className="tab-content">
-                {renderActiveTabContent()}
-            </div>
-        </section>
-    );
+        <Box mb={4}>
+          {/* Tab Bar */}
+          <Box sx={{ mb: 2, bgcolor: (theme) => theme.palette.background.paper, p: 0, borderRadius: 4, boxShadow: 3, display: 'flex', justifyContent: 'center' }}>
+            <Tabs
+              value={activeTab}
+              onChange={handleTabChange}
+              variant="scrollable"
+              scrollButtons="auto"
+              TabIndicatorProps={{ style: { display: 'none' } }}
+              sx={{}}
+            >
+              {tabs.map((tab) => (
+                <Tab
+                  key={tab.id}
+                  value={tab.id}
+                  label={t(tab.labelKey)}
+                  sx={{
+                    fontWeight: 700,
+                    fontSize: 16,
+                    textTransform: 'none',
+                    borderRadius: 0,
+                    mx: 0.5,
+                    px: 3,
+                    py: 1.2,
+                    minHeight: 48,
+                    transition: 'all 0.2s',
+                    bgcolor: 'transparent',
+                    color: (theme) => activeTab === tab.id ? theme.palette.primary.main : theme.palette.text.primary,
+                    borderBottom: (theme) => activeTab === tab.id ? `3px solid ${theme.palette.primary.main}` : '3px solid transparent',
+                    boxShadow: 0,
+                    outline: 'none',
+                    border: 'none',
+                    '&:focus': {
+                        outline: 'none',
+                        border: 'none',
+                        boxShadow: 'none',
+                    },
+                    '&.Mui-selected': {
+                        outline: 'none',
+                        border: 'none',
+                        boxShadow: 'none',
+                    },
+                    '&:hover': {
+                        bgcolor: 'transparent',
+                        color: (theme) => theme.palette.primary.main,
+                        borderBottom: (theme) => `3px solid ${theme.palette.primary.light}`,
+                    },
+                  }}
+                />
+              ))}
+            </Tabs>
+          </Box>
+          {/* Tab Content */}
+          <Card
+            elevation={2}
+            sx={{
+              p: { xs: 2, sm: 3 },
+              borderRadius: 4,
+              boxShadow: 2,
+              bgcolor: 'background.paper',
+            }}
+          >
+            {renderActiveTabContent()}
+          </Card>
+        </Box>
+      );
+      
 }

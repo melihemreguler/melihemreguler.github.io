@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { RichText } from "../../common/RichText";
+import { Card, CardContent, Typography, Stack } from '@mui/material';
 
 interface ExperienceSectionProps {
     isEmbedded?: boolean;
@@ -14,48 +15,40 @@ export function ExperienceSection({ isEmbedded = false }: ExperienceSectionProps
             {!isEmbedded && (
                 <h2 className="text-xl font-semibold mb-4">{t("home.experience.title")}</h2>
             )}
-            {experience.map((item: any, index: number) => (
-                <div key={index} className="mb-6">
-                    <div className="font-bold text-gray-900">
-                        <RichText
-                            i18nKey={`home.experience.items.${index}.position`}
-                        />
-                        {" – "}
-                        <RichText
-                            i18nKey={`home.experience.items.${index}.company`}
-                        />
-                    </div>
-                    <p className="text-sm text-gray-600">
-                        {item.location} | {item.period}
-                        {item.workType && ` | ${item.workType}`}
-                    </p>
-                    
-                    {/* Company Description */}
-                    <div className="mt-3 mb-4 text-gray-700">
-                        <RichText
-                            i18nKey={`home.experience.items.${index}.companyDescription`}
-                            links={{
-                                primodLink: { href: "https://app.primod.io/" }
-                            }}
-                        />
-                    </div>
-
-                    <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700">
-                        {item.responsibilities.map((_: any, i: number) => (
-                            <li key={i}>
+            <Stack spacing={3}>
+                {experience.map((item: any, index: number) => (
+                    <Card key={index} elevation={3} sx={{ borderRadius: 4 }}>
+                        <CardContent>
+                            <Typography variant="h6" fontWeight={700} color="primary.main" mb={1}>
+                                <RichText i18nKey={`home.experience.items.${index}.position`} /> – <RichText i18nKey={`home.experience.items.${index}.company`} />
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" mb={1}>
+                                {item.location} | {item.period}{item.workType && ` | ${item.workType}`}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary" mb={2}>
                                 <RichText
-                                    i18nKey={`home.experience.items.${index}.responsibilities.${i}`}
-                                    links={{
-                                        cloudqueryLink: { href: "https://github.com/MelihEmreGuler/cloudquery/tree/arangodb/plugins/destination/arangodb/client" },
-                                        cloudqueryMainLink: { href: "https://github.com/cloudquery/cloudquery" },
-                                        arangodbLink: { href: "https://arangodb.com/" }
-                                    }}
+                                    i18nKey={`home.experience.items.${index}.companyDescription`}
+                                    links={{ primodLink: { href: "https://app.primod.io/" } }}
                                 />
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+                            </Typography>
+                            <Stack component="ul" spacing={1} pl={2} mb={0}>
+                                {item.responsibilities.map((_: any, i: number) => (
+                                    <li key={i} style={{ color: 'inherit' }}>
+                                        <RichText
+                                            i18nKey={`home.experience.items.${index}.responsibilities.${i}`}
+                                            links={{
+                                                cloudqueryLink: { href: "https://github.com/MelihEmreGuler/cloudquery/tree/arangodb/plugins/destination/arangodb/client" },
+                                                cloudqueryMainLink: { href: "https://github.com/cloudquery/cloudquery" },
+                                                arangodbLink: { href: "https://arangodb.com/" }
+                                            }}
+                                        />
+                                    </li>
+                                ))}
+                            </Stack>
+                        </CardContent>
+                    </Card>
+                ))}
+            </Stack>
         </section>
     );
 }
