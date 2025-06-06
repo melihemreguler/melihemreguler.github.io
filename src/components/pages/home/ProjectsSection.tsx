@@ -38,7 +38,6 @@ export function ProjectsSection({ isEmbedded = false }: ProjectsSectionProps) {
 }
 
 function ProjectCard({ project, index }: { project: any, index: number }) {
-    const { t } = useTranslation();
     const getTechUrl = (techName: string) => {
         const techUrls: { [key: string]: string } = {
             'Java': 'https://www.oracle.com/java/',

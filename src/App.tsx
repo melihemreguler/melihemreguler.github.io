@@ -5,7 +5,7 @@ import { AboutSection } from "./components/pages/home/AboutSection";
 import { TabsSection } from "./components/pages/home/TabsSection";
 import { ContactSection } from "./components/pages/home/ContactSection";
 import { NotFoundPage } from "./components/pages/NotFoundPage";
-import { Box, Container, Typography, IconButton, Link as MuiLink, Stack, Paper, Button, ThemeProvider, createTheme, CssBaseline, useMediaQuery } from '@mui/material';
+import { Box, Container, Typography, IconButton, Link as MuiLink, Stack, Paper, Button, ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';

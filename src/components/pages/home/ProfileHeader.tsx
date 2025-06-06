@@ -1,6 +1,6 @@
 // src/components/sections/ProfileHeader.tsx
 import { RichText } from "../../common/RichText";
-import { Card, CardContent, Avatar, Typography, Stack } from '@mui/material';
+import { Avatar, Typography, Stack } from '@mui/material';
 
 export function ProfileHeader() {
     return (

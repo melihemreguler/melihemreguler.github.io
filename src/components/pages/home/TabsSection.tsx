@@ -5,7 +5,7 @@ import { SkillsSection } from './SkillsSection';
 import { CommunitySection } from './CommunitySection';
 import { EducationSection } from './EducationSection';
 import { ProjectsSection } from './ProjectsSection';
-import { Tabs, Tab, Box, Paper, Card } from '@mui/material';
+import { Tabs, Tab, Box, Card } from '@mui/material';
 
 type TabType = 'experience' | 'skills' | 'education' | 'community' | 'projects';
 
