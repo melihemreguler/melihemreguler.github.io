@@ -5,9 +5,7 @@ import { SkillsSection } from './SkillsSection';
 import { CommunitySection } from './CommunitySection';
 import { EducationSection } from './EducationSection';
 import { ProjectsSection } from './ProjectsSection';
-import { Tabs, Tab, Box, Card, useTheme, IconButton } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Tabs, Tab, Box, Card } from '@mui/material';
 
 type TabType = 'experience' | 'skills' | 'education' | 'community' | 'projects';
 
@@ -20,7 +18,6 @@ export function TabsSection() {
     const { t } = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
-    const theme = useTheme();
 
     // Get current tab from URL path
     const getCurrentTab = (): TabType => {
@@ -87,32 +84,6 @@ export function TabsSection() {
             default:
                 return <ExperienceSection isEmbedded={true} />;
         }
-    };
-
-    // Custom TabScrollButton for better visibility
-    const TabScrollButton = (props: any) => {
-        const { direction, ...rest } = props;
-        const isDisabled = rest.disabled;
-        return (
-            <IconButton
-                {...rest}
-                sx={{
-                    color: isDisabled
-                        ? theme.palette.action.disabled
-                        : theme.palette.mode === 'dark'
-                        ? theme.palette.primary.light
-                        : theme.palette.primary.main,
-                    bgcolor: 'transparent',
-                    '&:hover': {
-                        bgcolor: theme.palette.action.hover,
-                    },
-                    zIndex: 2,
-                }}
-                aria-label={direction === 'left' ? 'Scroll left' : 'Scroll right'}
-            >
-                {direction === 'left' ? <ArrowBackIosNewIcon fontSize="small" /> : <ArrowForwardIosIcon fontSize="small" />}
-            </IconButton>
-        );
     };
 
     return (
