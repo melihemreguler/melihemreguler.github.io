@@ -5,7 +5,9 @@ import { SkillsSection } from './SkillsSection';
 import { CommunitySection } from './CommunitySection';
 import { EducationSection } from './EducationSection';
 import { ProjectsSection } from './ProjectsSection';
-import { Tabs, Tab, Box, Card } from '@mui/material';
+import { Tabs, Tab, Box, Card, useTheme, IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 type TabType = 'experience' | 'skills' | 'education' | 'community' | 'projects';
 
@@ -18,6 +20,7 @@ export function TabsSection() {
     const { t } = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
+    const theme = useTheme();
 
     // Get current tab from URL path
     const getCurrentTab = (): TabType => {
@@ -86,17 +89,99 @@ export function TabsSection() {
         }
     };
 
+    // Custom TabScrollButton for better visibility
+    const TabScrollButton = (props: any) => {
+        const { direction, ...rest } = props;
+        const isDisabled = rest.disabled;
+        return (
+            <IconButton
+                {...rest}
+                sx={{
+                    color: isDisabled
+                        ? theme.palette.action.disabled
+                        : theme.palette.mode === 'dark'
+                        ? theme.palette.primary.light
+                        : theme.palette.primary.main,
+                    bgcolor: 'transparent',
+                    '&:hover': {
+                        bgcolor: theme.palette.action.hover,
+                    },
+                    zIndex: 2,
+                }}
+                aria-label={direction === 'left' ? 'Scroll left' : 'Scroll right'}
+            >
+                {direction === 'left' ? <ArrowBackIosNewIcon fontSize="small" /> : <ArrowForwardIosIcon fontSize="small" />}
+            </IconButton>
+        );
+    };
+
     return (
         <Box mb={4}>
-          {/* Tab Bar */}
-          <Box sx={{ mb: 2, bgcolor: (theme) => theme.palette.background.paper, p: 0, borderRadius: 4, boxShadow: 3, display: 'flex', justifyContent: 'center' }}>
+          {/* Tab Bar with fade overlays */}
+          <Box sx={{
+            position: 'relative',
+            mb: 2,
+            bgcolor: (theme) => theme.palette.background.paper,
+            p: 0,
+            borderRadius: 4,
+            boxShadow: 3,
+            display: 'flex',
+            justifyContent: 'center',
+            maxWidth: '100vw',
+            overflowX: 'auto',
+            overflowY: 'visible',
+          }}>
+            {/* Left Fade */}
+            <Box
+              sx={{
+                pointerEvents: 'none',
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: 32,
+                zIndex: 1,
+                background: (theme) =>
+                  `linear-gradient(to right, ${theme.palette.background.paper} 60%, ${theme.palette.background.paper}00 100%)`,
+                display: { xs: 'block', md: 'none' },
+              }}
+            />
+            {/* Right Fade */}
+            <Box
+              sx={{
+                pointerEvents: 'none',
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: 32,
+                zIndex: 1,
+                background: (theme) =>
+                  `linear-gradient(to left, ${theme.palette.background.paper} 60%, ${theme.palette.background.paper}00 100%)`,
+                display: { xs: 'block', md: 'none' },
+              }}
+            />
             <Tabs
               value={activeTab}
               onChange={handleTabChange}
               variant="scrollable"
-              scrollButtons="auto"
+              scrollButtons={true}
               TabIndicatorProps={{ style: { display: 'none' } }}
-              sx={{}}
+              sx={{ position: 'relative', zIndex: 2,
+                // Scroll oklarını özelleştir
+                '& .MuiTabs-scrollButtons': {
+                  color: (theme) => theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
+                  background: 'transparent',
+                  borderRadius: 2,
+                  boxShadow: 'none',
+                  '&:hover': {
+                    background: (theme) => theme.palette.action.hover,
+                  },
+                },
+                '& .Mui-disabled': {
+                  color: (theme) => theme.palette.action.disabled,
+                },
+              }}
             >
               {tabs.map((tab) => (
                 <Tab
@@ -109,7 +194,7 @@ export function TabsSection() {
                     textTransform: 'none',
                     borderRadius: 0,
                     mx: 0.5,
-                    px: 3,
+                    px: 4,
                     py: 1.2,
                     minHeight: 48,
                     transition: 'all 0.2s',
