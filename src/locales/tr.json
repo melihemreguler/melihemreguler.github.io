@@ -89,6 +89,7 @@
             "description": "Üzerinde çalıştığım bazı projeler aşağıda listelenmiştir.",
             "showAll": "Tümünü Göster",
             "noProjects": "Seçilen teknolojiler için proje bulunamadı.",
+            "tryLive": "Canlı Demo'yu Deneyin",
             "filterCategories": {
                 "Programming Languages": "Programlama Dilleri",
                 "Databases": "Veritabanları",
@@ -109,6 +110,7 @@
                     "name": "<captchaSystemLink><strong>CAPTCHA Doğrulama Sistemi</strong></captchaSystemLink>",
                     "description": "<strong>Spring Framework 6.2.3</strong> kullanılarak geliştirilen, <strong>RESTful API'ler</strong> ile CAPTCHA üretimi ve doğrulaması yapan güvenli bir kullanıcı doğrulama platformudur. <strong>Hibernate</strong> ve <strong>PostgreSQL</strong> kullanılmıştır. <strong>Maven</strong> ve <strong>JUnit</strong> ile inşa edilip test edilmiş, Jakarta EE uyumlu stack üzerinde çalışmaktadır. <strong>Türkçe ve İngilizce</strong> dil seçenekleri ile <strong>yerelleştirme</strong> desteği sağlar. Gerçek dünya uygulaması ile Java <strong>Spring Web MVC</strong> yetkinliği güçlendirilmiştir.",
                     "github": "https://github.com/ileri-java-proje/BM470",
+                    "demo": "https://captcha.melihemre.dev/",
                     "technologies": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit", "Docker"]
                 },
                 {

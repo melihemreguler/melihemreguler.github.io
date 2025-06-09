@@ -140,6 +140,7 @@ export function ProjectsSection({ isEmbedded = false }: ProjectsSectionProps) {
 }
 
 function ProjectCard({ project, index }: { project: any, index: number }) {
+    const { t } = useTranslation();
     const getTechUrl = (techName: string) => {
         const techUrls: { [key: string]: string } = {
             'Java': 'https://www.oracle.com/java/',
@@ -211,7 +212,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                         i18nKey={`home.projects.items.${index}.name`} 
                         links={{
                             urlShortenerLink: { href: project.github },
-                            captchaSystemLink: { href: project.github },
+                            captchaSystemLink: { href: project.demo || project.github },
                             wasteManagementLink: { href: project.github },
                             noteAppLink: { href: project.github },
                             todoAppLink: { href: project.github },
@@ -259,7 +260,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                         size="small"
                         sx={{ mt: 1 }}
                     >
-                        Demo
+                        {t('home.projects.tryLive')}
                     </MuiButton>
                 )}
             </CardContent>

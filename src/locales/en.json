@@ -89,6 +89,7 @@
             "description": "Here are some of the projects I've worked on.",
             "showAll": "Show All",
             "noProjects": "No projects found for selected technologies.",
+            "tryLive": "Try Live Demo",
             "filterCategories": {
                 "Programming Languages": "Programming Languages",
                 "Databases": "Databases",
@@ -109,6 +110,7 @@
                     "name": "<captchaSystemLink><strong>CAPTCHA Verification System</strong></captchaSystemLink>",
                     "description": "A secure user verification platform developed using <strong>Spring Framework 6.2.3</strong>, implementing CAPTCHA generation and validation with <strong>RESTful APIs</strong>. Utilized <strong>Hibernate</strong> and <strong>PostgreSQL</strong>. Built and tested with <strong>Maven</strong> and <strong>JUnit</strong>, running on a Jakarta EE-compatible stack. Supports <strong>localization</strong> with both <strong>Turkish and English</strong> language options. Strengthened Java <strong>Spring Web MVC</strong> proficiency through real-world implementation.",
                     "github": "https://github.com/ileri-java-proje/BM470",
+                    "demo": "https://captcha.melihemre.dev/",
                     "technologies": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit", "Docker"]
                 },
                 {
