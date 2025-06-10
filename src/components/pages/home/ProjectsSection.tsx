@@ -221,7 +221,12 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                     />
                 </Typography>
                 <Typography variant="body1" color="text.secondary" mb={2}>
-                    <RichText i18nKey={`home.projects.items.${index}.description`} />
+                    <RichText 
+                        i18nKey={`home.projects.items.${index}.description`} 
+                        links={{
+                            professorLink: { href: "https://www.linkedin.com/in/talhakabakus/" }
+                        }}
+                    />
                 </Typography>
                 {project.technologies && (
                     <Stack direction="row" spacing={1} flexWrap="wrap" mb={2}>

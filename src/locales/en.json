@@ -108,8 +108,8 @@
                 },
                 {
                     "name": "<captchaSystemLink><strong>CAPTCHA Verification System</strong></captchaSystemLink>",
-                    "description": "A secure user verification platform developed using <strong>Spring Framework 6.2.3</strong>, implementing CAPTCHA generation and validation with <strong>RESTful APIs</strong>. Utilized <strong>Hibernate</strong> and <strong>PostgreSQL</strong>. Built and tested with <strong>Maven</strong> and <strong>JUnit</strong>, running on a Jakarta EE-compatible stack. Supports <strong>localization</strong> with both <strong>Turkish and English</strong> language options. Strengthened Java <strong>Spring Web MVC</strong> proficiency through real-world implementation.",
-                    "github": "https://github.com/ileri-java-proje/BM470",
+                    "description": "A secure user verification platform developed using <strong>Spring Framework 6.2.3</strong>, implementing CAPTCHA generation and validation with <strong>RESTful APIs</strong>. Utilized <strong>Hibernate</strong>, <strong>PostgreSQL</strong>, and tested with <strong>Maven</strong> and <strong>JUnit 5</strong>. Supports localization and strengthens Java <strong>Spring Web MVC</strong> skills. Developed as a group assignment under the supervision of <professorLink>Doç. Dr. Abdullah Talha Kabakuş</professorLink>.",
+                    "github": "https://github.com/melihemreguler/spring-web-mvc-react-captcha",
                     "demo": "https://captcha.melihemre.dev/",
                     "technologies": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit", "Docker"]
                 },
