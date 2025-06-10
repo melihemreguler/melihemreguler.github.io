@@ -229,7 +229,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                     />
                 </Typography>
                 {project.technologies && (
-                    <Stack direction="row" spacing={1} flexWrap="wrap" mb={2}>
+                    <Stack direction="row" flexWrap="wrap" mb={2} sx={{ gap: 1.5, alignItems: 'flex-start' }}>
                         {project.technologies.map((tech: string, i: number) => (
                             <Chip
                                 key={tech + '-' + i}
@@ -240,7 +240,7 @@ function ProjectCard({ project, index }: { project: any, index: number }) {
                                 rel="noopener noreferrer"
                                 clickable
                                 sx={{
-                                    mb: 1,
+                                    mb: 1.5,
                                     bgcolor: (theme) => theme.palette.mode === 'dark' ? 'primary.dark' : '#e0e7ff',
                                     color: (theme) => theme.palette.mode === 'dark' ? theme.palette.primary.contrastText : '#3730a3',
                                     border: (theme) => theme.palette.mode === 'dark' ? '1px solid #374151' : '1px solid #c7d2fe',
