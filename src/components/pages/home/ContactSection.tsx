@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import { Card, CardContent, Typography, Stack, TextField, Button, Alert } from '@mui/material';
@@ -25,16 +25,15 @@ export function ContactSection() {
         email: '',
         message: ''
     });
-    const [userMetadata, setUserMetadata] = useState<UserMetadata | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
 
-    useEffect(() => {
-        // Get user metadata when component mounts
-        getUserMetadata();
-    }, []);
+    // Remove useEffect - get metadata only when needed during form submission
+    // useEffect(() => {
+    //     getUserMetadata();
+    // }, []);
 
-    const getUserMetadata = async () => {
+    const getUserMetadata = async (): Promise<UserMetadata | null> => {
         try {
             // Get IP address from ipify API
             const ipResponse = await fetch('https://api.ipify.org?format=json');
@@ -49,9 +48,10 @@ export function ContactSection() {
                 platform: navigator.platform
             };
 
-            setUserMetadata(metadata);
+            return metadata;
         } catch (error) {
             console.error('Error fetching user metadata:', error);
+            return null;
         }
     };
 
@@ -69,6 +69,9 @@ export function ContactSection() {
         setSubmitStatus(null);
 
         try {
+            // Get user metadata at submission time - not on component mount
+            const metadata = await getUserMetadata();
+            
             // EmailJS configuration from environment variables
             const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
             const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -84,11 +87,11 @@ export function ContactSection() {
                 from_email: formData.email,
                 message: formData.message,
                 to_name: 'Melih Emre Güler',
-                user_ip: userMetadata?.ip || 'Not available',
-                user_agent: userMetadata?.userAgent || 'Not available',
-                user_timezone: userMetadata?.timeZone || 'Not available',
-                user_language: userMetadata?.language || 'Not available',
-                user_platform: userMetadata?.platform || 'Not available',
+                user_ip: metadata?.ip || 'Not available',
+                user_agent: metadata?.userAgent || 'Not available',
+                user_timezone: metadata?.timeZone || 'Not available',
+                user_language: metadata?.language || 'Not available',
+                user_platform: metadata?.platform || 'Not available',
                 contact_time: new Date().toISOString()
             };
 
