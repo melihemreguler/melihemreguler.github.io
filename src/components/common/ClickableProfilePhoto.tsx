@@ -28,7 +28,6 @@ export function ClickableProfilePhoto({ size = 128, sx = {} }: ClickableProfileP
     return (
         <>
             <Avatar
-                src="/profile-photo.jpg"
                 alt="Melih Emre Güler"
                 onClick={handleClick}
                 sx={{
@@ -44,11 +43,18 @@ export function ClickableProfilePhoto({ size = 128, sx = {} }: ClickableProfileP
                     },
                     ...sx
                 }}
-                imgProps={{
-                    loading: 'lazy',
-                    decoding: 'async'
-                }}
-            />
+            >
+                <picture>
+                    <source srcSet="/profile-photo.webp" type="image/webp" />
+                    <img 
+                        src="/profile-photo.jpg" 
+                        alt="Melih Emre Güler"
+                        loading="lazy"
+                        decoding="async"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                </picture>
+            </Avatar>
             <Popover
                 open={open}
                 anchorEl={anchorEl}
