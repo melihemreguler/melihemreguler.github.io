@@ -66,66 +66,94 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          echo "Starting automated deployment setup..."
+          echo "Starting deployment validation and setup..."
           
-          # Create project directory if not exists
-          mkdir -p /home/ubuntu/portfolio
-          cd /home/ubuntu/portfolio
+          # System telemetry (non-sensitive)
+          echo "System Information:"
+          echo "OS: $(uname -s -r)"
+          echo "Uptime: $(uptime -p)"
           
-          # Ensure web network exists (used by existing nginx-proxy)
-          docker network create web 2>/dev/null || echo "Network 'web' already exists"
+          # Memory telemetry
+          echo "Memory Usage:"
+          free -h | awk 'NR==2{printf "• RAM: %s used / %s total (%.1f%%)\n", $3, $2, $3*100/$2}'
           
-          # Download or update docker-compose.yml
-          curl -o docker-compose.yml https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/docker-compose.yml
+          # Disk telemetry  
+          echo "Disk Usage:"
+          df -h / | awk 'NR==2{printf "• Root: %s used / %s total (%s)\n", $3, $2, $5}'
           
-          # Pull latest image
-          echo "Pulling latest Docker image..."
-          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          
-          # Stop and remove old containers
-          echo "Stopping existing containers..."
-          docker compose down portfolio || true
-          docker compose down portfolio-test || true
-          
-          # Check if this is first deployment or update
-          if docker ps -a --format "table {{.Names}}" | grep -q "portfolio"; then
-            echo "Updating existing deployment..."
+          # Network validation
+          echo "Network Validation:"
+          if docker network ls | grep -q "web"; then
+            echo "• 'web' network exists"
           else
-            echo "First time deployment detected..."
-          fi
-          
-          # Start new container (using test profile for IP access)
-          echo "Starting portfolio container..."
-          docker compose --profile test up -d portfolio-test
-          
-          # Wait for container to be ready
-          echo "Waiting for container to start..."
-          sleep 10
-          
-          # Health check
-          echo "Performing health check..."
-          if docker ps | grep -q "portfolio-test"; then
-            echo "Container is running successfully"
-            CONTAINER_ID=$(docker ps -q --filter "name=portfolio-test")
-            echo "Container ID: $CONTAINER_ID"
-            echo "Application is accessible on port 3000"
-          else
-            echo "Container failed to start"
-            echo "Checking logs..."
-            docker compose logs --tail=20 portfolio-test
+            echo "• CRITICAL: 'web' network not found!"
+            echo "• This indicates nginx-proxy infrastructure is not running"
+            echo "• Deploy cannot continue without proper network setup"
             exit 1
           fi
           
-          # Show running containers
-          echo "Current running containers:"
-          docker ps
+          # Project directory setup
+          echo "Project Setup:"
+          mkdir -p /home/ubuntu/portfolio
+          cd /home/ubuntu/portfolio
+          echo "Project directory ready"
           
-          # Show recent logs
-          echo "Recent application logs:"
-          docker compose logs --tail=20 portfolio-test
+          # Download/update docker-compose.yml
+          echo "Configuration Update:"
+          curl -s -o docker-compose.yml https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/docker-compose.yml
+          if [ -f docker-compose.yml ]; then
+            echo "docker-compose.yml updated"
+          else
+            echo "Failed to download docker-compose.yml"
+            exit 1
+          fi
           
-          # Clean up old images to save space
-          echo "Cleaning up old Docker images..."
-          docker image prune -f
+          # Container deployment
+          echo "Container Deployment:"
+          
+          # Pull latest image
+          echo "• Pulling latest image..."
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          
+          # Stop and remove old container
+          echo "• Stopping existing containers..."
+          docker compose down || true
+          
+          # Start new container
+          echo "• Starting production container..."
+          docker compose up -d portfolio
+          
+          # Wait for container to be ready
+          echo "• Waiting for container startup..."
+          sleep 10
+          
+          # Container health validation
+          echo "Health Check:"
+          if docker ps | grep -q "portfolio-app"; then
+            echo "Container 'portfolio-app' is running"
+            CONTAINER_ID=$(docker ps -q --filter "name=portfolio-app")
+            echo "• Container ID: ${CONTAINER_ID:0:12}..."
+            
+            # Check container resource usage
+            echo "Container Resources:"
+            docker stats --no-stream --format "• CPU: {{.CPUPerc}} | Memory: {{.MemUsage}}" portfolio-app 2>/dev/null || echo "• Resource stats unavailable"
+          else
+            echo "Container 'portfolio-app' failed to start"
+            echo "Container logs:"
+            docker compose logs --tail=20 portfolio
+            exit 1
+          fi
+          
+          # Clean up old images
+          echo "Cleanup:"
+          echo "• Removing unused images..."
+          PRUNED=$(docker image prune -f --filter="until=24h" 2>/dev/null | grep "Total reclaimed space" || echo "• No images to prune")
+          echo "$PRUNED"
+          
+          # Final status
+          echo "Final Status:"
+          echo "• Running containers:"
+          docker ps --format "  - {{.Names}}: {{.Status}}" | grep portfolio
           
           echo "Deployment completed successfully!"
+          echo "Application available at: https://melihemre.dev"
