@@ -2,7 +2,24 @@
 
 A modern, responsive portfolio website built with React, TypeScript, and Vite. Features rich text formatting, multilingual support, and an integrated contact form.
 
-## 🚀 Features
+## Table of Contents
+
+- [Features](#features)
+- [Live Website](#live-website)
+- [Deployment Architecture](#deployment-architecture)
+- [Setup Instructions](#setup-instructions)
+  - [1. Clone and Install](#1-clone-and-install)
+  - [2. Environment Configuration](#2-environment-configuration)
+  - [3. EmailJS Setup](#3-emailjs-setup)
+  - [4. Development](#4-development)
+  - [5. Production Build](#5-production-build)
+- [Docker Deployment](#docker-deployment)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Contact Form Features](#contact-form-features)
+- [Security Notes](#security-notes)
+
+## Features
 
 - **Rich Text Formatting**: Support for bold, italic, underline, code, highlights, and custom links
 - **Multilingual Support**: English and Turkish translations
@@ -10,7 +27,25 @@ A modern, responsive portfolio website built with React, TypeScript, and Vite. F
 - **Responsive Design**: Modern UI with Tailwind CSS
 - **Fast Performance**: Built with Vite for optimal loading speeds
 
-## 🛠️ Setup Instructions
+## Live Website
+
+**Current Deployment**: [https://melihemre.dev](https://melihemre.dev)
+
+**Infrastructure**: AWS EC2 with Docker containerization and nginx reverse proxy
+
+## Deployment Architecture
+
+This portfolio website is deployed on **AWS EC2** using a modern containerized infrastructure:
+
+- **Container**: Docker with nginx for static file serving
+- **Reverse Proxy**: jwilder/nginx-proxy for automatic domain routing
+- **SSL**: Automatic Let's Encrypt certificate management
+- **CI/CD**: GitHub Actions for automated deployment
+- **Domain**: Custom domain with Cloudflare DNS management
+
+**Note**: Previously deployed on GitHub Pages but migrated to AWS EC2 due to performance issues. GitHub Pages had significant loading delays (up to 60 seconds) and was too slow for optimal user experience. The current AWS infrastructure provides faster loading times and better reliability.
+
+## Setup Instructions
 
 ### 1. Clone and Install
 
@@ -56,20 +91,37 @@ npm run dev
 npm run build
 ```
 
-## 🔐 GitHub Pages Deployment with Secrets
+## Docker Deployment
 
-For automated deployment to GitHub Pages with EmailJS integration:
+The website is containerized using Docker with a multi-stage build process:
 
-1. Go to your GitHub repository
-2. Navigate to **Settings** → **Secrets and variables** → **Actions**
-3. Add the following secrets:
-   - `VITE_EMAILJS_SERVICE_ID`
-   - `VITE_EMAILJS_TEMPLATE_ID`
-   - `VITE_EMAILJS_PUBLIC_KEY`
+### Local Docker Build
 
-The GitHub Actions workflow will automatically build and deploy your site with the EmailJS configuration.
+```bash
+# Build the Docker image
+docker build -t portfolio:latest .
 
-## 📁 Project Structure
+# Run locally
+docker run -p 3000:80 portfolio:latest
+```
+
+### Production Deployment
+
+The production deployment uses Docker Compose with nginx-proxy:
+
+```bash
+# Deploy to production (on AWS EC2)
+docker compose up -d portfolio
+```
+
+**Deployment Features**:
+- Multi-stage Docker build (Node.js build + nginx serving)
+- Automatic SSL certificate management
+- Health checks and monitoring
+- Automated cleanup and resource management
+- Comprehensive deployment validation
+
+## Project Structure
 
 ```
 src/
@@ -89,9 +141,15 @@ src/
 │   ├── en.json                   # English translations
 │   └── tr.json                   # Turkish translations
 └── ...
+
+# Docker & Deployment
+├── Dockerfile                    # Multi-stage Docker build
+├── docker-compose.yml            # Production deployment config
+├── nginx.conf                    # nginx configuration for serving
+└── .github/workflows/deploy.yml  # CI/CD pipeline
 ```
 
-## 🌐 Technologies Used
+## Technologies Used
 
 - **React 18** with TypeScript
 - **Vite** for build tooling
@@ -99,8 +157,12 @@ src/
 - **React Router** for navigation
 - **React i18next** for internationalization
 - **EmailJS** for contact form functionality
+- **Docker** for containerization
+- **nginx** for static file serving
+- **AWS EC2** for hosting infrastructure
+- **GitHub Actions** for CI/CD automation
 
-## 📧 Contact Form Features
+## Contact Form Features
 
 - Real-time validation
 - Loading states and status messages
@@ -108,9 +170,11 @@ src/
 - Direct email sending via EmailJS
 - Responsive design
 
-## 🔒 Security Notes
+## Security Notes
 
 - Environment variables are used to protect EmailJS credentials
 - `.env` file is excluded from version control
 - GitHub Actions secrets ensure secure deployment
 - No sensitive information is exposed in the public repository
+- Docker multi-stage builds for optimized production images
+- nginx security headers and proper configuration
