@@ -84,8 +84,8 @@ jobs:
           
           # Stop and remove old containers
           echo "Stopping existing containers..."
-          docker-compose down portfolio || true
-          docker-compose down portfolio-test || true
+          docker compose down portfolio || true
+          docker compose down portfolio-test || true
           
           # Check if this is first deployment or update
           if docker ps -a --format "table {{.Names}}" | grep -q "portfolio"; then
@@ -96,7 +96,7 @@ jobs:
           
           # Start new container (using test profile for IP access)
           echo "Starting portfolio container..."
-          docker-compose --profile test up -d portfolio-test
+          docker compose --profile test up -d portfolio-test
           
           # Wait for container to be ready
           echo "Waiting for container to start..."
@@ -112,7 +112,7 @@ jobs:
           else
             echo "Container failed to start"
             echo "Checking logs..."
-            docker-compose logs --tail=20 portfolio-test
+            docker compose logs --tail=20 portfolio-test
             exit 1
           fi
           
@@ -122,7 +122,7 @@ jobs:
           
           # Show recent logs
           echo "Recent application logs:"
-          docker-compose logs --tail=20 portfolio-test
+          docker compose logs --tail=20 portfolio-test
           
           # Clean up old images to save space
           echo "Cleaning up old Docker images..."
