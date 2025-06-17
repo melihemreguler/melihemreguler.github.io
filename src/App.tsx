@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Box, Container, Typography, IconButton, Link as MuiLink, Stack, Paper, Button, ThemeProvider, createTheme, CssBaseline, CircularProgress } from '@mui/material';
-import EmailIcon from '@mui/icons-material/Email';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import { useState, useMemo, lazy, Suspense } from 'react';
+
+// Lazy load icons - defer until footer loads
+const EmailIcon = lazy(() => import('@mui/icons-material/Email'));
+const LinkedInIcon = lazy(() => import('@mui/icons-material/LinkedIn')); 
+const GitHubIcon = lazy(() => import('@mui/icons-material/GitHub'));
 
 // Lazy load components for better performance
 const ProfileHeader = lazy(() => import("./components/pages/home/ProfileHeader").then(module => ({ default: module.ProfileHeader })));
@@ -43,15 +45,17 @@ const MainLayout = () => (
                     © {new Date().getFullYear()} Melih Emre Güler. All rights reserved.
                 </Typography>
                 <Stack direction="row" spacing={1}>
-                    <IconButton component={MuiLink} href="mailto:guler@melihemre.dev" color="primary" aria-label="Email">
-                        <EmailIcon />
-                    </IconButton>
-                    <IconButton component={MuiLink} href="https://linkedin.com/in/melihemreguler" target="_blank" rel="noopener noreferrer" color="primary" aria-label="LinkedIn">
-                        <LinkedInIcon />
-                    </IconButton>
-                    <IconButton component={MuiLink} href="https://github.com/melihemreguler" target="_blank" rel="noopener noreferrer" color="primary" aria-label="GitHub">
-                        <GitHubIcon />
-                    </IconButton>
+                    <Suspense fallback={<CircularProgress size={20} />}>
+                        <IconButton component={MuiLink} href="mailto:guler@melihemre.dev" color="primary" aria-label="Email">
+                            <EmailIcon />
+                        </IconButton>
+                        <IconButton component={MuiLink} href="https://linkedin.com/in/melihemreguler" target="_blank" rel="noopener noreferrer" color="primary" aria-label="LinkedIn">
+                            <LinkedInIcon />
+                        </IconButton>
+                        <IconButton component={MuiLink} href="https://github.com/melihemreguler" target="_blank" rel="noopener noreferrer" color="primary" aria-label="GitHub">
+                            <GitHubIcon />
+                        </IconButton>
+                    </Suspense>
                 </Stack>
             </Stack>
         </Paper>
