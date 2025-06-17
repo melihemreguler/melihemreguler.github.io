@@ -44,6 +44,10 @@ export function ClickableProfilePhoto({ size = 128, sx = {} }: ClickableProfileP
                     },
                     ...sx
                 }}
+                imgProps={{
+                    loading: 'lazy',
+                    decoding: 'async'
+                }}
             />
             <Popover
                 open={open}

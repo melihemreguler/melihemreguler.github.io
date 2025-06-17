@@ -1,24 +1,41 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ProfileHeader } from "./components/pages/home/ProfileHeader";
-import { AboutSection } from "./components/pages/home/AboutSection";
-import { TabsSection } from "./components/pages/home/TabsSection";
-import { ContactSection } from "./components/pages/home/ContactSection";
-import { NotFoundPage } from "./components/pages/NotFoundPage";
-import { Box, Container, Typography, IconButton, Link as MuiLink, Stack, Paper, Button, ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { Box, Container, Typography, IconButton, Link as MuiLink, Stack, Paper, Button, ThemeProvider, createTheme, CssBaseline, CircularProgress } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, lazy, Suspense } from 'react';
+
+// Lazy load components for better performance
+const ProfileHeader = lazy(() => import("./components/pages/home/ProfileHeader").then(module => ({ default: module.ProfileHeader })));
+const AboutSection = lazy(() => import("./components/pages/home/AboutSection").then(module => ({ default: module.AboutSection })));
+const TabsSection = lazy(() => import("./components/pages/home/TabsSection").then(module => ({ default: module.TabsSection })));
+const ContactSection = lazy(() => import("./components/pages/home/ContactSection").then(module => ({ default: module.ContactSection })));
+const NotFoundPage = lazy(() => import("./components/pages/NotFoundPage").then(module => ({ default: module.NotFoundPage })));
+
+// Loading component
+const LoadingSpinner = () => (
+    <Box display="flex" justifyContent="center" alignItems="center" minHeight="20vh">
+        <CircularProgress size={40} />
+    </Box>
+);
 
 // Layout component for main pages
 const MainLayout = () => (
     <Box minHeight="100vh" bgcolor={(theme) => theme.palette.background.default} display="flex" flexDirection="column">
         <Container maxWidth="md" sx={{ flex: 1, py: 8, bgcolor: 'transparent' }}>
-            <ProfileHeader />
-            <AboutSection />
-            <TabsSection />
-            <ContactSection />
+            <Suspense fallback={<LoadingSpinner />}>
+                <ProfileHeader />
+            </Suspense>
+            <Suspense fallback={<LoadingSpinner />}>
+                <AboutSection />
+            </Suspense>
+            <Suspense fallback={<LoadingSpinner />}>
+                <TabsSection />
+            </Suspense>
+            <Suspense fallback={<LoadingSpinner />}>
+                <ContactSection />
+            </Suspense>
         </Container>
         <Paper elevation={0} sx={{ p: 3, textAlign: 'center', borderTop: 1, borderColor: 'divider', mt: 8, bgcolor: 'background.paper' }} component="footer">
             <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="center" spacing={2} maxWidth="md" mx="auto">
@@ -97,7 +114,11 @@ function App() {
                     <Route path="/community" element={<MainLayout />} />
                     <Route path="/projects" element={<MainLayout />} />
                     {/* Catch-all route for 404 */}
-                    <Route path="*" element={<NotFoundPage />} />
+                    <Route path="*" element={
+                        <Suspense fallback={<LoadingSpinner />}>
+                            <NotFoundPage />
+                        </Suspense>
+                    } />
                 </Routes>
             </Router>
         </ThemeProvider>
