@@ -14,18 +14,6 @@ services:
     networks:
       - web
 
-  # test service for IP access without nginx-proxy
-  portfolio-test:
-    image: melihemreguler/portfolio:latest
-    container_name: portfolio-test
-    restart: unless-stopped
-    ports:
-      - "3000:80"
-    environment:
-      - NODE_ENV=production
-    profiles:
-      - test
-
 networks:
   web:
     external: true
