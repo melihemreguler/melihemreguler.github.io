@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  portfolio:
+    image: melihemreguler/portfolio:latest
+    container_name: portfolio-app
+    restart: unless-stopped
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=melihemreguler.com,www.melihemreguler.com
+      - LETSENCRYPT_HOST=melihemreguler.com,www.melihemreguler.com
+      - LETSENCRYPT_EMAIL=melihemreguler@gmail.com
+    networks:
+      - web
+
+  # test service for IP access without nginx-proxy
+  portfolio-test:
+    image: melihemreguler/portfolio:latest
+    container_name: portfolio-test
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    profiles:
+      - test
+
+networks:
+  web:
+    external: true
