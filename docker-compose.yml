@@ -8,9 +8,9 @@ services:
     expose:
       - "80"
     environment:
-      - VIRTUAL_HOST=melihemreguler.com,www.melihemreguler.com
-      - LETSENCRYPT_HOST=melihemreguler.com,www.melihemreguler.com
-      - LETSENCRYPT_EMAIL=melihemreguler@gmail.com
+      - VIRTUAL_HOST=melihemre.dev,www.melihemre.dev
+      - LETSENCRYPT_HOST=melihemre.dev,www.melihemre.dev
+      - LETSENCRYPT_EMAIL=guler@melihemre.dev
     networks:
       - web
 
