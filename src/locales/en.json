@@ -104,6 +104,7 @@
                     "name": "<urlShortenerLink><strong>URL Shortener</strong></urlShortenerLink>",
                     "description": "A URL shortening service constructed with <strong>Java Spring Boot</strong> using the <strong>MVC</strong> architecture while adhering to <strong>Clean Code</strong> principles, featuring <strong>4 endpoints</strong>, configurable short URL domain support and API documentation via <strong>Swagger</strong>. Integrated <strong>MongoDB</strong> for storage and incorporated <strong>JUnit</strong> unit tests to ensure reliability.",
                     "github": "https://github.com/MelihEmreGuler/urlshortener",
+                    "demo": "https://urlshortener.melihemre.dev/",
                     "technologies": ["Java", "Spring Boot", "Spring Framework", "MongoDB", "JUnit", "Swagger", "Maven", "MVC", "Docker", "Docker Compose"]
                 },
                 {

@@ -104,6 +104,7 @@
                     "name": "<urlShortenerLink><strong>URL Kısaltıcı</strong></urlShortenerLink>",
                     "description": "<strong>Java Spring Boot</strong> kullanılarak <strong>MVC</strong> mimarisi ile <strong>Temiz Kod</strong> prensiplerini takip ederek inşa edilmiş bir URL kısaltma servisidir. <strong>4 endpoint</strong>, yapılandırılabilir kısa URL domain desteği ve <strong>Swagger</strong> ile API dokümantasyonu içermektedir. Depolama için <strong>MongoDB</strong> entegre edilmiş ve güvenilirliği sağlamak için <strong>JUnit</strong> birim testleri eklenmiştir.",
                     "github": "https://github.com/MelihEmreGuler/urlshortener",
+                    "demo": "https://urlshortener.melihemre.dev/",
                     "technologies": ["Java", "Spring Boot","Spring Framework", "MongoDB", "JUnit", "Maven", "Swagger", "MVC", "Docker", "Docker Compose"]
                 },
                 {
