@@ -35,7 +35,13 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true
       }
-    }
+    },
+    // Preload critical assets
+    modulePreload: {
+      polyfill: true
+    },
+    // Optimize chunk size
+    chunkSizeWarningLimit: 1000
   },
   publicDir: 'public'
 })
