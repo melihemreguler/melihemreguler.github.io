@@ -35,6 +35,13 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copy warmup script from local (not from builder stage)
+COPY warmup.sh /usr/local/bin/warmup.sh
+RUN chmod +x /usr/local/bin/warmup.sh
+
+# Install curl for health checks and warmup
+RUN apk add --no-cache curl
+
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
@@ -43,13 +50,6 @@ RUN echo 'gzip on; gzip_types text/plain text/css application/json application/j
 
 # Expose port
 EXPOSE 80
-
-# Copy warmup script
-COPY warmup.sh /usr/local/bin/warmup.sh
-RUN chmod +x /usr/local/bin/warmup.sh
-
-# Install curl for health checks and warmup
-RUN apk add --no-cache curl
 
 # Create startup script
 RUN echo '#!/bin/sh' > /usr/local/bin/start.sh && \
