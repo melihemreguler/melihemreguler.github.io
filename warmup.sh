@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Portfolio warmup script to prevent cold starts
 
 echo "Starting portfolio warmup..."
@@ -12,7 +12,7 @@ while true; do
     curl -s http://localhost/ > /dev/null 2>&1
     
     # Try to warm up common assets (these will be cached by nginx)
-    curl -s http://localhost/assets/ > /dev/null 2>&1
+    curl -s http://localhost/favicon.png > /dev/null 2>&1
     curl -s http://localhost/profile-photo.webp > /dev/null 2>&1
     
     echo "$(date): Warmup cycle completed"
