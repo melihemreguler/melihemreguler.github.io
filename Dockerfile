@@ -44,9 +44,19 @@ RUN echo 'gzip on; gzip_types text/plain text/css application/json application/j
 # Expose port
 EXPOSE 80
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost/ || exit 1
+# Copy warmup script
+COPY warmup.sh /usr/local/bin/warmup.sh
+RUN chmod +x /usr/local/bin/warmup.sh
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Install curl for health checks and warmup
+RUN apk add --no-cache curl
+
+# Create startup script
+RUN echo '#!/bin/sh' > /usr/local/bin/start.sh && \
+    echo 'nginx -g "daemon off;" &' >> /usr/local/bin/start.sh && \
+    echo '/usr/local/bin/warmup.sh &' >> /usr/local/bin/start.sh && \
+    echo 'wait' >> /usr/local/bin/start.sh && \
+    chmod +x /usr/local/bin/start.sh
+
+# Start nginx and warmup together
+CMD ["/usr/local/bin/start.sh"]
