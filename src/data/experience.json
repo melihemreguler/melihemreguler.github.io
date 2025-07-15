@@ -1,0 +1,62 @@
+{
+  "tr": {
+    "title": "Deneyim",
+    "expandText": "Tüm Deneyimi Gör",
+    "collapseText": "Gizle",
+    "items": [
+      {
+        "position": "Yardımcı Backend Geliştirici",
+        "company": "Prime Modality",
+        "companyType": "Bulut-Yerel Uygulama Koruma Platformu (CNAPP)",
+        "location": "Düzce Teknopark, Türkiye",
+        "period": "Eyl 2023 - Devam ediyor",
+        "workType": "Hibrit",
+        "companyDescription": "Prime Modality, eBPF teknolojisini kullanarak Bulut Güvenlik Duruş Yönetimi (CSPM) ve çalışma zamanı tehdit tespitini birleştiren kapsamlı bir CNAPP çözümü geliştiren bir siber güvenlik şirketidir. Platform, modern bulut altyapıları genelinde yanlış yapılandırmaları, güvenlik açıklarını ve gerçek zamanlı tehditleri tespit edip müşterilere uygulanabilir öngörüler sunarak hem bulut-yerel hem de kubernetes-yerel olacak şekilde tasarlanmıştır.",
+        "responsibilities": [
+          "API ölçeklenebilirliği ve sürdürülebilirliğini artırmak için Golang kullanarak 10+ RESTful endpoint geliştirdim.",
+          "İlişkisel veriler için PostgreSQL kullanarak veritabanı çözümleri tasarladım ve inşa ettim. Güvenlik Bulguları Panosu için 9 sütun tabanlı filtreleme seçeneği içeren bir filtreleme sistemi geliştirdim.",
+          "Platformda gerçek zamanlı veri akışını sağlamak için Event-Driven Architecture ve Observer Design Pattern prensiplerini takip ederek Golang'da WebSocket bağlantıları tasarladım ve entegre ettim.",
+          "Açık kaynak veri entegrasyon platformu CloudQuery için Golang ile bir API geliştirdim. Bu API, grafik tabanlı veritabanı ArangoDB'de 10K+ bulut ortamı verisi kaydının depolanmasını sağladı.",
+          "2 farklı veritabanı dahil olmak üzere 6 servisli bir ortamı dağıtmak ve yönetmek için Docker, Kubernetes, Minikube ve Skaffold gibi konteynerleştirme ve orkestrasyon araçlarını aktif olarak kullandım.",
+          "Yüksek ölçeklenebilir Bulut-Yerel altyapı sağlamak için Elastic Container Service (ECS), Elastic Kubernetes Service (EKS), Elastic Container Registry (ECR) ve Relational Database Service (RDS) dahil olmak üzere AWS bulut servislerini optimize etmek için takımlarla işbirliği yaptım."
+        ],
+        "links": {
+          "primodLink": "https://app.primod.io/",
+          "cloudqueryLink": "https://github.com/MelihEmreGuler/cloudquery/tree/arangodb/plugins/destination/arangodb/client",
+          "cloudqueryMainLink": "https://github.com/cloudquery/cloudquery",
+          "arangodbLink": "https://arangodb.com/"
+        }
+      }
+    ]
+  },
+  "en": {
+    "title": "Experience",
+    "expandText": "View All Experience",
+    "collapseText": "Collapse",
+    "items": [
+      {
+        "position": "Associate Back End Developer",
+        "company": "Prime Modality",
+        "companyType": "Cloud-Native Application Protection Platform (CNAPP)",
+        "location": "Düzce Teknopark, Turkey",
+        "period": "Sep 2023 - Present",
+        "workType": "Hybrid",
+        "companyDescription": "Prime Modality is a cybersecurity company developing a comprehensive CNAPP solution that combines Cloud Security Posture Management (CSPM) and runtime threat detection using eBPF technology. The platform is designed to be both cloud-native and kubernetes-native, identifying misconfigurations, vulnerabilities, and real-time threats across modern cloud infrastructures and delivering actionable insights to customers.",
+        "responsibilities": [
+          "Engineered 10+ RESTful endpoints using Golang to enhance API scalability and maintainability.",
+          "Architected and constructed database solutions using PostgreSQL for relational data, including a filtering system for a Security Findings Dashboard with 9 column-based filter options.",
+          "Designed and integrated WebSocket connections in Golang following Event-Driven Architecture and Observer Design Pattern principles to enable real-time data streaming on the platform.",
+          "Engineered an API with Golang for the open-source data integration platform CloudQuery, enabling storage of 10K+ cloud environment data records in the graph-based database ArangoDB.",
+          "Actively used containerization and orchestration tools such as Docker, Kubernetes, Minikube, and Skaffold to deploy and manage an environment with 6 services, including 2 different databases.",
+          "Collaborated with teams to optimize AWS cloud services, including Elastic Container Service (ECS), Elastic Kubernetes Service (EKS), Elastic Container Registry (ECR), and Relational Database Service (RDS), ensuring a highly scalable Cloud-Native infrastructure."
+        ],
+        "links": {
+          "primodLink": "https://app.primod.io/",
+          "cloudqueryLink": "https://github.com/MelihEmreGuler/cloudquery/tree/arangodb/plugins/destination/arangodb/client",
+          "cloudqueryMainLink": "https://github.com/cloudquery/cloudquery",
+          "arangodbLink": "https://arangodb.com/"
+        }
+      }
+    ]
+  }
+} 
