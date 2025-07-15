@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Programming Languages",
+    "items": "Golang, Java",
+    "icon": "Code",
+    "color": "#00ADD8"
+  },
+  {
+    "name": "Databases",
+    "items": "PostgreSQL, MongoDB, Redis, ArangoDB",
+    "icon": "Database",
+    "color": "#336791"
+  },
+  {
+    "name": "Backend Technologies",
+    "items": "Spring Boot, Maven, Kafka, RabbitMQ, gRPC, JUnit",
+    "icon": "Zap",
+    "color": "#6DB33F"
+  },
+  {
+    "name": "Containerization",
+    "items": "Docker, Docker Compose, Kubernetes, Minikube, Skaffold",
+    "icon": "Globe",
+    "color": "#2496ED"
+  },
+  {
+    "name": "Cloud Services",
+    "items": "AWS, ECS, EKS, RDS, ECR",
+    "icon": "Cloud",
+    "color": "#FF9900"
+  },
+  {
+    "name": "Software Principles",
+    "items": "Clean Code",
+    "icon": "Shield",
+    "color": "#4F46E5"
+  },
+  {
+    "name": "Development Tools",
+    "items": "Git, GitHub Actions, CI/CD, Swagger",
+    "icon": "Code",
+    "color": "#F05032"
+  }
+] 
