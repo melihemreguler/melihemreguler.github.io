@@ -1,0 +1,114 @@
+.introContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #000000 0%, #0f0f23 25%, #1a1a2e 50%, #16213e 75%, #0a0a1a 100%);
+  opacity: 0;
+}
+
+.logoContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.logoText {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 0%, #4ecdc4 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 3;
+}
+
+.glowRing {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(78, 205, 196, 0.3);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #4ecdc4, #ff6b6b);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logoText {
+    font-size: 2.5rem;
+  }
+  
+  .glowRing {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    font-size: 2rem;
+  }
+  
+  .glowRing {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .logoText {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .logoText,
+  .glowRing,
+  .particle {
+    animation: none !important;
+    transition: none !important;
+  }
+}
