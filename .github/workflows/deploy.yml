@@ -94,8 +94,8 @@ jobs:
           
           # Project directory setup
           echo "Project Setup:"
-          mkdir -p /home/ubuntu/portfolio
-          cd /home/ubuntu/portfolio
+          mkdir -p /root/portfolio
+          cd /root/portfolio
           echo "Project directory ready"
           
           # Download/update docker-compose.yml
