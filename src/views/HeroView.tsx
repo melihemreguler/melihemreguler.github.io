@@ -16,6 +16,9 @@ export default function HeroView({ t, currentCodeLine, handleCodeLineComplete }:
   const [prevCodeLine, setPrevCodeLine] = useState(0);
   const [currentBackgroundImage, setCurrentBackgroundImage] = useState<string>('');
   const [imageOpacity, setImageOpacity] = useState(0);
+  const [isImageLoading, setIsImageLoading] = useState(false);
+  const [imageLoadTimeout, setImageLoadTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [hasInitialImage, setHasInitialImage] = useState(false);
   const imageSelector = useRef<RandomImageSelector>(new RandomImageSelector());
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -31,12 +34,24 @@ export default function HeroView({ t, currentCodeLine, handleCodeLineComplete }:
   useEffect(() => {
     const initializeImages = async () => {
       await imageSelector.current.initialize();
-      changeBackgroundImage();
       
-      // Set interval to change image every 3 seconds
-      intervalRef.current = setInterval(() => {
+      // Get first image immediately for faster initial load
+      const firstImage = imageSelector.current.getFirstAvailableImage();
+      if (firstImage) {
+        setCurrentBackgroundImage(firstImage);
+        setImageOpacity(1);
+        setHasInitialImage(true);
+      }
+      
+      // Wait a bit before starting rotation to let initial image load
+      setTimeout(() => {
         changeBackgroundImage();
-      }, 3000);
+        
+        // Set interval to change image every 6 seconds (longer for slow connections)
+        intervalRef.current = setInterval(() => {
+          changeBackgroundImage();
+        }, 6000);
+      }, 2000); // Start rotation after 2 seconds
     };
 
     initializeImages();
@@ -46,23 +61,106 @@ export default function HeroView({ t, currentCodeLine, handleCodeLineComplete }:
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
+      if (imageLoadTimeout) {
+        clearTimeout(imageLoadTimeout);
+      }
     };
-  }, []);
+  }, [imageLoadTimeout]);
 
-  // Function to change background image with fade transition
+  // Function to change background image with improved loading strategy
   const changeBackgroundImage = () => {
-    const newImage = imageSelector.current.getRandomImage();
-    if (newImage) {
-      // Fade out current image
+    // Don't start new image loading if already loading
+    if (isImageLoading) {
+      console.log('Image loading in progress, skipping...');
+      return;
+    }
+
+    // Try to get a ready (preloaded) image first
+    let newImage = imageSelector.current.getReadyImage();
+    
+    // If no ready image, try to get any available image
+    if (!newImage) {
+      newImage = imageSelector.current.getRandomImage();
+    }
+    
+    if (!newImage) {
+      console.log('No images available');
+      return;
+    }
+
+    setIsImageLoading(true);
+
+    // Clear any existing timeout
+    if (imageLoadTimeout) {
+      clearTimeout(imageLoadTimeout);
+    }
+
+    // Check if image is preloaded and ready
+    if (imageSelector.current.isImageReady(newImage)) {
+      // Image is preloaded, change immediately
+      performImageTransition(newImage);
+    } else {
+      // Image not preloaded, load it with timeout
+      const img = new Image();
+      
+      // Set timeout for image loading (reduced for slow connections)
+      const timeout = setTimeout(() => {
+        console.log(`Image loading timeout: ${newImage}`);
+        setIsImageLoading(false);
+        // Try another image or keep current
+        const fallbackImage = imageSelector.current.getRandomImage();
+        if (fallbackImage && fallbackImage !== newImage) {
+          console.log(`Trying fallback image: ${fallbackImage}`);
+          performImageTransition(fallbackImage);
+        }
+      }, 3000); // Reduced timeout to 3 seconds for faster fallback
+
+      setImageLoadTimeout(timeout);
+
+      img.onload = () => {
+        clearTimeout(timeout);
+        setImageLoadTimeout(null);
+        performImageTransition(newImage);
+      };
+
+      img.onerror = () => {
+        clearTimeout(timeout);
+        setImageLoadTimeout(null);
+        console.error(`Failed to load image: ${newImage}`);
+        setIsImageLoading(false);
+        
+        // Try to get another image as fallback
+        const fallbackImage = imageSelector.current.getRandomImage();
+        if (fallbackImage && fallbackImage !== newImage) {
+          console.log(`Trying fallback after error: ${fallbackImage}`);
+          setTimeout(() => changeBackgroundImage(), 1000); // Retry after 1 second
+        }
+      };
+
+      img.crossOrigin = 'anonymous';
+      img.src = newImage;
+    }
+  };
+
+  // Separated function for smooth image transition
+  const performImageTransition = (newImage: string) => {
+    // Only fade out if we have an image currently showing
+    if (currentBackgroundImage) {
       setImageOpacity(0);
       
       // After fade out, change image and fade in
       setTimeout(() => {
         setCurrentBackgroundImage(newImage);
+        setIsImageLoading(false);
         setTimeout(() => {
           setImageOpacity(1);
-        }, 50); // Small delay to ensure image is loaded
-      }, 300);
+        }, 50); // Smaller delay for faster transition
+      }, 300); // Faster fade out for better UX
+    } else {
+      // No current image, set immediately
+      setCurrentBackgroundImage(newImage);
+      setIsImageLoading(false);
+      setImageOpacity(1);
     }
   };
 
