@@ -57,7 +57,7 @@ EXPOSE 80
 RUN echo '#!/bin/sh' > /usr/local/bin/start.sh && \
     echo 'cd /usr/share/nginx/html' >> /usr/local/bin/start.sh && \
     echo 'echo "Starting Next.js server..."' >> /usr/local/bin/start.sh && \
-    echo 'PORT=3001 node server.js &' >> /usr/local/bin/start.sh && \
+    echo 'PORT=3001 HOSTNAME=0.0.0.0 node server.js &' >> /usr/local/bin/start.sh && \
     echo 'echo "Starting nginx..."' >> /usr/local/bin/start.sh && \
     echo 'nginx -g "daemon off;" &' >> /usr/local/bin/start.sh && \
     echo 'echo "Starting warmup script..."' >> /usr/local/bin/start.sh && \
