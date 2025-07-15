@@ -1,0 +1,90 @@
+{
+  "tr": {
+    "nav": {
+      "home": "Ana Sayfa",
+      "about": "Hakkımda",
+      "projects": "Projeler",
+      "experience": "Deneyim",
+      "contact": "İletişim",
+      "hireMe": "İşe Al"
+    },
+    "hero": {
+      "title": "Melih Güler",
+      "subtitle": "Backend Geliştirici",
+      "tagline": "",
+      "description": "",
+      "getToKnowMe": "Ben Kimim?",
+      "hireMe": "İşe Al"
+    },
+    "about": {
+      "title": "Hakkımda",
+      "description1": "Haziran 2025'te mezun olacak bir Bilgisayar Mühendisliği öğrencisiyim ve backend geliştirme alanında uzmanlaşıyorum. Golang ve Java dillerinde üretim seviyesinde projeler geliştirdim. Mikroservis mimarisi, mesajlaşma sistemleri (Kafka, RabbitMQ), AWS servisleri ve konteynerleştirme (Docker, Kubernetes) gibi modern backend konularında uygulamalı deneyime sahibim.",
+      "description2": "Temiz ve sürdürülebilir kod yazmaya odaklanıyor, veri odaklı kararlarla ölçeklenebilir ve güvenilir sistemler geliştiriyorum. Takım çalışmasına değer veriyor, çapraz fonksiyonlu ekiplerde etkin iletişimle katkı sağlamaktan keyif alıyorum.",
+      "startYear": 2023,
+      "githubUsername": "melihemreguler",
+      "yearsExperience": "Yıl Deneyim",
+      "projectsCompleted": "Tamamlanan Proje"
+    },
+    "techStack": {
+      "title": "Teknoloji Yığını"
+    },
+    "contact": {
+      "title": "İletişime Geç",
+      "name": "Adınız",
+      "email": "E-posta Adresiniz",
+      "message": "Mesajınız",
+      "sendMessage": "Mesaj Gönder",
+      "sending": "Gönderiliyor...",
+      "successMessage": "Mesajınız başarıyla gönderildi!",
+      "errorMessage": "Mesaj gönderilemedi. Lütfen tekrar deneyin.",
+      "connectWithMe": "Benimle Bağlantı Kur"
+    },
+    "footer": {
+      "copyright": "© {{year}} Melih Güler. Tüm hakları saklıdır."
+    }
+  },
+  "en": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "experience": "Experience",
+      "contact": "Contact",
+      "hireMe": "Hire Me"
+    },
+    "hero": {
+      "title": "Melih Güler",
+      "subtitle": "Backend Developer",
+      "tagline": "",
+      "description": "",
+      "getToKnowMe": "Who Am I?",
+      "hireMe": "Hire Me"
+    },
+    "about": {
+      "title": "About Me",
+      "description1": "I am a Computer Engineering student graduating in June 2025, specializing in backend development. I have developed production-level projects in Golang and Java. I have hands-on experience in modern backend topics such as microservice architecture, messaging systems (Kafka, RabbitMQ), AWS services, and containerization (Docker, Kubernetes).",
+      "description2": "I focus on writing clean and maintainable code, developing scalable and reliable systems with data-driven decisions. I value teamwork and enjoy contributing effectively through communication in cross-functional teams.",
+      "startYear": 2023,
+      "githubUsername": "melihemreguler",
+      "yearsExperience": "Years Experience",
+      "projectsCompleted": "Projects Completed"
+    },
+    "techStack": {
+      "title": "Tech Stack"
+    },
+    "contact": {
+      "title": "Get In Touch",
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "sendMessage": "Send Message",
+      "sending": "Sending...",
+      "successMessage": "Message sent successfully!",
+      "errorMessage": "Failed to send message. Please try again.",
+      "connectWithMe": "Connect with me"
+    },
+    "footer": {
+      "copyright": "© {{year}} Melih Güler. All rights reserved."
+    }
+  }
+}
