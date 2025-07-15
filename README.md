@@ -1,6 +1,6 @@
 # Melih Emre Güler - Portfolio Website
 
-A modern, responsive portfolio website built with React, TypeScript, and Vite. Features rich text formatting, multilingual support, and an integrated contact form.
+A modern, responsive portfolio website built with Next.js, React, and TypeScript. Features dynamic image galleries, multilingual support, and an integrated contact form with EmailJS.
 
 ## Table of Contents
 
@@ -17,15 +17,19 @@ A modern, responsive portfolio website built with React, TypeScript, and Vite. F
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
 - [Contact Form Features](#contact-form-features)
+- [Image Optimization](#image-optimization)
+- [API Routes](#api-routes)
 - [Security Notes](#security-notes)
 
 ## Features
 
-- **Rich Text Formatting**: Support for bold, italic, underline, code, highlights, and custom links
-- **Multilingual Support**: English and Turkish translations
-- **Contact Form**: EmailJS integration for direct email communication
-- **Responsive Design**: Modern UI with Tailwind CSS
-- **Fast Performance**: Built with Vite for optimal loading speeds
+- **Dynamic Image Gallery**: Random background image rotation from organized asset folders
+- **API Integration**: Next.js API routes for image management and metadata
+- **Multilingual Support**: English and Turkish translations with dynamic content
+- **Contact Form**: EmailJS integration with user metadata collection
+- **Responsive Design**: Modern UI with custom CSS modules
+- **Image Optimization**: Automated image compression and resizing
+- **Fast Performance**: Built with Next.js for optimal loading speeds and SEO
 
 ## Live Website
 
@@ -57,18 +61,19 @@ npm install
 
 ### 2. Environment Configuration
 
-Create a `.env` file in the root directory:
+Create a `.env.local` file in the root directory:
 
 ```bash
-cp .env.example .env
+# Copy the example file
+cp .env.example .env.local
 ```
 
-Fill in your EmailJS credentials in the `.env` file:
+Fill in your EmailJS credentials in the `.env.local` file:
 
 ```env
-VITE_EMAILJS_SERVICE_ID=your_service_id_here
-VITE_EMAILJS_TEMPLATE_ID=your_template_id_here
-VITE_EMAILJS_PUBLIC_KEY=your_public_key_here
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id_here
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id_here
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key_here
 ```
 
 ### 3. EmailJS Setup
@@ -85,21 +90,28 @@ VITE_EMAILJS_PUBLIC_KEY=your_public_key_here
 npm run dev
 ```
 
+The development server will start on `http://localhost:3000` (or next available port).
+
 ### 5. Production Build
 
 ```bash
 npm run build
+npm run start
 ```
 
 ## Docker Deployment
 
-The website is containerized using Docker with a multi-stage build process:
+The website is containerized using Docker with a multi-stage build process optimized for Next.js:
 
 ### Local Docker Build
 
 ```bash
-# Build the Docker image
-docker build -t portfolio:latest .
+# Build the Docker image with build arguments
+docker build \
+  --build-arg NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id \
+  --build-arg NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id \
+  --build-arg NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key \
+  -t portfolio:latest .
 
 # Run locally
 docker run -p 3000:80 portfolio:latest
@@ -126,55 +138,122 @@ docker compose up -d portfolio
 ```
 src/
 ├── components/
-│   ├── common/
-│   │   └── RichText.tsx          # Rich text formatting component
-│   └── pages/
-│       ├── home/
-│       │   ├── AboutSection.tsx
-│       │   ├── ContactSection.tsx  # Contact form with EmailJS
-│       │   ├── EducationSection.tsx
-│       │   ├── ExperienceSection.tsx
-│       │   └── ...
-│       └── projects/
-│           └── ProjectsPage.tsx
-├── locales/
-│   ├── en.json                   # English translations
-│   └── tr.json                   # Turkish translations
-└── ...
+│   ├── IntroAnimation.tsx        # Animated intro component
+│   └── TypewriterText.tsx        # Typewriter animation effect
+├── data/
+│   ├── experience.json           # Work experience data
+│   ├── projects.json             # Project portfolio data
+│   ├── techStack.json            # Technology stack information
+│   ├── translations.json         # Multilingual content
+│   └── socialLinks.json          # Social media links
+├── pages/
+│   ├── api/
+│   │   └── images.ts             # API route for image management
+│   ├── _app.tsx                  # Next.js app configuration
+│   ├── _document.tsx             # Custom document structure
+│   └── index.tsx                 # Main homepage
+├── styles/
+│   ├── globals.css               # Global styles
+│   ├── Home.module.css           # Homepage specific styles
+│   ├── IntroAnimation.module.css # Intro animation styles
+│   └── CodeTypingAnimation.module.css # Code typing styles
+├── utils/
+│   ├── imageUtils.ts             # Image processing utilities
+│   ├── introUtils.ts             # Intro animation utilities
+│   ├── languageUtils.ts          # Language switching utilities
+│   └── translationUtils.ts       # Translation interpolation
+└── views/
+    ├── AboutView.tsx             # About section component
+    ├── ContactView.tsx           # Contact form with EmailJS
+    ├── ExperienceView.tsx        # Work experience section
+    ├── FooterView.tsx            # Footer with dynamic year
+    ├── HeroView.tsx              # Hero section with background images
+    ├── ProjectsView.tsx          # Projects showcase
+    └── TechStackView.tsx         # Technology stack display
 
-# Docker & Deployment
+# Configuration & Deployment
+├── next.config.ts                # Next.js configuration
 ├── Dockerfile                    # Multi-stage Docker build
 ├── docker-compose.yml            # Production deployment config
-├── nginx.conf                    # nginx configuration for serving
+├── nginx.conf                    # nginx configuration
 └── .github/workflows/deploy.yml  # CI/CD pipeline
 ```
 
 ## Technologies Used
 
-- **React 18** with TypeScript
-- **Vite** for build tooling
-- **Tailwind CSS** for styling
-- **React Router** for navigation
-- **React i18next** for internationalization
+- **Next.js 15** with TypeScript and React 19
+- **CSS Modules** for component-scoped styling
+- **Framer Motion** for animations and transitions
 - **EmailJS** for contact form functionality
+- **Custom API Routes** for dynamic image management
 - **Docker** for containerization
 - **nginx** for static file serving
 - **AWS EC2** for hosting infrastructure
 - **GitHub Actions** for CI/CD automation
+- **ImageMagick** for image optimization
 
 ## Contact Form Features
 
-- Real-time validation
-- Loading states and status messages
-- Bilingual support
+- Real-time form validation
+- Loading states and success/error messages
+- Bilingual support (English/Turkish)
+- User metadata collection (IP, browser info, timezone)
 - Direct email sending via EmailJS
-- Responsive design
+- Responsive design with animations
+- Environment variable protection for API keys
+
+## Image Optimization
+
+The project includes automated image optimization for better performance:
+
+```bash
+# Optimize images in public/assets directory (using ImageMagick)
+cd public/assets
+find . -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) -exec mogrify -resize '1200x1200>' -quality 85 {} \;
+find . -type f -iname "*.png" -exec mogrify -resize '1200x1200>' {} \;
+```
+
+**Optimization Results:**
+- Original size: ~82MB → Optimized: ~7.3MB (91% reduction)
+- Maximum dimensions: 1200x1200 pixels
+- JPEG quality: 85% (optimal for web)
+- Supports JPG, PNG, WebP formats
+
+## API Routes
+
+The project uses Next.js API routes for dynamic functionality:
+
+### `/api/images`
+
+Returns organized image folder structure from `public/assets`:
+
+```json
+{
+  "success": true,
+  "folders": [
+    {
+      "path": "assets/graduation",
+      "images": ["IMG-20250701-WA0001.jpg", "..."]
+    }
+  ],
+  "totalFolders": 8,
+  "totalImages": 38
+}
+```
+
+**Features:**
+- Recursive directory scanning
+- Web-format filtering (JPG, PNG, WebP, etc.)
+- Error handling and logging
+- CORS headers for development
 
 ## Security Notes
 
 - Environment variables are used to protect EmailJS credentials
-- `.env` file is excluded from version control
+- `.env.local` file is excluded from version control
 - GitHub Actions secrets ensure secure deployment
 - No sensitive information is exposed in the public repository
 - Docker multi-stage builds for optimized production images
 - nginx security headers and proper configuration
+- CORS headers configured for API routes
+- Image optimization reduces server load and improves performance
