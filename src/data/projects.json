@@ -1,0 +1,96 @@
+{
+  "tr": {
+    "title": "Öne Çıkan Projeler",
+    "expandText": "Tüm Projeleri Gör",
+    "collapseText": "Gizle",
+    "viewDetails": "Detayları Görüntüle",
+    "tryLive": "Canlı Demo'yu Deneyin",
+    "items": [
+      {
+        "title": "URL Kısaltıcı",
+        "description": "Java Spring Boot kullanılarak MVC mimarisi ile Temiz Kod prensiplerini takip ederek inşa edilmiş bir URL kısaltma servisidir. 4 endpoint, yapılandırılabilir kısa URL domain desteği ve Swagger ile API dokümantasyonu içermektedir. Depolama için MongoDB entegre edilmiş ve güvenilirliği sağlamak için JUnit birim testleri eklenmiştir.",
+        "tech": ["Java", "Spring Boot", "Spring Framework", "MongoDB", "JUnit", "Maven", "Swagger", "MVC", "Docker", "Docker Compose"],
+        "github": "https://github.com/MelihEmreGuler/urlshortener",
+        "demo": "https://urlshortener.melihemre.dev/"
+      },
+      {
+        "title": "CAPTCHA Doğrulama Sistemi",
+        "description": "Spring Framework 6.2.3 kullanılarak geliştirilen, RESTful API'ler ile CAPTCHA üretimi ve doğrulaması yapan güvenli bir kullanıcı doğrulama platformudur. Hibernate, PostgreSQL kullanılmış ve Maven ve JUnit 5 ile test edilmiştir. Yerelleştirme desteği sağlar ve Java Spring Web MVC becerilerini güçlendirir. Doç. Dr. Abdullah Talha Kabakuş gözetiminde grup ödevi olarak geliştirilmiştir.",
+        "tech": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit", "Docker"],
+        "github": "https://github.com/melihemreguler/spring-web-mvc-react-captcha",
+        "demo": "https://captcha.melihemre.dev/"
+      },
+      {
+        "title": "Atık Yönetimi Backend",
+        "description": "Go (Fiber) ve PostgreSQL ile inşa edilmiş ölçeklenebilir bir backend sistemidir. Docker Compose orkestrasyonu ve AWS EC2/RDS'ye dağıtım özelliklerine sahiptir. prod branch'ini hedef alan GitHub Actions aracılığıyla CI/CD otomasyonu uygulanmıştır. Swagger ile belgelenmiş ve golang-migrate ile veritabanı versiyonlaması içermektedir. Gelecekteki mikroservis entegrasyonu göz önünde bulundurularak tasarlanmıştır.",
+        "tech": ["Golang", "Fiber", "PostgreSQL", "AWS", "Docker", "CI/CD", "Authentication", "Swagger", "Docker Compose"],
+        "github": "https://github.com/donus-turkiye/backend"
+      },
+      {
+        "title": "Not Alma Uygulaması",
+        "description": "Golang ve Fiber ile oluşturulmuş, 11 RESTful endpoint sunan kullanıcı kimlik doğrulamalı not yönetim uygulamasıdır. 2 kişilik takım tarafından işbirliği içinde geliştirilmiş ve kimlik doğrulama mekanizmaları ile güvenlik altına alınmıştır. Swagger aracılığıyla API dokümantasyonu sağlanmıştır.",
+        "tech": ["Golang", "Fiber", "Authentication", "Swagger", "Docker"],
+        "github": "https://github.com/MelihEmreGuler/go-user-notes-app"
+      },
+      {
+        "title": "ToDo Uygulaması",
+        "description": "Gin ile formüle edilmiş ve MongoDB ile desteklenen 9 endpoint içeren görev yönetimi API'sidir. Kullanıcı kimlik doğrulamasını destekler ve 2 kişilik takım ile işbirliği içinde üretilmiştir. Sorunsuz dağıtım için tamamen konteynerleştirilmiş ve Swagger kullanılarak belgelenmiştir.",
+        "tech": ["Golang", "Gin", "MongoDB", "Docker", "Swagger", "Authentication"],
+        "github": "https://github.com/gdscduzceuniversity/todo-app-1"
+      },
+      {
+        "title": "Şehir Listesi ve Trafik Kodları",
+        "description": "Yapılandırılmış veri depolama için PostgreSQL kullanan, Redis ile önbellekleme ve RabbitMQ ile mesaj kuyruğu işleme ile geliştirilmiş 6 endpoint içeren bir REST API'dir.",
+        "tech": ["REST API", "PostgreSQL", "Redis", "RabbitMQ", "Docker"],
+        "github": "https://github.com/MelihEmreGuler/go-psql-redis-cities"
+      }
+    ]
+  },
+  "en": {
+    "title": "Featured Projects",
+    "expandText": "View All Projects",
+    "collapseText": "Collapse",
+    "viewDetails": "View Details",
+    "tryLive": "Try Live Demo",
+    "items": [
+      {
+        "title": "URL Shortener",
+        "description": "A URL shortening service constructed with Java Spring Boot using the MVC architecture while adhering to Clean Code principles, featuring 4 endpoints, configurable short URL domain support and API documentation via Swagger. Integrated MongoDB for storage and incorporated JUnit unit tests to ensure reliability.",
+        "tech": ["Java", "Spring Boot", "Spring Framework", "MongoDB", "JUnit", "Swagger", "Maven", "MVC", "Docker", "Docker Compose"],
+        "github": "https://github.com/MelihEmreGuler/urlshortener",
+        "demo": "https://urlshortener.melihemre.dev/"
+      },
+      {
+        "title": "CAPTCHA Verification System",
+        "description": "A secure user verification platform developed using Spring Framework 6.2.3, implementing CAPTCHA generation and validation with RESTful APIs. Utilized Hibernate, PostgreSQL, and tested with Maven and JUnit 5. Supports localization and strengthens Java Spring Web MVC skills. Developed as a group assignment under the supervision of Assoc. Prof. Dr. Abdullah Talha Kabakuş.",
+        "tech": ["Java", "Spring Framework", "PostgreSQL", "Hibernate", "Maven", "JUnit", "Docker"],
+        "github": "https://github.com/melihemreguler/spring-web-mvc-react-captcha",
+        "demo": "https://captcha.melihemre.dev/"
+      },
+      {
+        "title": "Waste Management Backend",
+        "description": "A scalable backend system built with Go (Fiber) and PostgreSQL, featuring Docker Compose orchestration and deployment to AWS EC2/RDS. Applied CI/CD automation via GitHub Actions targeting the prod branch. Documented using Swagger and includes database versioning via golang-migrate. Designed with future microservices integration in mind.",
+        "tech": ["Golang", "Fiber", "PostgreSQL", "AWS", "Docker", "CI/CD", "Authentication", "Swagger", "Docker Compose"],
+        "github": "https://github.com/donus-turkiye/backend"
+      },
+      {
+        "title": "Note Taking App",
+        "description": "A user-authenticated note management application crafted with Golang and Fiber, exposing 11 RESTful endpoints. Created collaboratively by a 2-person team and secured with authentication mechanisms. API documentation provided via Swagger.",
+        "tech": ["Golang", "Fiber", "Authentication", "Swagger", "Docker"],
+        "github": "https://github.com/MelihEmreGuler/go-user-notes-app"
+      },
+      {
+        "title": "ToDo App",
+        "description": "A 9-endpoint task management API formulated with Gin and backed by MongoDB. Supports user authentication and was collaboratively produced with 2-person team. Fully containerized for seamless deployment and documented using Swagger.",
+        "tech": ["Golang", "Gin", "MongoDB", "Swagger", "Docker", "Authentication"],
+        "github": "https://github.com/gdscduzceuniversity/todo-app-1"
+      },
+      {
+        "title": "City List and Traffic Codes",
+        "description": "A 6-endpoint REST API leveraging PostgreSQL for structured data storage, enhanced with caching via Redis and message queue processing through RabbitMQ.",
+        "tech": ["REST API", "PostgreSQL", "Redis", "RabbitMQ", "Docker"],
+        "github": "https://github.com/MelihEmreGuler/go-psql-redis-cities"
+      }
+    ]
+  }
+}
