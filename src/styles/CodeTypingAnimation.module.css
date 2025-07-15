@@ -1,0 +1,214 @@
+.codeContainer {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(78, 205, 196, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(78, 205, 196, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  min-height: 400px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #2a2a3e 0%, #1f1f2e 100%);
+  border-bottom: 1px solid rgba(78, 205, 196, 0.2);
+  position: relative;
+}
+
+.codeButtons {
+  display: flex;
+  gap: 8px;
+  margin-right: 16px;
+}
+
+.codeButton {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff5f56 0%, #e0443e 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.codeButton:nth-child(2) {
+  background: linear-gradient(135deg, #ffbd2e 0%, #e6a23c 100%);
+}
+
+.codeButton:nth-child(3) {
+  background: linear-gradient(135deg, #27ca3f 0%, #1f9d55 100%);
+}
+
+.codeTitle {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 14px;
+  color: #b8b8b8;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  flex: 1;
+}
+
+.replayIndicator {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(78, 205, 196, 0.2);
+  color: #4ecdc4;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(78, 205, 196, 0.3);
+}
+
+.codeContent {
+  padding: 20px 16px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e6e6e6;
+  position: relative;
+  z-index: 2;
+}
+
+.codeLine {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 4px;
+  min-height: 20px;
+}
+
+.lineNumber {
+  color: #6b7280;
+  font-size: 12px;
+  min-width: 30px;
+  text-align: right;
+  margin-right: 16px;
+  user-select: none;
+  font-weight: 400;
+}
+
+.codeText {
+  flex: 1;
+  white-space: pre;
+  position: relative;
+}
+
+.cursor {
+  color: #4ecdc4;
+  font-weight: bold;
+  animation: blink 1s infinite;
+  position: relative;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.codeGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(78, 205, 196, 0.1) 0%,
+    rgba(78, 205, 196, 0.05) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .codeContainer {
+    min-height: 350px;
+    max-width: 100%;
+  }
+  
+  .codeContent {
+    font-size: 13px;
+    padding: 16px 12px;
+  }
+  
+  .lineNumber {
+    min-width: 25px;
+    margin-right: 12px;
+    font-size: 11px;
+  }
+  
+  .replayIndicator {
+    right: 12px;
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .codeContainer {
+    min-height: 300px;
+  }
+  
+  .codeContent {
+    font-size: 12px;
+    padding: 12px 8px;
+  }
+  
+  .lineNumber {
+    min-width: 20px;
+    margin-right: 8px;
+    font-size: 10px;
+  }
+  
+  .replayIndicator {
+    right: 8px;
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .codeText {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
+  
+  .codeContainer {
+    transition: none;
+  }
+}
+
+/* Hover effects */
+.codeContainer:hover {
+  border-color: rgba(78, 205, 196, 0.3);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(78, 205, 196, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Focus states for accessibility */
+.codeContainer:focus-within {
+  outline: 2px solid rgba(78, 205, 196, 0.5);
+  outline-offset: 2px;
+} 
