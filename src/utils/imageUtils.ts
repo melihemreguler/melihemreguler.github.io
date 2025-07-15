@@ -43,6 +43,8 @@ export class RandomImageSelector {
   private maxRecentImages: number = 3; // Remember last 3 images
   private isInitialized: boolean = false;
   private preloadedImages: Set<string> = new Set();
+  private preloadQueue: string[] = [];
+  private loadingImages: Set<string> = new Set();
 
   async initialize(): Promise<void> {
     if (this.isInitialized) return;
@@ -54,8 +56,8 @@ export class RandomImageSelector {
       this.isInitialized = true;
       
       if (this.folders.length > 0) {
-        // Disable initial preloading to reduce browser load
-        // this.preloadRandomImages(1);
+        // Preload first 5 images immediately for smoother start (increased from 3)
+        this.preloadRandomImages(5);
         console.log(`Image selector initialized with ${this.folders.length} folders and ${this.getTotalImageCount()} total images`);
         console.log('Available folders:', this.folders.map(f => `${f.path} (${f.images.length} images)`));
       } else {
@@ -79,29 +81,35 @@ export class RandomImageSelector {
   }
 
   private preloadImage(imagePath: string): void {
-    if (this.preloadedImages.has(imagePath)) return;
+    if (this.preloadedImages.has(imagePath) || this.loadingImages.has(imagePath)) return;
     
+    this.loadingImages.add(imagePath);
     const img = new Image();
     
-    // Set timeout for large images
+    // Set timeout for slow connections (reduced for faster fallback)
     const timeout = setTimeout(() => {
+      this.loadingImages.delete(imagePath);
       console.warn(`Preload timeout for image: ${imagePath}`);
-    }, 10000); // 10 second timeout
+    }, 6000); // 6 second timeout instead of 8
     
     img.onload = () => {
       clearTimeout(timeout);
+      this.loadingImages.delete(imagePath);
       this.preloadedImages.add(imagePath);
       console.log(`Successfully preloaded: ${imagePath}`);
     };
     
     img.onerror = (error) => {
       clearTimeout(timeout);
+      this.loadingImages.delete(imagePath);
       console.warn(`Failed to preload image: ${imagePath}`, error);
     };
     
-    // Add crossOrigin attribute for better compatibility
+    // Add cache headers for better performance
     img.crossOrigin = 'anonymous';
-    img.src = imagePath;
+    // Add cache buster only in development
+    const isDev = process.env.NODE_ENV === 'development';
+    img.src = isDev ? `${imagePath}?t=${Date.now()}` : imagePath;
   }
 
   private getRandomImagePath(): string | null {
@@ -158,15 +166,56 @@ export class RandomImageSelector {
       console.log(`Selected image: ${imagePath}`);
       console.log('Recent images:', this.recentImages);
       
+      // More aggressive preloading: preload next 3 images in advance
       setTimeout(() => {
-        const nextImage = this.getRandomImagePath();
-        if (nextImage && nextImage !== imagePath) {
-          this.preloadImage(nextImage);
+        for (let i = 0; i < 3; i++) {
+          const nextImage = this.getRandomImagePath();
+          if (nextImage && nextImage !== imagePath && !this.preloadedImages.has(nextImage)) {
+            this.preloadImage(nextImage);
+          }
         }
-      }, 2500);
+      }, 500); // Start preloading faster
     }
     
     return imagePath;
+  }
+
+  // Check if an image is ready to display
+  isImageReady(imagePath: string): boolean {
+    return this.preloadedImages.has(imagePath);
+  }
+
+  // Get a ready image (preloaded) or fallback to any available
+  getReadyImage(): string | null {
+    // First try to get a preloaded image
+    const imagePath = this.getRandomImagePath();
+    if (imagePath && this.preloadedImages.has(imagePath)) {
+      return imagePath;
+    }
+
+    // If no preloaded image available, get any random image
+    return this.getRandomImagePath();
+  }
+
+  // Get first available image for immediate loading (no randomization)
+  getFirstAvailableImage(): string | null {
+    if (!this.isInitialized || this.folders.length === 0) {
+      return null;
+    }
+    
+    // Get first folder with images
+    const firstFolder = this.folders[0];
+    if (firstFolder && firstFolder.images.length > 0) {
+      const imagePath = `/${firstFolder.path}/${firstFolder.images[0]}`;
+      console.log(`First available image: ${imagePath}`);
+      
+      // Preload this image immediately
+      this.preloadImage(imagePath);
+      
+      return imagePath;
+    }
+    
+    return null;
   }
 
   getFolderCount(): number {
@@ -179,5 +228,33 @@ export class RandomImageSelector {
 
   getLoadedImageCount(): number {
     return this.preloadedImages.size;
+  }
+
+  // Get available preloaded images count for debugging
+  getPreloadedCount(): number {
+    return this.preloadedImages.size;
+  }
+
+  // Get loading images count for debugging  
+  getLoadingCount(): number {
+    return this.loadingImages.size;
+  }
+
+  // Force preload specific number of images
+  forcePreloadImages(count: number): void {
+    let preloaded = 0;
+    let attempts = 0;
+    const maxAttempts = count * 3;
+    
+    while (preloaded < count && attempts < maxAttempts) {
+      const imagePath = this.getRandomImagePath();
+      if (imagePath && !this.preloadedImages.has(imagePath) && !this.loadingImages.has(imagePath)) {
+        this.preloadImage(imagePath);
+        preloaded++;
+      }
+      attempts++;
+    }
+    
+    console.log(`Force preloading ${preloaded} images`);
   }
 }
