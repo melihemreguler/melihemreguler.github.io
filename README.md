@@ -291,3 +291,55 @@ The nginx configuration includes advanced caching mechanisms for optimal perform
 ### Docker Volume Configuration
 - Persistent nginx cache volume for container restarts
 - Proper cache directory permissions and ownership
+
+## Production Management
+
+### Cache Management Tools
+
+For production cache management, use the `production-tools.sh` script that's automatically downloaded during deployment:
+
+```bash
+# Download the tools (done automatically during deploy)
+curl -O https://raw.githubusercontent.com/melihemreguler/melihemreguler.github.io/main/production-tools.sh
+chmod +x production-tools.sh
+
+# Available commands
+./production-tools.sh clear      # Clear nginx cache
+./production-tools.sh stats      # Show cache statistics
+./production-tools.sh restart    # Reload nginx configuration
+./production-tools.sh performance # Check performance metrics
+./production-tools.sh bundles    # Analyze bundle sizes
+./production-tools.sh report     # Generate full performance report
+./production-tools.sh logs       # Show container logs
+```
+
+### Remote Usage (No Download Required)
+
+```bash
+# Clear cache remotely
+curl -s https://raw.githubusercontent.com/melihemreguler/melihemreguler.github.io/main/production-tools.sh | bash -s clear
+
+# Get performance report
+curl -s https://raw.githubusercontent.com/melihemreguler/melihemreguler.github.io/main/production-tools.sh | bash -s report
+
+# Quick performance check
+curl -s https://raw.githubusercontent.com/melihemreguler/melihemreguler.github.io/main/production-tools.sh | bash -s performance
+```
+
+### LCP Performance Troubleshooting
+
+If experiencing high LCP (Largest Contentful Paint) times:
+
+1. **Clear cache**: `./production-tools.sh clear`
+2. **Check compression**: `./production-tools.sh performance`
+3. **Analyze bundles**: `./production-tools.sh bundles`
+4. **Restart nginx**: `./production-tools.sh restart`
+
+### Monitoring
+
+The deployment process includes automatic performance analysis that checks:
+- Cache directory setup
+- Compression enablement
+- Static file caching
+- Bundle sizes
+- Image optimization
