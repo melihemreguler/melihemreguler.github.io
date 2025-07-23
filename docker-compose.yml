@@ -11,9 +11,16 @@ services:
       - VIRTUAL_HOST=melihemre.dev,www.melihemre.dev
       - LETSENCRYPT_HOST=melihemre.dev,www.melihemre.dev
       - LETSENCRYPT_EMAIL=guler@melihemre.dev
+    volumes:
+      # Nginx cache directory for better performance
+      - nginx_cache:/var/cache/nginx
     networks:
       - web
 
 networks:
   web:
     external: true
+
+volumes:
+  nginx_cache:
+    driver: local
