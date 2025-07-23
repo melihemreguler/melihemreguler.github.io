@@ -257,3 +257,37 @@ Returns organized image folder structure from `public/assets`:
 - nginx security headers and proper configuration
 - CORS headers configured for API routes
 - Image optimization reduces server load and improves performance
+
+## Performance Optimizations
+
+### Cache Configuration
+
+The nginx configuration includes advanced caching mechanisms for optimal performance:
+
+#### Static File Caching
+- **Images**: 30-day cache with `max-age=2592000`
+- **CSS/JS**: 7-day cache with `max-age=604800`
+- **Fonts**: 1-year cache with `immutable` directive
+- **JSON/XML**: 1-day cache with `max-age=86400`
+
+#### Proxy Cache
+- Configured proxy cache path: `/var/cache/nginx`
+- Cache zone: `static_cache` with 10MB memory and 1GB disk space
+- Cache validity: 10 minutes for successful responses, 1 minute for 404s
+- Background cache updates and stale content serving for high availability
+
+#### Cache Headers
+- `Cache-Control` headers for browser caching
+- `Vary: Accept-Encoding` for proper compression handling
+- `ETag` support for efficient cache validation
+- Access logs disabled for static assets to reduce I/O
+
+#### Performance Benefits
+- Reduced server load by serving cached content
+- Faster page load times for returning visitors
+- Improved bandwidth efficiency
+- Better user experience with instant static content delivery
+
+### Docker Volume Configuration
+- Persistent nginx cache volume for container restarts
+- Proper cache directory permissions and ownership
