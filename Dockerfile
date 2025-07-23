@@ -29,6 +29,9 @@ RUN npm run build
 # Production stage with nginx only
 FROM nginx:alpine
 
+# Install brotli module for better compression
+RUN apk add --no-cache nginx-mod-http-brotli
+
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
 
