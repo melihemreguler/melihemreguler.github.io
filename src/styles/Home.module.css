@@ -1487,3 +1487,30 @@
     padding: 0.4rem 0.8rem;
   }
 }
+
+/* Loading Spinner for Lazy Loading */
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: #64ffda;
+  font-size: 1rem;
+  min-height: 200px;
+}
+
+.loadingSpinner::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid #64ffda;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
