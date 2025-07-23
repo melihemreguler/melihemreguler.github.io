@@ -1,5 +1,6 @@
 # Multi-stage build for optimal performance
-FROM node:20-alpine AS builder
+# Target AMD64 platform for production deployment
+FROM --platform=linux/amd64 node:20-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -27,7 +28,8 @@ ENV NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=$NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
 RUN npm run build
 
 # Production stage with nginx only
-FROM nginx:alpine
+# Target AMD64 platform for production deployment  
+FROM --platform=linux/amd64 nginx:alpine
 
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
