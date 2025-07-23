@@ -10,7 +10,7 @@ import {
   ChevronRight,
   Languages
 } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import styles from "@/styles/Home.module.css";
 import IntroAnimation from "@/components/IntroAnimation";
 import TypewriterText from "@/components/TypewriterText";
@@ -18,18 +18,20 @@ import { introUtils } from "@/utils/introUtils";
 import { getSavedLanguage, saveLanguage, SupportedLanguage } from "@/utils/languageUtils";
 import translations from "../data/translations.json";
 import HeroView from "../views/HeroView";
-import AboutView from "../views/AboutView";
-import TechStackView from "../views/TechStackView";
-import ProjectsView from "../views/ProjectsView";
-import ExperienceView from "../views/ExperienceView";
-import ContactView from "../views/ContactView";
-import FooterView from "../views/FooterView";
-import techStackData from "../data/techStack.json";
 import { Code, Zap, Globe, Database, Cloud, Shield } from "lucide-react";
 
-const iconMap: Record<string, any> = { Code, Zap, Globe, Database, Cloud, Shield };
+// Lazy load non-critical components for better LCP
+const AboutView = lazy(() => import("../views/AboutView"));
+const TechStackView = lazy(() => import("../views/TechStackView"));
+const ProjectsView = lazy(() => import("../views/ProjectsView"));
+const ExperienceView = lazy(() => import("../views/ExperienceView"));
+const ContactView = lazy(() => import("../views/ContactView"));
+const FooterView = lazy(() => import("../views/FooterView"));
 
-const techStack = techStackData.map((item: any) => ({ ...item, icon: iconMap[item.icon] }));
+// Lazy load tech stack data
+const techStackData = lazy(() => import("../data/techStack.json"));
+
+const iconMap: Record<string, any> = { Code, Zap, Globe, Database, Cloud, Shield };
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -227,20 +229,24 @@ export default function Home() {
           )}
         </nav>
 
-        {/* Hero Section */}
+        {/* Hero Section - Keep this for LCP */}
         <HeroView t={t} currentCodeLine={currentCodeLine} handleCodeLineComplete={handleCodeLineComplete} />
-        {/* About Section */}
-        <AboutView t={t} />
-        {/* Tech Stack Section */}
-        <TechStackView t={t} techStack={techStack} />
-        {/* Projects Section */}
-        <ProjectsView language={language} />
-        {/* Experience Section */}
-        <ExperienceView language={language} />
-        {/* Contact Section */}
-        <ContactView t={t} />
-        {/* Footer */}
-        <FooterView t={t} />
+        
+        {/* Lazy load below-the-fold content for better LCP */}
+        <Suspense fallback={<div className={styles.loadingSpinner}>Loading...</div>}>
+          {/* About Section */}
+          <AboutView t={t} />
+          {/* Tech Stack Section */}
+          <TechStackView t={t} techStack={[]} />
+          {/* Projects Section */}
+          <ProjectsView language={language} />
+          {/* Experience Section */}
+          <ExperienceView language={language} />
+          {/* Contact Section */}
+          <ContactView t={t} />
+          {/* Footer */}
+          <FooterView t={t} />
+        </Suspense>
       </motion.div>
     </>
   );
