@@ -28,10 +28,13 @@ const ExperienceView = lazy(() => import("../views/ExperienceView"));
 const ContactView = lazy(() => import("../views/ContactView"));
 const FooterView = lazy(() => import("../views/FooterView"));
 
-// Lazy load tech stack data
-const techStackData = lazy(() => import("../data/techStack.json"));
+// Import tech stack data normally (JSON can't be lazy loaded)
+import techStackData from "../data/techStack.json";
 
 const iconMap: Record<string, any> = { Code, Zap, Globe, Database, Cloud, Shield };
+
+// Map tech stack data with icons
+const techStack = techStackData.map((item: any) => ({ ...item, icon: iconMap[item.icon] }));
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -237,7 +240,7 @@ export default function Home() {
           {/* About Section */}
           <AboutView t={t} />
           {/* Tech Stack Section */}
-          <TechStackView t={t} techStack={[]} />
+          <TechStackView t={t} techStack={techStack} />
           {/* Projects Section */}
           <ProjectsView language={language} />
           {/* Experience Section */}
