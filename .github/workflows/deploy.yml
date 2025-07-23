@@ -137,6 +137,31 @@ jobs:
             # Check container resource usage
             echo "Container Resources:"
             docker stats --no-stream --format "• CPU: {{.CPUPerc}} | Memory: {{.MemUsage}}" portfolio-app 2>/dev/null || echo "• Resource stats unavailable"
+            
+            # Performance and Cache Analysis
+            echo "Performance Analysis:"
+            echo "• Testing nginx cache setup..."
+            docker exec portfolio-app ls -la /var/cache/nginx/ 2>/dev/null && echo "  Cache directory exists" || echo "  Cache directory missing"
+            
+            echo "• Testing compression..."
+            curl -H "Accept-Encoding: gzip, br" -I http://localhost 2>/dev/null | grep -i "content-encoding" && echo "  Compression enabled" || echo "  No compression detected"
+            
+            echo "• Checking static file cache headers..."
+            curl -I http://localhost/favicon.png 2>/dev/null | grep -i "cache-control" && echo "  Static cache headers OK" || echo "  Static cache headers missing"
+            
+            echo "• Bundle size analysis..."
+            docker exec portfolio-app sh -c "
+              cd /usr/share/nginx/html
+              echo '  HTML files:'
+              find . -name '*.html' -exec ls -lh {} \; | awk '{print \"    \" \$5, \$9}' | head -5
+              echo '  CSS files:'
+              find . -name '*.css' -exec ls -lh {} \; | awk '{print \"    \" \$5, \$9}' | head -5
+              echo '  JS files (largest 5):'
+              find . -name '*.js' -exec ls -lh {} \; | sort -hr | head -5 | awk '{print \"    \" \$5, \$9}'
+              echo '  Images (largest 5):'
+              find . -type f \( -name '*.jpg' -o -name '*.png' -o -name '*.webp' \) -exec ls -lh {} \; | sort -hr | head -5 | awk '{print \"    \" \$5, \$9}'
+            " 2>/dev/null || echo "  Bundle analysis failed"
+            
           else
             echo "Container 'portfolio-app' failed to start"
             echo "Container logs:"
@@ -154,6 +179,18 @@ jobs:
           echo "Final Status:"
           echo "• Running containers:"
           docker ps --format "  - {{.Names}}: {{.Status}}" | grep portfolio
+          
+          # Download production tools for cache management
+          echo "Production Tools Setup:"
+          curl -s -o production-tools.sh https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/production-tools.sh
+          chmod +x production-tools.sh
+          echo "• Production tools downloaded and ready"
+          echo "• Usage: ./production-tools.sh [clear|stats|restart|performance|report]"
+          
+          # Initial cache warm-up (optional)
+          echo "Cache Warm-up:"
+          curl -s http://localhost > /dev/null && echo "• Main page cached" || echo "• Cache warm-up failed"
+          curl -s http://localhost/favicon.png > /dev/null && echo "• Favicon cached" || echo "• Favicon cache failed"
           
           echo "Deployment completed successfully!"
           echo "Application available at: https://melihemre.dev"
