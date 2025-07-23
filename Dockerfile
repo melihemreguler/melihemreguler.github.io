@@ -32,31 +32,22 @@ FROM nginx:alpine
 # Remove default nginx static assets
 RUN rm -rf /usr/share/nginx/html/*
 
+# Create cache directory and set permissions
+RUN mkdir -p /var/cache/nginx && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chmod -R 755 /var/cache/nginx
+
 # Copy static export files
 COPY --from=builder /app/out /usr/share/nginx/html
 
-# Install curl for health checks (brotli module is not available in alpine easily)
+# Install curl for health checks (no need for Node.js anymore)
 RUN apk add --no-cache curl
-
-# Create cache directories
-RUN mkdir -p /var/cache/nginx && \
-    chown -R nginx:nginx /var/cache/nginx
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Enhanced compression configuration (without brotli for simplicity)
-RUN echo '# Enhanced Gzip Configuration' > /etc/nginx/conf.d/compression.conf && \
-    echo 'gzip on;' >> /etc/nginx/conf.d/compression.conf && \
-    echo 'gzip_vary on;' >> /etc/nginx/conf.d/compression.conf && \
-    echo 'gzip_min_length 1024;' >> /etc/nginx/conf.d/compression.conf && \
-    echo 'gzip_proxied any;' >> /etc/nginx/conf.d/compression.conf && \
-    echo 'gzip_comp_level 6;' >> /etc/nginx/conf.d/compression.conf && \
-    echo 'gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json image/svg+xml;' >> /etc/nginx/conf.d/compression.conf
-
-# Optimize nginx worker processes
-RUN echo 'worker_processes auto;' > /etc/nginx/conf.d/worker.conf && \
-    echo 'worker_connections 1024;' >> /etc/nginx/conf.d/worker.conf
+# Add compression and caching
+RUN echo 'gzip on; gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;' > /etc/nginx/conf.d/gzip.conf
 
 # Expose port
 EXPOSE 80
