@@ -160,12 +160,14 @@ jobs:
 
           # Deployment health validation
           echo "Health Check:"
-          READY_PODS=$(kubectl get pods -n portfolio -l app=portfolio-web --field-selector=status.phase=Running --no-headers 2>/dev/null | wc -l)
+
+          # Get actual running pods count
+          RUNNING_PODS=$(kubectl get pods -n portfolio -l app=portfolio-web --field-selector=status.phase=Running -o json | jq '[.items[] | select(.status.containerStatuses[].ready == true)] | length')
           TOTAL_PODS=$(kubectl get deployment portfolio-web -n portfolio -o jsonpath='{.spec.replicas}' 2>/dev/null)
 
-          echo "• Pods: $READY_PODS/$TOTAL_PODS ready"
+          echo "• Running Pods: $RUNNING_PODS/$TOTAL_PODS"
 
-          if [ "$READY_PODS" -eq "$TOTAL_PODS" ] && [ "$READY_PODS" -gt 0 ]; then
+          if [ "$RUNNING_PODS" -ge "$TOTAL_PODS" ] && [ "$RUNNING_PODS" -gt 0 ]; then
             echo "• All pods are running successfully"
 
             # Show pod details
@@ -183,13 +185,13 @@ jobs:
             kubectl get ingress -n portfolio
 
           else
-            echo "• Deployment failed - not all pods are ready"
+            echo "• Deployment failed - not enough pods are ready"
             echo "Pod Status:"
             kubectl get pods -n portfolio -l app=portfolio-web
             echo "Recent Events:"
             kubectl get events -n portfolio --sort-by='.lastTimestamp' | tail -10
             echo "Pod Logs:"
-            kubectl logs -n portfolio -l app=portfolio-web --tail=50
+            kubectl logs -n portfolio -l app=portfolio-web --tail=50 --all-containers=true
             exit 1
           fi
 
