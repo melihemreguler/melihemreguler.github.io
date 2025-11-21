@@ -161,14 +161,17 @@ jobs:
           # Deployment health validation
           echo "Health Check:"
 
-          # Get actual running pods count
-          RUNNING_PODS=$(kubectl get pods -n portfolio -l app=portfolio-web --field-selector=status.phase=Running -o json | jq '[.items[] | select(.status.containerStatuses[].ready == true)] | length')
+          # Wait a bit for old pods to terminate
+          sleep 5
+
+          # Get actual running and ready pods count
+          RUNNING_PODS=$(kubectl get pods -n portfolio -l app=portfolio-web --field-selector=status.phase=Running --no-headers 2>/dev/null | grep -c "1/1")
           TOTAL_PODS=$(kubectl get deployment portfolio-web -n portfolio -o jsonpath='{.spec.replicas}' 2>/dev/null)
 
-          echo "• Running Pods: $RUNNING_PODS/$TOTAL_PODS"
+          echo "• Running & Ready Pods: $RUNNING_PODS/$TOTAL_PODS"
 
           if [ "$RUNNING_PODS" -ge "$TOTAL_PODS" ] && [ "$RUNNING_PODS" -gt 0 ]; then
-            echo "• All pods are running successfully"
+            echo "✓ All pods are running successfully"
 
             # Show pod details
             echo "Pod Details:"
