@@ -1,4 +1,4 @@
-name: Deploy to AWS EC2
+name: Deploy to Kubernetes
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -59,148 +59,141 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
     - name: Setup SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy_key
+        echo "${{ secrets.K8S_SSH_KEY }}" > ~/.ssh/deploy_key
         chmod 600 ~/.ssh/deploy_key
-        ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-    
-    - name: Deploy to EC2
+        ssh-keyscan -H ${{ secrets.K8S_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to Kubernetes
       run: |
-        ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} << 'EOF'
-          echo "Starting deployment validation and setup..."
-          
-          # System telemetry (non-sensitive)
+        ssh -i ~/.ssh/deploy_key ${{ secrets.K8S_USERNAME }}@${{ secrets.K8S_HOST }} << 'EOF'
+          echo "Starting Kubernetes deployment..."
+
+          # System telemetry
           echo "System Information:"
           echo "OS: $(uname -s -r)"
           echo "Uptime: $(uptime -p)"
-          
+
           # Memory telemetry
           echo "Memory Usage:"
           free -h | awk 'NR==2{printf "• RAM: %s used / %s total (%.1f%%)\n", $3, $2, $3*100/$2}'
-          
-          # Disk telemetry  
+
+          # Disk telemetry
           echo "Disk Usage:"
           df -h / | awk 'NR==2{printf "• Root: %s used / %s total (%s)\n", $3, $2, $5}'
-          
-          # Network validation
-          echo "Network Validation:"
-          if docker network ls | grep -q "web"; then
-            echo "• 'web' network exists"
+
+          # Kubernetes validation
+          echo "Kubernetes Validation:"
+          if kubectl version --short 2>/dev/null; then
+            echo "• kubectl is available"
           else
-            echo "• CRITICAL: 'web' network not found!"
-            echo "• This indicates nginx-proxy infrastructure is not running"
-            echo "• Deploy cannot continue without proper network setup"
+            echo "• CRITICAL: kubectl not found!"
             exit 1
           fi
-          
+
           # Project directory setup
           echo "Project Setup:"
-          mkdir -p /root/portfolio
-          cd /root/portfolio
+          mkdir -p /root/portfolio-k8s
+          cd /root/portfolio-k8s
           echo "Project directory ready"
-          
-          # Download/update docker-compose.yml
+
+          # Download/update Kubernetes manifests
           echo "Configuration Update:"
-          curl -s -o docker-compose.yml https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/docker-compose.yml
-          if [ -f docker-compose.yml ]; then
-            echo "docker-compose.yml updated"
+          curl -s -o deployment.yaml https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/k8s/deployment.yaml
+          if [ -f deployment.yaml ]; then
+            echo "deployment.yaml updated"
           else
-            echo "Failed to download docker-compose.yml"
+            echo "Failed to download deployment.yaml"
             exit 1
           fi
-          
-          # Container deployment
-          echo "Container Deployment:"
-          
-          # Pull latest image
-          echo "• Pulling latest image..."
-          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          
-          # Stop and remove old container
-          echo "• Stopping existing containers..."
-          docker compose down || true
-          
-          # Start new container
-          echo "• Starting production container..."
-          docker compose up -d portfolio
-          
-          # Wait for container to be ready
-          echo "• Waiting for container startup..."
-          sleep 10
-          
-          # Container health validation
+
+          # Apply Kubernetes manifests
+          echo "Kubernetes Deployment:"
+
+          # Create namespace if not exists
+          kubectl create namespace portfolio --dry-run=client -o yaml | kubectl apply -f -
+          echo "• Namespace 'portfolio' ready"
+
+          # Create Docker Hub secret if not exists
+          kubectl create secret docker-registry dockerhub-secret \
+            --docker-server=docker.io \
+            --docker-username=${{ secrets.DOCKER_USERNAME }} \
+            --docker-password=${{ secrets.DOCKER_PASSWORD }} \
+            --namespace=portfolio \
+            --dry-run=client -o yaml | kubectl apply -f -
+          echo "• Docker Hub secret configured"
+
+          # Apply deployment
+          kubectl apply -f deployment.yaml
+          echo "• Deployment manifest applied"
+
+          # Wait for rollout
+          echo "• Waiting for deployment rollout..."
+          kubectl rollout status deployment/portfolio-web -n portfolio --timeout=300s
+
+          # Force pods to pull new image
+          kubectl rollout restart deployment/portfolio-web -n portfolio
+          echo "• Deployment restarted to pull latest image"
+
+          # Wait for new rollout
+          kubectl rollout status deployment/portfolio-web -n portfolio --timeout=300s
+
+          # Deployment health validation
           echo "Health Check:"
-          if docker ps | grep -q "portfolio-app"; then
-            echo "Container 'portfolio-app' is running"
-            CONTAINER_ID=$(docker ps -q --filter "name=portfolio-app")
-            echo "• Container ID: ${CONTAINER_ID:0:12}..."
-            
-            # Check container resource usage
-            echo "Container Resources:"
-            docker stats --no-stream --format "• CPU: {{.CPUPerc}} | Memory: {{.MemUsage}}" portfolio-app 2>/dev/null || echo "• Resource stats unavailable"
-            
-            # Performance and Cache Analysis
-            echo "Performance Analysis:"
-            echo "• Testing nginx cache setup..."
-            docker exec portfolio-app ls -la /var/cache/nginx/ 2>/dev/null && echo "  Cache directory exists" || echo "  Cache directory missing"
-            
-            echo "• Testing compression..."
-            curl -H "Accept-Encoding: gzip, br" -I http://localhost 2>/dev/null | grep -i "content-encoding" && echo "  Compression enabled" || echo "  No compression detected"
-            
-            echo "• Checking static file cache headers..."
-            curl -I http://localhost/favicon.png 2>/dev/null | grep -i "cache-control" && echo "  Static cache headers OK" || echo "  Static cache headers missing"
-            
-            echo "• Bundle size analysis..."
-            docker exec portfolio-app sh -c "
-              cd /usr/share/nginx/html
-              echo '  HTML files:'
-              find . -name '*.html' -exec ls -lh {} \; | awk '{print \"    \" \$5, \$9}' | head -5
-              echo '  CSS files:'
-              find . -name '*.css' -exec ls -lh {} \; | awk '{print \"    \" \$5, \$9}' | head -5
-              echo '  JS files (largest 5):'
-              find . -name '*.js' -exec ls -lh {} \; | sort -hr | head -5 | awk '{print \"    \" \$5, \$9}'
-              echo '  Images (largest 5):'
-              find . -type f \( -name '*.jpg' -o -name '*.png' -o -name '*.webp' \) -exec ls -lh {} \; | sort -hr | head -5 | awk '{print \"    \" \$5, \$9}'
-            " 2>/dev/null || echo "  Bundle analysis failed"
-            
+          READY_PODS=$(kubectl get pods -n portfolio -l app=portfolio-web --field-selector=status.phase=Running --no-headers 2>/dev/null | wc -l)
+          TOTAL_PODS=$(kubectl get deployment portfolio-web -n portfolio -o jsonpath='{.spec.replicas}' 2>/dev/null)
+
+          echo "• Pods: $READY_PODS/$TOTAL_PODS ready"
+
+          if [ "$READY_PODS" -eq "$TOTAL_PODS" ] && [ "$READY_PODS" -gt 0 ]; then
+            echo "• All pods are running successfully"
+
+            # Show pod details
+            echo "Pod Details:"
+            kubectl get pods -n portfolio -l app=portfolio-web -o wide
+
+            # Show resource usage
+            echo "Resource Usage:"
+            kubectl top pods -n portfolio -l app=portfolio-web 2>/dev/null || echo "• Metrics unavailable (metrics-server may not be installed)"
+
+            # Show service and ingress
+            echo "Service Information:"
+            kubectl get svc -n portfolio
+            echo "Ingress Information:"
+            kubectl get ingress -n portfolio
+
           else
-            echo "Container 'portfolio-app' failed to start"
-            echo "Container logs:"
-            docker compose logs --tail=20 portfolio
+            echo "• Deployment failed - not all pods are ready"
+            echo "Pod Status:"
+            kubectl get pods -n portfolio -l app=portfolio-web
+            echo "Recent Events:"
+            kubectl get events -n portfolio --sort-by='.lastTimestamp' | tail -10
+            echo "Pod Logs:"
+            kubectl logs -n portfolio -l app=portfolio-web --tail=50
             exit 1
           fi
-          
-          # Clean up old images
+
+          # Clean up old replica sets
           echo "Cleanup:"
-          echo "• Removing unused images..."
-          PRUNED=$(docker image prune -f --filter="until=24h" 2>/dev/null | grep "Total reclaimed space" || echo "• No images to prune")
-          echo "$PRUNED"
-          
+          kubectl delete replicaset -n portfolio $(kubectl get replicaset -n portfolio -o jsonpath='{.items[?(@.spec.replicas==0)].metadata.name}') 2>/dev/null || echo "• No old replica sets to clean"
+
           # Final status
           echo "Final Status:"
-          echo "• Running containers:"
-          docker ps --format "  - {{.Names}}: {{.Status}}" | grep portfolio
-          
-          # Download production tools for cache management
-          echo "Production Tools Setup:"
-          curl -s -o production-tools.sh https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/production-tools.sh
-          chmod +x production-tools.sh
-          echo "• Production tools downloaded and ready"
-          echo "• Usage: ./production-tools.sh [clear|stats|restart|performance|report]"
-          
-          # Initial cache warm-up (optional)
-          echo "Cache Warm-up:"
-          curl -s http://localhost > /dev/null && echo "• Main page cached" || echo "• Cache warm-up failed"
-          curl -s http://localhost/favicon.png > /dev/null && echo "• Favicon cached" || echo "• Favicon cache failed"
-          
+          echo "• Deployment: $(kubectl get deployment portfolio-web -n portfolio -o jsonpath='{.status.conditions[?(@.type=="Available")].status}')"
+          echo "• Image: $(kubectl get deployment portfolio-web -n portfolio -o jsonpath='{.spec.template.spec.containers[0].image}')"
+          echo "• Replicas: $(kubectl get deployment portfolio-web -n portfolio -o jsonpath='{.status.readyReplicas}')/$TOTAL_PODS"
+
           echo "Deployment completed successfully!"
           echo "Application available at: https://melihemre.dev"
         EOF
-    
+
     - name: Cleanup SSH key
       if: always()
       run: |
