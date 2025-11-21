@@ -89,13 +89,26 @@ jobs:
           echo "Disk Usage:"
           df -h / | awk 'NR==2{printf "• Root: %s used / %s total (%s)\n", $3, $2, $5}'
 
-          # Kubernetes validation
+          # Kubernetes validation and installation
           echo "Kubernetes Validation:"
-          if kubectl version --short 2>/dev/null; then
-            echo "• kubectl is available"
+          if ! command -v kubectl &> /dev/null; then
+            echo "• kubectl not found, installing..."
+
+            # Install kubectl
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            chmod +x kubectl
+            sudo mv kubectl /usr/local/bin/
+
+            # Verify installation
+            if kubectl version --client &> /dev/null; then
+              echo "• kubectl installed successfully"
+            else
+              echo "• CRITICAL: kubectl installation failed!"
+              exit 1
+            fi
           else
-            echo "• CRITICAL: kubectl not found!"
-            exit 1
+            echo "• kubectl is available"
+            kubectl version --client --short 2>/dev/null || kubectl version --client
           fi
 
           # Project directory setup
