@@ -24,6 +24,7 @@ spec:
       containers:
       - name: nginx
         image: melihemreguler/portfolio:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:
