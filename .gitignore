@@ -18,6 +18,9 @@ dist-ssr
 out/
 build/
 
+# Generated files
+public/image-manifest.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
