@@ -22,7 +22,7 @@ spec:
         app: portfolio-web
     spec:
       containers:
-      - name: nginx
+      - name: portfolio-web
         image: melihemreguler/portfolio:latest
         imagePullPolicy: Always
         ports:
