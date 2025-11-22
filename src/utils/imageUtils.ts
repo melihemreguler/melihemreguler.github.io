@@ -3,19 +3,19 @@ export interface ImageFolder {
   images: string[];
 }
 
-// Function to get all image folders and their contents from API
+// Function to get all image folders and their contents from manifest
 export const getImageFolders = async (): Promise<ImageFolder[]> => {
   try {
-    console.log('Fetching image folders from API...'); // Debug log
-    const response = await fetch('/api/images');
-    
+    console.log('Fetching image folders from manifest...'); // Debug log
+    const response = await fetch('/image-manifest.json');
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json();
-    console.log('API response:', data); // Debug log
-    
+    console.log('Manifest response:', data); // Debug log
+
     if (data.success) {
       return data.folders;
     } else {
@@ -31,7 +31,7 @@ export const getImageFolders = async (): Promise<ImageFolder[]> => {
 // Fallback function with hardcoded images (as backup)
 const getFallbackImageFolders = (): ImageFolder[] => {
   return [
-    
+
   ];
 };
 
@@ -48,13 +48,13 @@ export class RandomImageSelector {
 
   async initialize(): Promise<void> {
     if (this.isInitialized) return;
-    
+
     try {
       const allFolders = await getImageFolders();
       // Filter out folders with no images (e.g., those with only HEIC files)
       this.folders = allFolders.filter(folder => folder.images.length > 0);
       this.isInitialized = true;
-      
+
       if (this.folders.length > 0) {
         // Preload first 5 images immediately for smoother start (increased from 3)
         this.preloadRandomImages(5);
@@ -82,29 +82,29 @@ export class RandomImageSelector {
 
   private preloadImage(imagePath: string): void {
     if (this.preloadedImages.has(imagePath) || this.loadingImages.has(imagePath)) return;
-    
+
     this.loadingImages.add(imagePath);
     const img = new Image();
-    
+
     // Set timeout for slow connections (reduced for faster fallback)
     const timeout = setTimeout(() => {
       this.loadingImages.delete(imagePath);
       console.warn(`Preload timeout for image: ${imagePath}`);
     }, 6000); // 6 second timeout instead of 8
-    
+
     img.onload = () => {
       clearTimeout(timeout);
       this.loadingImages.delete(imagePath);
       this.preloadedImages.add(imagePath);
       console.log(`Successfully preloaded: ${imagePath}`);
     };
-    
+
     img.onerror = (error) => {
       clearTimeout(timeout);
       this.loadingImages.delete(imagePath);
       console.warn(`Failed to preload image: ${imagePath}`, error);
     };
-    
+
     // Add cache headers for better performance
     img.crossOrigin = 'anonymous';
     // Add cache buster only in development
@@ -125,7 +125,7 @@ export class RandomImageSelector {
     do {
       // Select a different folder than the last one (if possible)
       let folderIndex: number;
-      
+
       if (this.folders.length === 1) {
         folderIndex = 0;
       } else {
@@ -136,16 +136,16 @@ export class RandomImageSelector {
 
       this.lastSelectedFolderIndex = folderIndex;
       const selectedFolder = this.folders[folderIndex];
-      
+
       // Select a random image from the selected folder
       const imageIndex = Math.floor(Math.random() * selectedFolder.images.length);
       const selectedImage = selectedFolder.images[imageIndex];
-      
+
       imagePath = `/${selectedFolder.path}/${selectedImage}`;
       attempts++;
-      
+
     } while (this.recentImages.includes(imagePath!) && attempts < maxAttempts);
-    
+
     // Update the recent images list
     if (imagePath) {
       this.recentImages.push(imagePath);
@@ -154,18 +154,18 @@ export class RandomImageSelector {
         this.recentImages.shift(); // Remove the oldest
       }
     }
-    
+
     return imagePath;
   }
 
   getRandomImage(): string | null {
     const imagePath = this.getRandomImagePath();
-    
+
     // Debug: Log which image is selected
     if (imagePath) {
       console.log(`Selected image: ${imagePath}`);
       console.log('Recent images:', this.recentImages);
-      
+
       // More aggressive preloading: preload next 3 images in advance
       setTimeout(() => {
         for (let i = 0; i < 3; i++) {
@@ -176,7 +176,7 @@ export class RandomImageSelector {
         }
       }, 500); // Start preloading faster
     }
-    
+
     return imagePath;
   }
 
@@ -202,19 +202,19 @@ export class RandomImageSelector {
     if (!this.isInitialized || this.folders.length === 0) {
       return null;
     }
-    
+
     // Get first folder with images
     const firstFolder = this.folders[0];
     if (firstFolder && firstFolder.images.length > 0) {
       const imagePath = `/${firstFolder.path}/${firstFolder.images[0]}`;
       console.log(`First available image: ${imagePath}`);
-      
+
       // Preload this image immediately
       this.preloadImage(imagePath);
-      
+
       return imagePath;
     }
-    
+
     return null;
   }
 
@@ -235,7 +235,7 @@ export class RandomImageSelector {
     return this.preloadedImages.size;
   }
 
-  // Get loading images count for debugging  
+  // Get loading images count for debugging
   getLoadingCount(): number {
     return this.loadingImages.size;
   }
@@ -245,7 +245,7 @@ export class RandomImageSelector {
     let preloaded = 0;
     let attempts = 0;
     const maxAttempts = count * 3;
-    
+
     while (preloaded < count && attempts < maxAttempts) {
       const imagePath = this.getRandomImagePath();
       if (imagePath && !this.preloadedImages.has(imagePath) && !this.loadingImages.has(imagePath)) {
@@ -254,7 +254,7 @@ export class RandomImageSelector {
       }
       attempts++;
     }
-    
+
     console.log(`Force preloading ${preloaded} images`);
   }
 }
