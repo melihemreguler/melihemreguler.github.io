@@ -3,10 +3,11 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run generate:manifest && next dev",
+    "build": "npm run generate:manifest && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:manifest": "node scripts/generate-image-manifest.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
